@@ -225,7 +225,7 @@ def state_to_features(self, game_state: dict) -> np.array:
     else:
         features[5]=2
     
-    
+    #add test for checking push
     
     #return features
     return 0
