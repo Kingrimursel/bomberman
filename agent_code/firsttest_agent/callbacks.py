@@ -215,6 +215,6 @@ def state_to_features(self, game_state: dict) -> np.array:
     else:
         features[5]=2
     
-    
+    dfg =0
     #return tuple(features)
     return 0
