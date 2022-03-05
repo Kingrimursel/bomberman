@@ -58,19 +58,7 @@ def act(self, game_state: dict) -> str:
     #return = ACTIONS[np.argmax(Q[state])] #Gives action with maximal reward for state
     
     
-def features_to_state(features):
-    """
-    INPUT:
-    features: Array of feature values
-    
-    OUTPUT:
-    state: int that encodes the current state in a number
-    
-    
-    """
-    
-    #TODO: Build a function that gives a number between 0 and #{Possible STATES} from the given features
-    return 0
+
     
 
 
@@ -87,8 +75,12 @@ def state_to_features(self, game_state: dict) -> np.array:
     which is a dictionary. Consult 'get_state_for_agent' in environment.py to see
     what it contains.
 
-    :param game_state:  A dictionary describing the current game board.
-    :return: np.array
+    INPUT:
+    game_state:  A dictionary describing the current game board.
+    
+    
+    OUTPUT:
+    tuple with 6 entries for the features
     """
     
     
@@ -96,7 +88,7 @@ def state_to_features(self, game_state: dict) -> np.array:
     features = np.zeros(6)
     
     def look_for_targets(free_space, start, targets, logger=None):
-        """Find direction of the closest target (coin)
+        """Find distance to the closest target (target can be specified in use)
 
         Performs a breadth-first search of the reachable free tiles until a target is encountered.
         Args:
@@ -136,8 +128,8 @@ def state_to_features(self, game_state: dict) -> np.array:
                     frontier.append(neighbor)
                     parent_dict[neighbor] = current
                     dist_so_far[neighbor] = dist_so_far[current] + 1
-        if logger: logger.debug(f'Suitable target found at {best}')
-        # Determine the first step towards the best found target tile
+        #if logger: logger.debug(f'Suitable target found at {best}')
+        if logger: logger.debug(f'Suitable target found with distance {best_dist}')
         return best_dist
         
     
@@ -215,8 +207,6 @@ def state_to_features(self, game_state: dict) -> np.array:
     for n,s,b,(x,y) in others:
         totalscore+=s
     totalcoins=totalscore-((total_agents-len(others))*5)
-
-    
     
     if(len(coins)>0):
         features[5]=0
@@ -225,7 +215,6 @@ def state_to_features(self, game_state: dict) -> np.array:
     else:
         features[5]=2
     
-    #add test for checking push
     
-    #return features
+    #return tuple(features)
     return 0
