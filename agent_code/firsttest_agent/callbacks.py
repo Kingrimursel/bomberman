@@ -25,7 +25,7 @@ def setup(self):
     if self.train or not os.path.isfile("my-saved-model.pt"):
         self.logger.info("Setting up model from scratch.")
         weights = np.random.rand(len(ACTIONS))
-        self.model = np.ones((3840,6))*[.2, .2, .2, .2, .2, 0] #Initial guess #TODO: Replace 3840 by actual dimension of Q-table an (empty) working model (Q-Table)
+        self.model = np.ones((3840,6))*[.2, .2, .2, .2, .2, .0] #Initial guess #TODO: Replace 3840 by actual dimension of Q-table an (empty) working model (Q-Table)
         
     else:
         self.logger.info("Loading model from saved state.")
@@ -53,13 +53,14 @@ def act(self, game_state: dict) -> str:
     
     
     
-    #state = features_to_state(state_to_features(game_state)) #get a number between 0 and the number of possible states from game_state
+    fetures = state_to_features(self, game_state) #get features from game_state
     return np.random.choice(ACTIONS, p=self.model[0]) #TODO: replace by feature (state) dependent move (Next line, once Q exists)
-    #return = ACTIONS[np.argmax(Q[state])] #Gives action with maximal reward for state
+    #return = ACTIONS[np.argmax(Q[features])] #Gives action with maximal reward for given state
     
     
 
-    
+
+
 
 
 
@@ -86,11 +87,11 @@ def state_to_features(self, game_state: dict) -> np.array:
     
     
     features = np.zeros(6)
-    
+    #The following two functions are defined in here so they need less parameters (can use variables from the outer function), and they are called only inside this function anyways
     def look_for_targets(free_space, start, targets, logger=None):
         """Find distance to the closest target (target can be specified in use)
 
-        Performs a breadth-first search of the reachable free tiles until a target is encountered.
+        Performs a breadth-first search of the reachable free tiles until a special target is encountered.
         Args:
             free_space: Boolean numpy array. True for free tiles and False for obstacles.
             start: the coordinate from which to begin the search.
@@ -131,22 +132,40 @@ def state_to_features(self, game_state: dict) -> np.array:
         #if logger: logger.debug(f'Suitable target found at {best}')
         if logger: logger.debug(f'Suitable target found with distance {best_dist}')
         return best_dist
+    def destruction(x,y):
+        """
+        Function that returns for a given tile, how much damage (crates/enemies) a bomb exploding at that time would create
         
+        
+        INPUT: (x,y) coordinates of tile
+        OUTPUT: count of enemies/crates, that would be destroyed
+        """
+        
+        possible_destruction=0
+        for (i, j) in [(x + h, y) for h in range(-3, 4)] + [(x, y + h) for h in range(-3, 4)]:
+            if (0 < i< arena.shape[0]) and (0 < j< arena.shape[1]):
+                if arena[i,j]==1:
+                    possible_destruction+=1
+                elif others_map[i,j]==1:
+                    possible_destruction+=1
+            return possible_destruction
     
     
-    
+        
     # This is the dict before the game begins and after it ends
     if game_state is None:
         return None
     
     # Gather information about the game state
     arena = game_state['field']
+    explosion_map = game_state['explosion_map']
     step = game_state['step']
-    _, score, bombs_left, (x, y) = game_state['self']
+    n,s,b,(x, y) = game_state['self']
     bombs = game_state['bombs']
     bomb_xys = [xy for (xy, t) in bombs]
     others = [(n, s, b, xy) for (n, s, b, xy) in game_state['others']]
     coins = game_state['coins']
+    
     bomb_map = np.ones(arena.shape) * 5
     for (xb, yb), t in bombs:
         for (i, j) in [(xb + h, yb) for h in range(-3, 4)] + [(xb, yb + h) for h in range(-3, 4)]:
@@ -167,42 +186,10 @@ def state_to_features(self, game_state: dict) -> np.array:
     free_space = arena == 0 #For the function
     
     
-    distance_nextcoin = look_for_targets(free_space, (x, y), coins, self.logger) #distance to closest coin
-    distance_nextneighbor = look_for_targets(free_space,(x , y), [(xy) for (n, s, b, xy) in others], self.logger) #distance to closest neighbor
-    distance_nextcrate = look_for_targets(free_space, (x, y), crates, self.logger) #distance to closest crate
     
-    
-    
-    #TODO: Neighbor tile features (0-3)
-    for num, (i,j) in enumerate([(x + h, y) for h in [-1, 1]] + [(x, y + h) for h in [-1, 1]]):
-        #if tile is free
-        if (arena[i,j] == 0):
-            features[num]=0
-            
-        # if tile is Wall, crate, sure death, bomb, or other agent
-        if (arena[i,j] == -1 or arena[i,j]== 1 or bomb_map[i,j]==1 or bomb_positions[i,j]==1 or others_map[i,j]==1):
-            features[num]=1
-        # possible danger (a bomb in the area may explode soon)
-        elif (arena[neighbor0[0],[neighbor0[1]]] == 0 and bomb_map[neighbor0[0],[neighbor0[1]]]<=4)
-            features[num]=2
-        #TODO: Design phase dependent value features[num]=3
-        #elif ():
-        #    features[num]=3
-        
-    
-    #TODO: Design feature for current tile (4)
-    #wait does not lead to sure death and (can not place bomb or placing bomb leads to sure death)
-    if(bomb_map[x,y]>1 and (bomb_positions[x,y]==1 or )):
-        features[4]=0
-    
-    if(bomb_map[x,y]==1 or bomb_positions[x,y]==1): #Bomb placed on current tile or wait is safe death
-        features[3]=4
-    
-    
-    #TODO: Phase Feature (5) FINISHED (determine first, when other features finished, move to top of feature function)
+    #Phase Feature (5) (Needed for other features, because of that determined first)
     #Determine total number of found coins
-    if step==1:
-        total_agents = len(others)
+    total_agents = 0 #TODO: Define depending on game mode, later always 3 -> opponent number, excluding self)
     totalscore=0
     for n,s,b,(x,y) in others:
         totalscore+=s
@@ -215,6 +202,56 @@ def state_to_features(self, game_state: dict) -> np.array:
     else:
         features[5]=2
     
-    dfg =0
-    #return tuple(features)
-    return 0
+    
+    #Neighbor tile features (0-3)
+    #All the three are needed for the pase dependent decision
+    distance_nextcoin = look_for_targets(free_space, (x, y), coins, self.logger) #distance to closest coin
+    distance_nextopponent = look_for_targets(free_space,(x , y), [(xy) for (n, s, b, xy) in others], self.logger) #distance to closest neighbor
+    distance_nextcrate = look_for_targets(free_space, (x, y), crates, self.logger) #distance to closest crate
+    #how many crates/enemies would a bomb on this tile exploding right now destroy
+    possible_destruction= destruction(x,y)
+    
+    for num, (i,j) in enumerate([(x + h, y) for h in [-1, 1]] + [(x, y + h) for h in [-1, 1]]):
+        #if tile is free
+        if (arena[i,j] == 0):
+            features[num]=0
+        # if tile is Wall, crate, sure death, bomb, or other agent
+        if (arena[i,j] == -1 or arena[i,j]== 1 or bomb_map[i,j]==1 or bomb_positions[i,j]==1 or others_map[i,j]==1 or explosion_map[i,j]>0):
+            features[num]=1
+        # possible danger (a bomb in the area may explode soon)
+        elif (arena[i,j] == 0 and bomb_map[i,j]<=4):
+            features[num]=2
+        #Phase dependent value
+        else:
+            if(features[5]==0):
+                if(look_for_targets(free_space, (i, j), coins, self.logger)<distance_nextcoin):
+                    features[num]=3
+            elif(features[5]==1):
+                if((destruction(i,j)>possible_destruction) or (look_for_targets(free_space, (i, j), crates, self.logger)<distance_nextcrate)):
+                    features[num]=3
+            elif(features[5]==2):
+                if((look_for_targets(free_space,(i , j), [(xy) for (n, s, b, xy) in others], self.logger)<distance_next_opponent) and bomb_map[i,j]>4):
+                    features[num]=3
+            
+        
+
+    #Feature for current tile (4)
+    #wait does not lead to sure death and (can not place bomb (current field is bomb or bomb was placed recently) or placing bomb leads to sure death(trapped))
+    if(bomb_map[x,y]>1 and (bomb_positions[x,y]==1 or features[0]==features[1]==features[2]==features[3]==1 or not b)):
+        features[4]=0
+    #not (directly) trapped and the possible destruction is (1 or 2)/(3-5)/(>6)
+    elif(features[0]!=1 and features[1]!=1 and features[2]!= 1 and features[3]!=1 and (1 <= possible_destruction < 3)):
+        features[4]=1
+    elif(features[0]!=1 and features[1]!=1 and features[2]!= 1 and features[3]!=1 and (3 <= possible_destruction < 6)):
+        features[4]=2
+    elif(features[0]!=1 and features[1]!=1 and features[2]!= 1 and features[3]!=1 and (6 <= possible_destruction)):
+        features[4]=3
+    if(bomb_map[x,y]==1 or bomb_positions[x,y]==1): #Bomb placed on current tile or wait is safe death
+        features[3]=4
+    
+    
+    
+    
+    output = tuple(features)
+    self.logger.debug(f'Features Calculated: {output}')
+    return output
