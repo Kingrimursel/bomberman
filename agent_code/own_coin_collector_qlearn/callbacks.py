@@ -43,7 +43,7 @@ def act(self, game_state: dict) -> str:
     :return: The action to take as a string.
     """
     
-    random_prob = .4 #TODO: Adapt Exploration vs exploitation parameter
+    random_prob = .3 #TODO: Adapt Exploration vs exploitation parameter
     if self.train and random.random() < random_prob:
         self.logger.debug("Choosing action purely at random.")
         # 80% walk in any direction. wait 20%. Bomb 0%
@@ -103,7 +103,7 @@ def look_for_targets(free_space, start, targets, logger=None):
                 dist_so_far[neighbor] = dist_so_far[current] + 1
     #if logger: logger.debug(f'Suitable target found at {best}')
     #if logger: logger.debug(f'Suitable target found with distance {best_dist}')
-    return best_dist
+    return best_dist+1
 
 def destruction(arena, others_map, x,y):
     """
@@ -216,7 +216,7 @@ def state_to_features(self, game_state: dict) -> np.array:
         if (arena[i,j] == 0):
             features[num]=0
         # if tile is Wall, crate, sure death, bomb, or other agent
-        if (arena[i,j] == -1 or arena[i,j]== 1 or bomb_map[i,j]==1 or bomb_positions[i,j]==1 or others_map[i,j]==1 or explosion_map[i,j]>0):
+        if (arena[i,j] == -1 or arena[i,j]== 1 or bomb_map[i,j]<=1 or bomb_positions[i,j]==1 or others_map[i,j]==1 or explosion_map[i,j]>0):
             features[num]=1
         # possible danger (a bomb in the area may explode soon)
         elif (arena[i,j] == 0 and bomb_map[i,j]<=4):
