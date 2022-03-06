@@ -148,7 +148,7 @@ def get_field_value(i, j, game_state, future_explosions_map, opponents):
         return 6
 
     # opponent
-    elif opponents and (i, j) in list(opponents[:, -1]):
+    elif opponents.size != 0 and (i, j) in list(opponents[:, -1]):
         return 7
 
     # coin
