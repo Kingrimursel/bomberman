@@ -1,86 +1,1461 @@
-2022-03-06 11:43:24,446 [my_agent_code] INFO: Loading model from saved state.
-2022-03-06 11:43:24,609 [my_agent_code] DEBUG: Querying model for action.
-2022-03-06 11:43:24,612 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 1
-2022-03-06 11:43:24,712 [my_agent_code] DEBUG: Querying model for action.
-2022-03-06 11:43:24,716 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 2
-2022-03-06 11:43:24,716 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
-2022-03-06 11:43:24,716 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
-2022-03-06 11:43:24,829 [my_agent_code] DEBUG: Querying model for action.
-2022-03-06 11:43:24,835 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 3
-2022-03-06 11:43:24,835 [my_agent_code] INFO: Awarded 0 for events WAITED
-2022-03-06 11:43:24,835 [my_agent_code] INFO: Awarded 0 for events WAITED
-2022-03-06 11:43:24,927 [my_agent_code] DEBUG: Querying model for action.
-2022-03-06 11:43:24,938 [my_agent_code] DEBUG: Encountered game event(s) 'BOMB_DROPPED' in step 4
-2022-03-06 11:43:24,938 [my_agent_code] INFO: Awarded 0 for events BOMB_DROPPED
-2022-03-06 11:43:24,939 [my_agent_code] INFO: Awarded 0 for events BOMB_DROPPED
-2022-03-06 11:43:25,027 [my_agent_code] DEBUG: Querying model for action.
-2022-03-06 11:43:25,038 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 5
-2022-03-06 11:43:25,039 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
-2022-03-06 11:43:25,039 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
-2022-03-06 11:43:25,130 [my_agent_code] DEBUG: Querying model for action.
-2022-03-06 11:43:25,145 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 6
-2022-03-06 11:43:25,145 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
-2022-03-06 11:43:25,145 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
-2022-03-06 11:43:25,229 [my_agent_code] DEBUG: Querying model for action.
-2022-03-06 11:43:25,239 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 7
-2022-03-06 11:43:25,239 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
-2022-03-06 11:43:25,240 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
-2022-03-06 11:43:25,329 [my_agent_code] DEBUG: Querying model for action.
-2022-03-06 11:43:25,338 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION', 'BOMB_EXPLODED', 'CRATE_DESTROYED', 'CRATE_DESTROYED', 'CRATE_DESTROYED' in step 8
-2022-03-06 11:43:25,339 [my_agent_code] INFO: Awarded 3 for events INVALID_ACTION, BOMB_EXPLODED, CRATE_DESTROYED, CRATE_DESTROYED, CRATE_DESTROYED
-2022-03-06 11:43:25,339 [my_agent_code] INFO: Awarded 3 for events INVALID_ACTION, BOMB_EXPLODED, CRATE_DESTROYED, CRATE_DESTROYED, CRATE_DESTROYED
-2022-03-06 11:43:25,429 [my_agent_code] DEBUG: Querying model for action.
-2022-03-06 11:43:25,440 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 9
-2022-03-06 11:43:25,440 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
-2022-03-06 11:43:25,440 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
-2022-03-06 11:43:25,529 [my_agent_code] DEBUG: Querying model for action.
-2022-03-06 11:43:25,546 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 10
-2022-03-06 11:43:25,547 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
-2022-03-06 11:43:25,547 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
-2022-03-06 11:43:25,628 [my_agent_code] DEBUG: Querying model for action.
-2022-03-06 11:43:25,642 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 11
-2022-03-06 11:43:25,643 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
-2022-03-06 11:43:25,643 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
-2022-03-06 11:43:25,727 [my_agent_code] DEBUG: Querying model for action.
-2022-03-06 11:43:25,741 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 12
-2022-03-06 11:43:25,742 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
-2022-03-06 11:43:25,742 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
-2022-03-06 11:43:25,827 [my_agent_code] DEBUG: Querying model for action.
-2022-03-06 11:43:25,843 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 13
-2022-03-06 11:43:25,843 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
-2022-03-06 11:43:25,843 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
-2022-03-06 11:43:25,927 [my_agent_code] DEBUG: Querying model for action.
-2022-03-06 11:43:25,942 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 14
-2022-03-06 11:43:25,942 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
-2022-03-06 11:43:25,943 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
-2022-03-06 11:43:26,029 [my_agent_code] DEBUG: Querying model for action.
-2022-03-06 11:43:26,040 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 15
-2022-03-06 11:43:26,040 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
-2022-03-06 11:43:26,040 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
-2022-03-06 11:43:26,133 [my_agent_code] DEBUG: Querying model for action.
-2022-03-06 11:43:26,142 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 16
-2022-03-06 11:43:26,143 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
-2022-03-06 11:43:26,143 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
-2022-03-06 11:43:26,229 [my_agent_code] DEBUG: Querying model for action.
-2022-03-06 11:43:26,240 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 17
-2022-03-06 11:43:26,240 [my_agent_code] INFO: Awarded 0 for events WAITED
-2022-03-06 11:43:26,240 [my_agent_code] INFO: Awarded 0 for events WAITED
-2022-03-06 11:43:26,329 [my_agent_code] DEBUG: Querying model for action.
-2022-03-06 11:43:26,342 [my_agent_code] DEBUG: Encountered game event(s) 'BOMB_DROPPED' in step 18
-2022-03-06 11:43:26,342 [my_agent_code] INFO: Awarded 0 for events BOMB_DROPPED
-2022-03-06 11:43:26,343 [my_agent_code] INFO: Awarded 0 for events BOMB_DROPPED
-2022-03-06 11:43:26,428 [my_agent_code] DEBUG: Querying model for action.
-2022-03-06 11:43:26,444 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 19
-2022-03-06 11:43:26,444 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
-2022-03-06 11:43:26,445 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
-2022-03-06 11:43:26,528 [my_agent_code] DEBUG: Choosing action purely at random.
-2022-03-06 11:43:26,544 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 20
-2022-03-06 11:43:26,544 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
-2022-03-06 11:43:26,544 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
-2022-03-06 11:43:26,628 [my_agent_code] DEBUG: Querying model for action.
-2022-03-06 11:43:26,645 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 21
-2022-03-06 11:43:26,645 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
-2022-03-06 11:43:26,645 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
-2022-03-06 11:43:26,729 [my_agent_code] DEBUG: Querying model for action.
-2022-03-06 11:43:26,747 [my_agent_code] DEBUG: Encountered event(s) 'INVALID_ACTION', 'BOMB_EXPLODED', 'CRATE_DESTROYED', 'CRATE_DESTROYED', 'CRATE_DESTROYED', 'CRATE_DESTROYED', 'CRATE_DESTROYED', 'KILLED_SELF', 'GOT_KILLED' in final step
-2022-03-06 11:43:26,747 [my_agent_code] INFO: Awarded 1 for events INVALID_ACTION, BOMB_EXPLODED, CRATE_DESTROYED, CRATE_DESTROYED, CRATE_DESTROYED, CRATE_DESTROYED, CRATE_DESTROYED, KILLED_SELF, GOT_KILLED
+2022-03-06 17:41:43,834 [my_agent_code] INFO: Loading model from saved state.
+2022-03-06 17:41:43,841 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,844 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 1
+2022-03-06 17:41:43,844 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,846 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 2
+2022-03-06 17:41:43,847 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,847 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,847 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,851 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 3
+2022-03-06 17:41:43,852 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,852 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,853 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,856 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 4
+2022-03-06 17:41:43,857 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,858 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,858 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,861 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 5
+2022-03-06 17:41:43,862 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,862 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,863 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,866 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 6
+2022-03-06 17:41:43,866 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,867 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,867 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,869 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 7
+2022-03-06 17:41:43,870 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,870 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,870 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,872 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 8
+2022-03-06 17:41:43,872 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,872 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,872 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,875 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 9
+2022-03-06 17:41:43,875 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,875 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,875 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,877 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 10
+2022-03-06 17:41:43,878 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,878 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,879 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,882 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 11
+2022-03-06 17:41:43,883 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,884 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,884 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,888 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 12
+2022-03-06 17:41:43,889 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,890 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,890 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,894 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 13
+2022-03-06 17:41:43,895 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,895 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,896 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,900 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 14
+2022-03-06 17:41:43,900 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,901 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,901 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,904 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 15
+2022-03-06 17:41:43,904 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,904 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,905 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:43,907 [my_agent_code] DEBUG: Encountered game event(s) 'BOMB_DROPPED' in step 16
+2022-03-06 17:41:43,907 [my_agent_code] INFO: Awarded -3 for events BOMB_DROPPED, MOVED_INTO_DANGER
+2022-03-06 17:41:43,908 [my_agent_code] INFO: Awarded -3 for events BOMB_DROPPED, MOVED_INTO_DANGER
+2022-03-06 17:41:43,908 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,910 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 17
+2022-03-06 17:41:43,911 [my_agent_code] INFO: Awarded 4 for events MOVED_DOWN, ESCAPED_DANGER
+2022-03-06 17:41:43,911 [my_agent_code] INFO: Awarded 4 for events MOVED_DOWN, ESCAPED_DANGER
+2022-03-06 17:41:43,911 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,914 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 18
+2022-03-06 17:41:43,914 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:43,915 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:43,915 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,920 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 19
+2022-03-06 17:41:43,922 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,922 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,923 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,927 [my_agent_code] DEBUG: Encountered event(s) 'MOVED_LEFT', 'BOMB_EXPLODED', 'CRATE_DESTROYED', 'CRATE_DESTROYED', 'KILLED_SELF', 'GOT_KILLED' in final step
+2022-03-06 17:41:43,928 [my_agent_code] INFO: Awarded -4 for events MOVED_LEFT, BOMB_EXPLODED, CRATE_DESTROYED, CRATE_DESTROYED, KILLED_SELF, GOT_KILLED
+2022-03-06 17:41:43,934 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,936 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 1
+2022-03-06 17:41:43,936 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,938 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 2
+2022-03-06 17:41:43,939 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,939 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,940 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,943 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 3
+2022-03-06 17:41:43,944 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,944 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,945 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,948 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 4
+2022-03-06 17:41:43,949 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,949 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,950 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,953 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 5
+2022-03-06 17:41:43,954 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,955 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,955 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,959 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 6
+2022-03-06 17:41:43,959 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,959 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,960 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,963 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 7
+2022-03-06 17:41:43,963 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,963 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,963 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,966 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 8
+2022-03-06 17:41:43,966 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,966 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,966 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,969 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 9
+2022-03-06 17:41:43,969 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,969 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,969 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,971 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 10
+2022-03-06 17:41:43,972 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,972 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,972 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,975 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 11
+2022-03-06 17:41:43,976 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,976 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,977 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,981 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 12
+2022-03-06 17:41:43,982 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,982 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,983 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,987 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 13
+2022-03-06 17:41:43,988 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,989 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,989 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,993 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 14
+2022-03-06 17:41:43,994 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,994 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,994 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:43,998 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 15
+2022-03-06 17:41:43,998 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,998 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:43,999 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,002 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 16
+2022-03-06 17:41:44,002 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,002 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,002 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:44,005 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 17
+2022-03-06 17:41:44,005 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:44,005 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:44,006 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,009 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 18
+2022-03-06 17:41:44,010 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,010 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,010 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,014 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 19
+2022-03-06 17:41:44,015 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,015 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,015 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,019 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 20
+2022-03-06 17:41:44,020 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,020 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,020 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,024 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 21
+2022-03-06 17:41:44,024 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,025 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,025 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,029 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 22
+2022-03-06 17:41:44,030 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,030 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,030 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,034 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 23
+2022-03-06 17:41:44,034 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,035 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,035 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,038 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 24
+2022-03-06 17:41:44,039 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,039 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,039 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,043 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 25
+2022-03-06 17:41:44,043 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,044 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,044 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,047 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 26
+2022-03-06 17:41:44,048 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,048 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,048 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,052 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 27
+2022-03-06 17:41:44,053 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,053 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,053 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,057 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 28
+2022-03-06 17:41:44,058 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,058 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,058 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,062 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 29
+2022-03-06 17:41:44,063 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,063 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,064 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,067 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 30
+2022-03-06 17:41:44,068 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,068 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,069 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,072 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 31
+2022-03-06 17:41:44,073 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,073 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,073 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,076 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 32
+2022-03-06 17:41:44,077 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,077 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,078 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:44,082 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 33
+2022-03-06 17:41:44,082 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:44,083 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:44,083 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,087 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 34
+2022-03-06 17:41:44,088 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,088 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,088 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,092 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 35
+2022-03-06 17:41:44,093 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,093 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,093 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:44,098 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 36
+2022-03-06 17:41:44,098 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:44,099 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:44,099 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:44,103 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 37
+2022-03-06 17:41:44,103 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:44,104 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:44,104 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,108 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 38
+2022-03-06 17:41:44,108 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,108 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,109 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,112 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 39
+2022-03-06 17:41:44,112 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,112 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,113 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,115 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 40
+2022-03-06 17:41:44,116 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,116 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,116 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,120 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 41
+2022-03-06 17:41:44,120 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,120 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,121 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,125 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 42
+2022-03-06 17:41:44,126 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,126 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,126 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,131 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 43
+2022-03-06 17:41:44,131 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,132 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,132 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,137 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 44
+2022-03-06 17:41:44,137 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,138 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,138 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,142 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 45
+2022-03-06 17:41:44,142 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,142 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,143 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:44,146 [my_agent_code] DEBUG: Encountered game event(s) 'BOMB_DROPPED' in step 46
+2022-03-06 17:41:44,147 [my_agent_code] INFO: Awarded -3 for events BOMB_DROPPED, MOVED_INTO_DANGER
+2022-03-06 17:41:44,147 [my_agent_code] INFO: Awarded -3 for events BOMB_DROPPED, MOVED_INTO_DANGER
+2022-03-06 17:41:44,147 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,152 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 47
+2022-03-06 17:41:44,153 [my_agent_code] INFO: Awarded 4 for events MOVED_DOWN, ESCAPED_DANGER
+2022-03-06 17:41:44,153 [my_agent_code] INFO: Awarded 4 for events MOVED_DOWN, ESCAPED_DANGER
+2022-03-06 17:41:44,154 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:44,158 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 48
+2022-03-06 17:41:44,159 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,159 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,160 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,164 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 49
+2022-03-06 17:41:44,165 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,165 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,166 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,171 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT', 'BOMB_EXPLODED', 'CRATE_DESTROYED', 'CRATE_DESTROYED' in step 50
+2022-03-06 17:41:44,172 [my_agent_code] INFO: Awarded 2 for events MOVED_LEFT, BOMB_EXPLODED, CRATE_DESTROYED, CRATE_DESTROYED
+2022-03-06 17:41:44,172 [my_agent_code] INFO: Awarded 2 for events MOVED_LEFT, BOMB_EXPLODED, CRATE_DESTROYED, CRATE_DESTROYED
+2022-03-06 17:41:44,173 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,178 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 51
+2022-03-06 17:41:44,178 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,178 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,178 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,183 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 52
+2022-03-06 17:41:44,183 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,184 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,184 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,189 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 53
+2022-03-06 17:41:44,190 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,190 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,190 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,195 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 54
+2022-03-06 17:41:44,195 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,196 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,196 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,200 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 55
+2022-03-06 17:41:44,200 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,200 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,201 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,205 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 56
+2022-03-06 17:41:44,205 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,206 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,206 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,209 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 57
+2022-03-06 17:41:44,210 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,210 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,210 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,213 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 58
+2022-03-06 17:41:44,213 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,213 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,213 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,215 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 59
+2022-03-06 17:41:44,216 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,216 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,216 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,219 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 60
+2022-03-06 17:41:44,220 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,220 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,220 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:44,223 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 61
+2022-03-06 17:41:44,223 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:44,224 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:44,224 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,228 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 62
+2022-03-06 17:41:44,229 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,229 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,229 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:44,235 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 63
+2022-03-06 17:41:44,236 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:44,236 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:44,236 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,242 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 64
+2022-03-06 17:41:44,242 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,243 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,243 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,248 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 65
+2022-03-06 17:41:44,248 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,249 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,249 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,254 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 66
+2022-03-06 17:41:44,255 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,255 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,255 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,262 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 67
+2022-03-06 17:41:44,262 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,263 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,263 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:44,269 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 68
+2022-03-06 17:41:44,269 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,270 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,270 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,275 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 69
+2022-03-06 17:41:44,275 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,276 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,276 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,280 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 70
+2022-03-06 17:41:44,280 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,281 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,281 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,285 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 71
+2022-03-06 17:41:44,285 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,285 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,285 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,289 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 72
+2022-03-06 17:41:44,289 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,289 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,289 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,292 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 73
+2022-03-06 17:41:44,292 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,292 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,293 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,296 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 74
+2022-03-06 17:41:44,296 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,296 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,297 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,299 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 75
+2022-03-06 17:41:44,300 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,300 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,300 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,306 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 76
+2022-03-06 17:41:44,307 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,307 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,308 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,314 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 77
+2022-03-06 17:41:44,314 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,315 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,315 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,323 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 78
+2022-03-06 17:41:44,323 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,324 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,324 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,331 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 79
+2022-03-06 17:41:44,332 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,332 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,333 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,338 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 80
+2022-03-06 17:41:44,338 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,339 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,339 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,343 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 81
+2022-03-06 17:41:44,343 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,344 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,344 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,347 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 82
+2022-03-06 17:41:44,347 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,347 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,347 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,350 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 83
+2022-03-06 17:41:44,350 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,350 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,350 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,353 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 84
+2022-03-06 17:41:44,353 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,353 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,353 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,356 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 85
+2022-03-06 17:41:44,356 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,356 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,356 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,359 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 86
+2022-03-06 17:41:44,360 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,360 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,360 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,363 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 87
+2022-03-06 17:41:44,363 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,363 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,364 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,366 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 88
+2022-03-06 17:41:44,367 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,367 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,368 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,374 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 89
+2022-03-06 17:41:44,374 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,374 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,375 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,381 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 90
+2022-03-06 17:41:44,381 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,381 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,382 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,388 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 91
+2022-03-06 17:41:44,388 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,388 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,389 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:44,394 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 92
+2022-03-06 17:41:44,395 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,395 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:44,395 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:44,400 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 93
+2022-03-06 17:41:44,401 [my_agent_code] INFO: Awarded -3 for events WAITED, MOVED_INTO_DANGER
+2022-03-06 17:41:44,402 [my_agent_code] INFO: Awarded -3 for events WAITED, MOVED_INTO_DANGER
+2022-03-06 17:41:44,402 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:44,408 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 94
+2022-03-06 17:41:44,408 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,409 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:44,409 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,416 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 95
+2022-03-06 17:41:44,416 [my_agent_code] INFO: Awarded -3 for events WAITED, PASSIVE_IN_DANGER
+2022-03-06 17:41:44,417 [my_agent_code] INFO: Awarded -3 for events WAITED, PASSIVE_IN_DANGER
+2022-03-06 17:41:44,417 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,428 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 96
+2022-03-06 17:41:44,428 [my_agent_code] INFO: Awarded 1 for events WAITED, PASSIVE_IN_DANGER, ESCAPED_DANGER
+2022-03-06 17:41:44,429 [my_agent_code] INFO: Awarded 1 for events WAITED, PASSIVE_IN_DANGER, ESCAPED_DANGER
+2022-03-06 17:41:44,429 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,435 [my_agent_code] DEBUG: Encountered event(s) 'MOVED_RIGHT', 'GOT_KILLED' in final step
+2022-03-06 17:41:44,435 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT, GOT_KILLED
+2022-03-06 17:41:44,441 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,443 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 1
+2022-03-06 17:41:44,443 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,445 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 2
+2022-03-06 17:41:44,446 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,446 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,447 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,450 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 3
+2022-03-06 17:41:44,450 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,451 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,451 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,455 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 4
+2022-03-06 17:41:44,455 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,456 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,456 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,459 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 5
+2022-03-06 17:41:44,460 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,461 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,461 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,464 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 6
+2022-03-06 17:41:44,464 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,465 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,465 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,467 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 7
+2022-03-06 17:41:44,467 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,467 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,467 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,470 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 8
+2022-03-06 17:41:44,470 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,470 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,470 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,472 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 9
+2022-03-06 17:41:44,473 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,473 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,473 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:44,476 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 10
+2022-03-06 17:41:44,476 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:44,477 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:44,477 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,481 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 11
+2022-03-06 17:41:44,481 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,482 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,482 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:44,485 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 12
+2022-03-06 17:41:44,486 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,486 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,487 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,493 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 13
+2022-03-06 17:41:44,494 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,495 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,495 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,500 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 14
+2022-03-06 17:41:44,501 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,501 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,502 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,506 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 15
+2022-03-06 17:41:44,506 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,506 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,507 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,511 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 16
+2022-03-06 17:41:44,511 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,511 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,511 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,513 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 17
+2022-03-06 17:41:44,514 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,514 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,514 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,518 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 18
+2022-03-06 17:41:44,519 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,520 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,520 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,524 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 19
+2022-03-06 17:41:44,525 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,525 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,526 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,529 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 20
+2022-03-06 17:41:44,530 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,530 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,531 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,534 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 21
+2022-03-06 17:41:44,535 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,535 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,535 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,538 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 22
+2022-03-06 17:41:44,538 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,538 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,538 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,540 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 23
+2022-03-06 17:41:44,541 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,541 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,541 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,543 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 24
+2022-03-06 17:41:44,543 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,544 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,544 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,547 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 25
+2022-03-06 17:41:44,548 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,548 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,549 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,552 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 26
+2022-03-06 17:41:44,553 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,554 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,554 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,558 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 27
+2022-03-06 17:41:44,559 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,559 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,560 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,563 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 28
+2022-03-06 17:41:44,564 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,564 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,565 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,568 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 29
+2022-03-06 17:41:44,568 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,568 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,569 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,572 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 30
+2022-03-06 17:41:44,572 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,572 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,572 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,575 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 31
+2022-03-06 17:41:44,575 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,575 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,575 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,577 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 32
+2022-03-06 17:41:44,578 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,578 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,578 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,582 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 33
+2022-03-06 17:41:44,583 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,583 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,584 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,588 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 34
+2022-03-06 17:41:44,589 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,590 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,590 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,595 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 35
+2022-03-06 17:41:44,596 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,596 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,597 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,601 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 36
+2022-03-06 17:41:44,602 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,603 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,603 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,608 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 37
+2022-03-06 17:41:44,608 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,609 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,609 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,614 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 38
+2022-03-06 17:41:44,614 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,615 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,615 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,619 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 39
+2022-03-06 17:41:44,619 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,619 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,619 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,624 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 40
+2022-03-06 17:41:44,624 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,624 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,624 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,628 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 41
+2022-03-06 17:41:44,628 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,628 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,628 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,631 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 42
+2022-03-06 17:41:44,631 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,631 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,631 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,634 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 43
+2022-03-06 17:41:44,634 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,634 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,635 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,638 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 44
+2022-03-06 17:41:44,638 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,638 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,639 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,641 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 45
+2022-03-06 17:41:44,642 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,642 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,642 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,645 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 46
+2022-03-06 17:41:44,646 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,646 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,646 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,651 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 47
+2022-03-06 17:41:44,651 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,652 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,652 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,657 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 48
+2022-03-06 17:41:44,657 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,657 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,658 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,664 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 49
+2022-03-06 17:41:44,664 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,665 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,665 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,670 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 50
+2022-03-06 17:41:44,671 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,671 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,671 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,676 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 51
+2022-03-06 17:41:44,676 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,677 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,677 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,681 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 52
+2022-03-06 17:41:44,682 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,682 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,682 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,686 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 53
+2022-03-06 17:41:44,686 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,686 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,687 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,691 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 54
+2022-03-06 17:41:44,691 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,692 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,692 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,695 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 55
+2022-03-06 17:41:44,696 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,696 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,696 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,701 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 56
+2022-03-06 17:41:44,701 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,702 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,702 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,706 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 57
+2022-03-06 17:41:44,707 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,707 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,707 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,711 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 58
+2022-03-06 17:41:44,711 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,711 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,712 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,715 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 59
+2022-03-06 17:41:44,715 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,715 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,716 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,719 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 60
+2022-03-06 17:41:44,719 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,719 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,720 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,723 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 61
+2022-03-06 17:41:44,724 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,724 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,724 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,727 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 62
+2022-03-06 17:41:44,728 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,728 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,729 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,733 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 63
+2022-03-06 17:41:44,734 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,734 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,734 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,738 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 64
+2022-03-06 17:41:44,739 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,739 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,740 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,743 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 65
+2022-03-06 17:41:44,744 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,744 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,744 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,749 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 66
+2022-03-06 17:41:44,749 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,749 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,750 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,755 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 67
+2022-03-06 17:41:44,756 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,756 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,756 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,761 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 68
+2022-03-06 17:41:44,762 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,762 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,762 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,767 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 69
+2022-03-06 17:41:44,767 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,767 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,768 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,772 [my_agent_code] DEBUG: Encountered event(s) 'WAITED', 'GOT_KILLED' in final step
+2022-03-06 17:41:44,772 [my_agent_code] INFO: Awarded 0 for events WAITED, GOT_KILLED
+2022-03-06 17:41:44,778 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,780 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 1
+2022-03-06 17:41:44,780 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,782 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 2
+2022-03-06 17:41:44,783 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,783 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,784 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,787 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 3
+2022-03-06 17:41:44,788 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,789 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,789 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,795 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 4
+2022-03-06 17:41:44,796 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,797 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,798 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,803 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 5
+2022-03-06 17:41:44,805 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,805 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,806 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,811 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 6
+2022-03-06 17:41:44,811 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,812 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,812 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,814 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 7
+2022-03-06 17:41:44,814 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,814 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,815 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,817 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 8
+2022-03-06 17:41:44,817 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,817 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,817 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,819 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 9
+2022-03-06 17:41:44,819 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,820 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,820 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,823 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 10
+2022-03-06 17:41:44,823 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,824 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,824 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,828 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 11
+2022-03-06 17:41:44,828 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,829 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,829 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,833 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 12
+2022-03-06 17:41:44,833 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,834 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,835 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,838 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 13
+2022-03-06 17:41:44,839 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,839 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,839 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:44,842 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 14
+2022-03-06 17:41:44,843 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:44,843 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:44,843 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,846 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 15
+2022-03-06 17:41:44,846 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,846 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,846 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,848 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 16
+2022-03-06 17:41:44,848 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,849 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,849 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,852 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 17
+2022-03-06 17:41:44,853 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,853 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,853 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,856 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 18
+2022-03-06 17:41:44,857 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,857 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,858 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,862 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 19
+2022-03-06 17:41:44,863 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,863 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,864 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,869 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 20
+2022-03-06 17:41:44,869 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,870 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,870 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:44,874 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 21
+2022-03-06 17:41:44,875 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,875 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:44,876 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,880 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 22
+2022-03-06 17:41:44,881 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,881 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,881 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,885 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 23
+2022-03-06 17:41:44,885 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,885 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,885 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,889 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 24
+2022-03-06 17:41:44,889 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,889 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,890 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,892 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 25
+2022-03-06 17:41:44,892 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,892 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,892 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,895 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 26
+2022-03-06 17:41:44,895 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,895 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,895 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:44,897 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 27
+2022-03-06 17:41:44,898 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:44,898 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:44,898 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,904 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 28
+2022-03-06 17:41:44,905 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,905 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,906 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,912 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 29
+2022-03-06 17:41:44,912 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,913 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,914 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,919 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 30
+2022-03-06 17:41:44,920 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,921 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,921 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,927 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 31
+2022-03-06 17:41:44,927 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,928 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,928 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,934 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 32
+2022-03-06 17:41:44,934 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,934 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,934 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,939 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 33
+2022-03-06 17:41:44,939 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,940 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,940 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,944 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 34
+2022-03-06 17:41:44,944 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,944 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,944 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,948 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 35
+2022-03-06 17:41:44,948 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,948 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,948 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,952 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 36
+2022-03-06 17:41:44,952 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,952 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,952 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,954 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 37
+2022-03-06 17:41:44,955 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,955 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,955 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,957 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 38
+2022-03-06 17:41:44,957 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,958 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,958 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,961 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 39
+2022-03-06 17:41:44,962 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,962 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,963 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,971 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 40
+2022-03-06 17:41:44,972 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,972 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:44,973 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,980 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 41
+2022-03-06 17:41:44,981 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,981 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:44,982 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:44,989 [my_agent_code] DEBUG: Encountered game event(s) 'BOMB_DROPPED' in step 42
+2022-03-06 17:41:44,990 [my_agent_code] INFO: Awarded -3 for events BOMB_DROPPED, MOVED_INTO_DANGER
+2022-03-06 17:41:44,991 [my_agent_code] INFO: Awarded -3 for events BOMB_DROPPED, MOVED_INTO_DANGER
+2022-03-06 17:41:44,991 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:44,998 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 43
+2022-03-06 17:41:44,999 [my_agent_code] INFO: Awarded 4 for events MOVED_DOWN, ESCAPED_DANGER
+2022-03-06 17:41:44,999 [my_agent_code] INFO: Awarded 4 for events MOVED_DOWN, ESCAPED_DANGER
+2022-03-06 17:41:44,999 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,006 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 44
+2022-03-06 17:41:45,006 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:45,007 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:45,007 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,014 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 45
+2022-03-06 17:41:45,014 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:45,015 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:45,015 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,022 [my_agent_code] DEBUG: Encountered event(s) 'INVALID_ACTION', 'BOMB_EXPLODED', 'CRATE_DESTROYED', 'COIN_FOUND', 'CRATE_DESTROYED', 'CRATE_DESTROYED', 'CRATE_DESTROYED', 'KILLED_SELF', 'GOT_KILLED' in final step
+2022-03-06 17:41:45,022 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION, BOMB_EXPLODED, CRATE_DESTROYED, COIN_FOUND, CRATE_DESTROYED, CRATE_DESTROYED, CRATE_DESTROYED, KILLED_SELF, GOT_KILLED
+2022-03-06 17:41:45,027 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:45,030 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 1
+2022-03-06 17:41:45,030 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,032 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 2
+2022-03-06 17:41:45,033 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,033 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,033 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:45,037 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 3
+2022-03-06 17:41:45,038 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:45,039 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:45,039 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,043 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 4
+2022-03-06 17:41:45,044 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,044 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,045 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,048 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 5
+2022-03-06 17:41:45,049 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,050 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,050 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,054 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 6
+2022-03-06 17:41:45,055 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,055 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,056 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,058 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 7
+2022-03-06 17:41:45,058 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,058 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,059 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,061 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 8
+2022-03-06 17:41:45,061 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,061 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,062 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,064 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 9
+2022-03-06 17:41:45,064 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,065 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,065 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,068 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 10
+2022-03-06 17:41:45,069 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,069 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,070 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,075 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 11
+2022-03-06 17:41:45,076 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,076 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,077 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,081 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 12
+2022-03-06 17:41:45,082 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,083 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,083 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,088 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 13
+2022-03-06 17:41:45,089 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,089 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,090 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,097 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 14
+2022-03-06 17:41:45,098 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,098 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,099 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,104 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 15
+2022-03-06 17:41:45,104 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,104 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,105 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,109 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 16
+2022-03-06 17:41:45,109 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,109 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,110 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,113 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 17
+2022-03-06 17:41:45,114 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,115 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,115 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,120 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 18
+2022-03-06 17:41:45,121 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,121 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,122 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,127 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 19
+2022-03-06 17:41:45,128 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,129 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,129 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,134 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 20
+2022-03-06 17:41:45,135 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,136 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,136 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,142 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 21
+2022-03-06 17:41:45,143 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,143 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,143 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,148 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 22
+2022-03-06 17:41:45,149 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,149 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,149 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,154 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 23
+2022-03-06 17:41:45,154 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,154 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,154 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,159 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 24
+2022-03-06 17:41:45,159 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,159 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,159 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,163 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 25
+2022-03-06 17:41:45,163 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,163 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,163 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,168 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 26
+2022-03-06 17:41:45,169 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,169 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,169 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,173 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 27
+2022-03-06 17:41:45,174 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,174 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,174 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,178 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 28
+2022-03-06 17:41:45,179 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,179 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,180 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,184 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 29
+2022-03-06 17:41:45,185 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,186 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,186 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,191 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 30
+2022-03-06 17:41:45,191 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,192 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,193 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,198 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 31
+2022-03-06 17:41:45,199 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,199 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,200 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,205 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 32
+2022-03-06 17:41:45,206 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,206 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,207 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,212 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 33
+2022-03-06 17:41:45,212 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,212 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,213 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:45,217 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 34
+2022-03-06 17:41:45,218 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:45,218 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:45,219 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:45,225 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 35
+2022-03-06 17:41:45,226 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,226 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,226 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,231 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 36
+2022-03-06 17:41:45,231 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,232 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,232 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:45,237 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 37
+2022-03-06 17:41:45,238 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:45,238 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:45,238 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,243 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 38
+2022-03-06 17:41:45,244 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,244 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,244 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,248 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 39
+2022-03-06 17:41:45,248 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,248 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,248 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,252 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 40
+2022-03-06 17:41:45,252 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,252 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,253 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,258 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 41
+2022-03-06 17:41:45,258 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,258 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,259 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,263 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 42
+2022-03-06 17:41:45,264 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,264 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,265 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,272 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 43
+2022-03-06 17:41:45,272 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,273 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,273 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,280 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 44
+2022-03-06 17:41:45,281 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,281 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,282 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,287 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 45
+2022-03-06 17:41:45,287 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,288 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,288 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,293 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 46
+2022-03-06 17:41:45,294 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,294 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,294 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:45,300 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 47
+2022-03-06 17:41:45,300 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:45,300 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:45,301 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:45,308 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 48
+2022-03-06 17:41:45,309 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:45,309 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:45,310 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,316 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 49
+2022-03-06 17:41:45,316 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,316 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,317 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,322 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 50
+2022-03-06 17:41:45,323 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,323 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,323 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,328 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 51
+2022-03-06 17:41:45,328 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,328 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,329 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:45,333 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 52
+2022-03-06 17:41:45,334 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,334 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,334 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,340 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 53
+2022-03-06 17:41:45,341 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,341 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,341 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,347 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 54
+2022-03-06 17:41:45,347 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,347 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,348 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,354 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 55
+2022-03-06 17:41:45,355 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,356 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,356 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,363 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 56
+2022-03-06 17:41:45,363 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,363 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,364 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,367 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 57
+2022-03-06 17:41:45,368 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,368 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,369 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:45,375 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 58
+2022-03-06 17:41:45,376 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,376 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,377 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,382 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 59
+2022-03-06 17:41:45,383 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,383 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,384 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,390 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 60
+2022-03-06 17:41:45,391 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,392 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,392 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,398 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 61
+2022-03-06 17:41:45,398 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,399 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,399 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:45,404 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 62
+2022-03-06 17:41:45,405 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:45,405 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:45,405 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,410 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 63
+2022-03-06 17:41:45,410 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,411 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,411 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,415 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 64
+2022-03-06 17:41:45,416 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,416 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,416 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:45,420 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 65
+2022-03-06 17:41:45,421 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:45,421 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:45,422 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,426 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 66
+2022-03-06 17:41:45,426 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,427 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,427 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,430 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 67
+2022-03-06 17:41:45,430 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,430 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,431 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:45,434 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 68
+2022-03-06 17:41:45,434 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:45,434 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:45,435 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:45,444 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 69
+2022-03-06 17:41:45,444 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:45,445 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:45,445 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:45,453 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 70
+2022-03-06 17:41:45,454 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:45,455 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:45,455 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,462 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 71
+2022-03-06 17:41:45,463 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,464 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,464 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,470 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 72
+2022-03-06 17:41:45,471 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,471 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,471 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,475 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 73
+2022-03-06 17:41:45,475 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,475 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,476 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,480 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 74
+2022-03-06 17:41:45,480 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,480 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,480 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,484 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 75
+2022-03-06 17:41:45,484 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,485 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,485 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,489 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 76
+2022-03-06 17:41:45,490 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,490 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,491 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,495 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 77
+2022-03-06 17:41:45,496 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,496 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,496 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,500 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 78
+2022-03-06 17:41:45,501 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,501 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,501 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,505 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 79
+2022-03-06 17:41:45,506 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,506 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,506 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,512 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 80
+2022-03-06 17:41:45,512 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,513 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,513 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,518 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 81
+2022-03-06 17:41:45,518 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,519 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,519 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,528 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 82
+2022-03-06 17:41:45,528 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,528 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,529 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,537 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 83
+2022-03-06 17:41:45,538 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,538 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,538 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,546 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 84
+2022-03-06 17:41:45,546 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,547 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,547 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,553 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 85
+2022-03-06 17:41:45,554 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,554 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,555 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,560 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 86
+2022-03-06 17:41:45,560 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,561 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,561 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,566 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 87
+2022-03-06 17:41:45,566 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,566 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,566 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,571 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 88
+2022-03-06 17:41:45,571 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,571 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,571 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,575 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 89
+2022-03-06 17:41:45,575 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,575 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,575 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,579 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 90
+2022-03-06 17:41:45,579 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,579 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,579 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,582 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 91
+2022-03-06 17:41:45,583 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,583 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,583 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,590 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 92
+2022-03-06 17:41:45,591 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,591 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,592 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:45,598 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 93
+2022-03-06 17:41:45,598 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:45,599 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:45,599 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,602 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 94
+2022-03-06 17:41:45,603 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,603 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,604 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,606 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN', 'OPPONENT_ELIMINATED' in step 95
+2022-03-06 17:41:45,607 [my_agent_code] INFO: Awarded 3 for events MOVED_DOWN, OPPONENT_ELIMINATED
+2022-03-06 17:41:45,607 [my_agent_code] INFO: Awarded 3 for events MOVED_DOWN, OPPONENT_ELIMINATED
+2022-03-06 17:41:45,607 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,613 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 96
+2022-03-06 17:41:45,613 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,613 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,614 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,621 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 97
+2022-03-06 17:41:45,621 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,622 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,622 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,628 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 98
+2022-03-06 17:41:45,628 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,628 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,628 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,634 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 99
+2022-03-06 17:41:45,635 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,635 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,636 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,643 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 100
+2022-03-06 17:41:45,644 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,644 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,644 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,651 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 101
+2022-03-06 17:41:45,652 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,652 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,653 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,658 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 102
+2022-03-06 17:41:45,659 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:45,659 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:45,659 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,664 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 103
+2022-03-06 17:41:45,664 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,664 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,665 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:45,669 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 104
+2022-03-06 17:41:45,669 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:45,669 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:45,669 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:45,671 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 105
+2022-03-06 17:41:45,671 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:45,671 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:45,672 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,673 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 106
+2022-03-06 17:41:45,674 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,674 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,674 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,679 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 107
+2022-03-06 17:41:45,680 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:45,680 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:45,680 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,683 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 108
+2022-03-06 17:41:45,683 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,684 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,684 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,687 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 109
+2022-03-06 17:41:45,688 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,688 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,688 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,690 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 110
+2022-03-06 17:41:45,691 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,691 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,691 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,693 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 111
+2022-03-06 17:41:45,693 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,693 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,694 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,695 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 112
+2022-03-06 17:41:45,696 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,696 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,696 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,700 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 113
+2022-03-06 17:41:45,700 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,700 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,700 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,707 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 114
+2022-03-06 17:41:45,707 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,707 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,707 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,712 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 115
+2022-03-06 17:41:45,712 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,712 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,713 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,716 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 116
+2022-03-06 17:41:45,716 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,716 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,717 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,720 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 117
+2022-03-06 17:41:45,720 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,720 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 17:41:45,721 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,723 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 118
+2022-03-06 17:41:45,723 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,724 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 17:41:45,724 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:45,726 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 119
+2022-03-06 17:41:45,726 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:45,726 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:45,726 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,728 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 120
+2022-03-06 17:41:45,728 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:45,729 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:45,729 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,731 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 121
+2022-03-06 17:41:45,732 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:45,732 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:45,733 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,735 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 122
+2022-03-06 17:41:45,736 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:45,736 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:45,736 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:45,739 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 123
+2022-03-06 17:41:45,739 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:45,740 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:45,740 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,743 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT', 'OPPONENT_ELIMINATED' in step 124
+2022-03-06 17:41:45,743 [my_agent_code] INFO: Awarded 3 for events MOVED_LEFT, OPPONENT_ELIMINATED
+2022-03-06 17:41:45,743 [my_agent_code] INFO: Awarded 3 for events MOVED_LEFT, OPPONENT_ELIMINATED
+2022-03-06 17:41:45,744 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,745 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 125
+2022-03-06 17:41:45,745 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:45,745 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:45,746 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,747 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 126
+2022-03-06 17:41:45,747 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:45,747 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:45,747 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,748 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 127
+2022-03-06 17:41:45,748 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:45,748 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:45,748 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,749 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 128
+2022-03-06 17:41:45,750 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:45,750 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:45,750 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,751 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 129
+2022-03-06 17:41:45,752 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:45,752 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:45,753 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,754 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 130
+2022-03-06 17:41:45,754 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:45,755 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 17:41:45,755 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,756 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 131
+2022-03-06 17:41:45,757 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:45,757 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 17:41:45,757 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,759 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT', 'OPPONENT_ELIMINATED' in step 132
+2022-03-06 17:41:45,759 [my_agent_code] INFO: Awarded 3 for events MOVED_LEFT, OPPONENT_ELIMINATED
+2022-03-06 17:41:45,759 [my_agent_code] INFO: Awarded 3 for events MOVED_LEFT, OPPONENT_ELIMINATED
+2022-03-06 17:41:45,760 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 17:41:45,760 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 133
+2022-03-06 17:41:45,760 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:45,760 [my_agent_code] INFO: Awarded -3 for events INVALID_ACTION
+2022-03-06 17:41:45,761 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 17:41:45,762 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 134
+2022-03-06 17:41:45,762 [my_agent_code] INFO: Awarded 0 for events MOVED_LEFT
+2022-03-06 17:41:45,762 [my_agent_wrapper] ERROR: index 3 is out of bounds for axis 0 with size 1
+Traceback (most recent call last):
+  File "/home/philipp/workspace/bomberman/agents.py", line 248, in process_event
+    event_result = getattr(module, event_name)(self.fake_self, *event_args)
+  File "/home/philipp/workspace/bomberman/agent_code/my_agent/train.py", line 114, in game_events_occurred
+    old_model[ACTIONS[self_action]] = old_model[ACTIONS[self_action]] + self.alpha * (
+IndexError: index 3 is out of bounds for axis 0 with size 1
