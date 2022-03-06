@@ -1,35 +1,86 @@
-2022-03-04 20:50:35,679 [my_agent_code] INFO: Setting up model from scratch.
-2022-03-04 20:50:35,999 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:36,109 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:36,210 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:36,310 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:36,410 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:36,510 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:36,611 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:36,722 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:36,812 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:36,913 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:37,010 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:37,111 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:37,211 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:37,311 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:37,414 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:37,514 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:37,614 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:37,714 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:37,811 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:37,912 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:38,013 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:38,114 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:38,214 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:38,314 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:38,413 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:38,512 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:38,612 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:38,711 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:38,812 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:38,912 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:39,014 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:39,114 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:39,214 [my_agent_code] DEBUG: Querying model for action.
-2022-03-04 20:50:39,315 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 11:43:24,446 [my_agent_code] INFO: Loading model from saved state.
+2022-03-06 11:43:24,609 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 11:43:24,612 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_LEFT' in step 1
+2022-03-06 11:43:24,712 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 11:43:24,716 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 2
+2022-03-06 11:43:24,716 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
+2022-03-06 11:43:24,716 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
+2022-03-06 11:43:24,829 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 11:43:24,835 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 3
+2022-03-06 11:43:24,835 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 11:43:24,835 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 11:43:24,927 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 11:43:24,938 [my_agent_code] DEBUG: Encountered game event(s) 'BOMB_DROPPED' in step 4
+2022-03-06 11:43:24,938 [my_agent_code] INFO: Awarded 0 for events BOMB_DROPPED
+2022-03-06 11:43:24,939 [my_agent_code] INFO: Awarded 0 for events BOMB_DROPPED
+2022-03-06 11:43:25,027 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 11:43:25,038 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_RIGHT' in step 5
+2022-03-06 11:43:25,039 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 11:43:25,039 [my_agent_code] INFO: Awarded 0 for events MOVED_RIGHT
+2022-03-06 11:43:25,130 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 11:43:25,145 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 6
+2022-03-06 11:43:25,145 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 11:43:25,145 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 11:43:25,229 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 11:43:25,239 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_UP' in step 7
+2022-03-06 11:43:25,239 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 11:43:25,240 [my_agent_code] INFO: Awarded 0 for events MOVED_UP
+2022-03-06 11:43:25,329 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 11:43:25,338 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION', 'BOMB_EXPLODED', 'CRATE_DESTROYED', 'CRATE_DESTROYED', 'CRATE_DESTROYED' in step 8
+2022-03-06 11:43:25,339 [my_agent_code] INFO: Awarded 3 for events INVALID_ACTION, BOMB_EXPLODED, CRATE_DESTROYED, CRATE_DESTROYED, CRATE_DESTROYED
+2022-03-06 11:43:25,339 [my_agent_code] INFO: Awarded 3 for events INVALID_ACTION, BOMB_EXPLODED, CRATE_DESTROYED, CRATE_DESTROYED, CRATE_DESTROYED
+2022-03-06 11:43:25,429 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 11:43:25,440 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 9
+2022-03-06 11:43:25,440 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
+2022-03-06 11:43:25,440 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
+2022-03-06 11:43:25,529 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 11:43:25,546 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 10
+2022-03-06 11:43:25,547 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
+2022-03-06 11:43:25,547 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
+2022-03-06 11:43:25,628 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 11:43:25,642 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 11
+2022-03-06 11:43:25,643 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
+2022-03-06 11:43:25,643 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
+2022-03-06 11:43:25,727 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 11:43:25,741 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 12
+2022-03-06 11:43:25,742 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
+2022-03-06 11:43:25,742 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
+2022-03-06 11:43:25,827 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 11:43:25,843 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 13
+2022-03-06 11:43:25,843 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
+2022-03-06 11:43:25,843 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
+2022-03-06 11:43:25,927 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 11:43:25,942 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 14
+2022-03-06 11:43:25,942 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
+2022-03-06 11:43:25,943 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
+2022-03-06 11:43:26,029 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 11:43:26,040 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 15
+2022-03-06 11:43:26,040 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
+2022-03-06 11:43:26,040 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
+2022-03-06 11:43:26,133 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 11:43:26,142 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 16
+2022-03-06 11:43:26,143 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
+2022-03-06 11:43:26,143 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
+2022-03-06 11:43:26,229 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 11:43:26,240 [my_agent_code] DEBUG: Encountered game event(s) 'WAITED' in step 17
+2022-03-06 11:43:26,240 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 11:43:26,240 [my_agent_code] INFO: Awarded 0 for events WAITED
+2022-03-06 11:43:26,329 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 11:43:26,342 [my_agent_code] DEBUG: Encountered game event(s) 'BOMB_DROPPED' in step 18
+2022-03-06 11:43:26,342 [my_agent_code] INFO: Awarded 0 for events BOMB_DROPPED
+2022-03-06 11:43:26,343 [my_agent_code] INFO: Awarded 0 for events BOMB_DROPPED
+2022-03-06 11:43:26,428 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 11:43:26,444 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 19
+2022-03-06 11:43:26,444 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
+2022-03-06 11:43:26,445 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
+2022-03-06 11:43:26,528 [my_agent_code] DEBUG: Choosing action purely at random.
+2022-03-06 11:43:26,544 [my_agent_code] DEBUG: Encountered game event(s) 'MOVED_DOWN' in step 20
+2022-03-06 11:43:26,544 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 11:43:26,544 [my_agent_code] INFO: Awarded 0 for events MOVED_DOWN
+2022-03-06 11:43:26,628 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 11:43:26,645 [my_agent_code] DEBUG: Encountered game event(s) 'INVALID_ACTION' in step 21
+2022-03-06 11:43:26,645 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
+2022-03-06 11:43:26,645 [my_agent_code] INFO: Awarded 0 for events INVALID_ACTION
+2022-03-06 11:43:26,729 [my_agent_code] DEBUG: Querying model for action.
+2022-03-06 11:43:26,747 [my_agent_code] DEBUG: Encountered event(s) 'INVALID_ACTION', 'BOMB_EXPLODED', 'CRATE_DESTROYED', 'CRATE_DESTROYED', 'CRATE_DESTROYED', 'CRATE_DESTROYED', 'CRATE_DESTROYED', 'KILLED_SELF', 'GOT_KILLED' in final step
+2022-03-06 11:43:26,747 [my_agent_code] INFO: Awarded 1 for events INVALID_ACTION, BOMB_EXPLODED, CRATE_DESTROYED, CRATE_DESTROYED, CRATE_DESTROYED, CRATE_DESTROYED, CRATE_DESTROYED, KILLED_SELF, GOT_KILLED

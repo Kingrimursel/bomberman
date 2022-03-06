@@ -1,3 +1,5 @@
+import numpy as np
+
 from collections import namedtuple, deque
 
 import pickle
@@ -16,6 +18,9 @@ RECORD_ENEMY_TRANSITIONS = 1.0  # record enemy transitions with probability ...
 
 # Events
 PLACEHOLDER_EVENT = "PLACEHOLDER"
+
+# action to int dit
+ACTIONS = {"UP": 0, "RIGHT": 1, "DOWN": 2, "LEFT": 3, "WAIT": 4, "BOMB": 5}
 
 
 def setup_training(self):
@@ -50,12 +55,44 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     """
     self.logger.debug(f'Encountered game event(s) {", ".join(map(repr, events))} in step {new_game_state["step"]}')
 
-    # Idea: Add your own events to hand out rewards
-    if ...:
-        events.append(PLACEHOLDER_EVENT)
+    if not old_game_state:  # TODO why can this be true?
+        print("yees")
+        return
 
-    # state_to_features is defined in callbacks.py
-    self.transitions.append(Transition(state_to_features(old_game_state), self_action, state_to_features(new_game_state), reward_from_events(self, events)))
+    # TODO: add reward when agent is next to a coin
+
+    # Idea: Add your own events to hand out rewards
+    #if ...:
+    #    events.append(PLACEHOLDER_EVENT)
+
+
+    # calculate current transition
+    current_transition = Transition(state_to_features(self, old_game_state), self_action, state_to_features(self, new_game_state), reward_from_events(self, events))
+
+
+    # append current transition to transition stack
+    self.transitions.append(current_transition)
+
+    old_features = state_to_features(self, old_game_state)
+    new_features = state_to_features(self, new_game_state)
+
+    #print(new_features)
+    #print(old_game_state)
+    #print(self.model.shape)
+    #print(old_features)
+    #print(self.model[old_features].shape)
+
+    old_model = self.model[old_features]
+    new_model = self.model[new_features]
+
+
+
+    # do temporal difference learning
+    old_model[ACTIONS[self_action]] = old_model[ACTIONS[self_action]] + self.alpha * (
+            reward_from_events(self, events) +
+            self.gamma * np.max(new_model) -
+            old_model[ACTIONS[self_action]]
+        )
 
 
 def end_of_round(self, last_game_state: dict, last_action: str, events: List[str]):
@@ -72,7 +109,11 @@ def end_of_round(self, last_game_state: dict, last_action: str, events: List[str
     :param self: The same object that is passed to all of your callbacks.
     """
     self.logger.debug(f'Encountered event(s) {", ".join(map(repr, events))} in final step')
-    self.transitions.append(Transition(state_to_features(last_game_state), last_action, None, reward_from_events(self, events)))
+
+    # append current transition to transition stack
+    self.transitions.append(Transition(state_to_features(self, last_game_state), last_action, None, reward_from_events(self, events)))
+
+    # TODO: do Q-learning here aswell
 
     # Store the model
     with open("my-saved-model.pt", "wb") as file:
@@ -89,8 +130,14 @@ def reward_from_events(self, events: List[str]) -> int:
     game_rewards = {
         e.COIN_COLLECTED: 1,
         e.KILLED_OPPONENT: 5,
+        e.CRATE_DESTROYED: 1,
+        e.COIN_FOUND: 2,
+        e.KILLED_SELF: -4,
+        e.OPPONENT_ELIMINATED: 3,
+        e.SURVIVED_ROUND: 4,
         PLACEHOLDER_EVENT: -.1  # idea: the custom event is bad
     }
+
     reward_sum = 0
     for event in events:
         if event in game_rewards:

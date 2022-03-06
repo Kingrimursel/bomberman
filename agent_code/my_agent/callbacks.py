@@ -22,14 +22,19 @@ def setup(self):
 
     :param self: This object is passed to all callbacks and you can set arbitrary values.
     """
-    if self.train or not os.path.isfile("my-saved-model.pt"):
+
+    if not os.path.isfile("my-saved-model.pt"):
         self.logger.info("Setting up model from scratch.")
-        weights = np.random.rand(len(ACTIONS))
-        self.model = weights / weights.sum()
+        self.model = np.ones((10, 10, 10, 10, 10, 6)) # one dimension for each feature and one for the actions
+
     else:
         self.logger.info("Loading model from saved state.")
         with open("my-saved-model.pt", "rb") as file:
             self.model = pickle.load(file)
+
+    # TODO: tune these hyper parameters!
+    self.alpha = .5
+    self.gamma = .1 
 
 
 def act(self, game_state: dict) -> str:
@@ -44,7 +49,7 @@ def act(self, game_state: dict) -> str:
     # todo Exploration vs exploitation
 
     # extract features from state
-    features = state_to_features(game_state)
+    features = state_to_features(self, game_state)
 
     random_prob = .1
     if self.train and random.random() < random_prob:
@@ -53,10 +58,11 @@ def act(self, game_state: dict) -> str:
         return np.random.choice(ACTIONS, p=[.2, .2, .2, .2, .1, .1])
 
     self.logger.debug("Querying model for action.")
-    return np.random.choice(ACTIONS, p=self.model)
+
+    return ACTIONS[np.argmax(self.model[state_to_features(self, game_state)])]
 
 
-def state_to_features(game_state: dict) -> np.array:
+def state_to_features(self, game_state: dict) -> np.array:
     """
     *This is not a required function, but an idea to structure your code.*
 
@@ -72,7 +78,7 @@ def state_to_features(game_state: dict) -> np.array:
     """
 
     # we consider five features: one for each neighbouring cite and one for the current one.
-    # the cites can take different values, depending on the circumstances.
+    # the cites can take different values, depending on the circumstances like type etc.
 
     # wall: -1
     # free: 0
@@ -82,35 +88,100 @@ def state_to_features(game_state: dict) -> np.array:
     # opponent: 7
     # coin: 8
 
-    bombs    = np.array(game_state["bombs"], dtype=object)
-    oponents = np.array(game_state["others"], dtype=object)
 
-    x,y = game_state["self"][-1]
-
-    current_field  = get_field_value(x,   y,   game_state, bombs, oponents)
-    left_field     = get_field_value(x-1, y,   game_state, bombs, oponents)
-    right_field    = get_field_value(x+1, y,   game_state, bombs, oponents)
-    top_field      = get_field_value(x,   y-1, game_state, bombs, oponents)
-    bottom_field   = get_field_value(x,   y+1, game_state, bombs, oponents)
+    # TODO: add map awareness
+    # TODO: add feature that shows you to next feature. I.e. if moving to a tile brings you closer to
+    # the coin, give it a higher value
 
 
     # This is the dict before the game begins and after it ends
     if game_state is None:
         return None
 
-    # For example, you could construct several channels of equal shape, ...
-    channels = []
-    channels.append(...)
-    # concatenate them as a feature tensor (they must have the same shape), ...
-    stacked_channels = np.stack(channels)
-    # and return them as a vector
-    return stacked_channels.reshape(-1)
+    # numpyify the two lists for better access
+    bombs    = np.array(game_state["bombs"], dtype=object)
+    opponents = np.array(game_state["others"], dtype=object)
+
+    # coordinates of agents current position
+    x,y = game_state["self"][-1]
+
+    current_field  = get_field_value(x,   y,   game_state, bombs, opponents)
+    left_field     = get_field_value(x-1, y,   game_state, bombs, opponents)
+    right_field    = get_field_value(x+1, y,   game_state, bombs, opponents)
+    top_field      = get_field_value(x,   y-1, game_state, bombs, opponents)
+    bottom_field   = get_field_value(x,   y+1, game_state, bombs, opponents)
+
+    #test = [current_field, left_field, right_field, top_field, bottom_field]
+    #print(test)
+    #print(tuple(test))
 
 
-def get_field_value(i, j, game_state, bombs, oponents):
+    return tuple([current_field, left_field, right_field, top_field, bottom_field])
+
+
+def look_for_targets(free_space, start, targets, logger=None):
+    """Find direction of the closest target that can be reached via free tiles.
+
+    Performs a breadth-first search of the reachable free tiles until a target is encountered.
+    If no target can be reached, the path that takes the agent closest to any target is chosen.
+
+    Args:
+        free_space: Boolean numpy array. True for free tiles and False for obstacles.
+        start: the coordinate from which to begin the search.
+        targets: list or array holding the coordinates of all target tiles.
+        logger: optional logger object for debugging.
+    Returns:
+        coordinate of first step towards the closest target or towards tile closest to any target.
+    """
+    if len(targets) == 0:
+        return None
+
+    frontier = [start]
+    parent_dict = {start: start}
+    dist_so_far = {start: 0}
+    best = start
+    best_dist = np.sum(np.abs(np.subtract(targets, start)), axis=1).min()
+
+    while len(frontier) > 0:
+        current = frontier.pop(0)
+        # Find distance from current position to all targets, track closest
+        d = np.sum(np.abs(np.subtract(targets, current)), axis=1).min()
+        if d + dist_so_far[current] <= best_dist:
+            best = current
+            best_dist = d + dist_so_far[current]
+        if d == 0:
+            # Found path to a target's exact position, mission accomplished!
+            best = current
+            break
+        # Add unexplored free neighboring tiles to the queue in a random order
+        x, y = current
+        neighbors = [(x, y) for (x, y) in [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)] if free_space[x, y]]
+        shuffle(neighbors)
+        for neighbor in neighbors:
+            if neighbor not in parent_dict:
+                frontier.append(neighbor)
+                parent_dict[neighbor] = current
+                dist_so_far[neighbor] = dist_so_far[current] + 1
+    if logger: logger.debug(f'Suitable target found at {best}')
+    # Determine the first step towards the best found target tile
+    current = best
+    while True:
+        if parent_dict[current] == start: return current
+        current = parent_dict[current]
+
+
+def get_field_value(i, j, game_state, bombs, opponents):
     """
 
-    classify field (i, j)
+    classify field (i, j) with its corresponding feature value
+
+    INPUT:
+        i,j:        coordinates on map
+        game_state: current game state
+        bombs:      numpyified bombs array
+        opponents:  numpyified opponents array
+    OUTPUT:
+        field classification with corresponding value
 
     """
 
@@ -125,7 +196,7 @@ def get_field_value(i, j, game_state, bombs, oponents):
         return 6
 
     # opponent
-    elif (i, j) in list(oponents[:, -1]):
+    elif (i, j) in list(opponents[:, -1]):
         return 7
 
     # coin
