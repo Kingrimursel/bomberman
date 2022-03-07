@@ -43,7 +43,7 @@ def act(self, game_state: dict) -> str:
     :return: The action to take as a string.
     """
     
-    random_prob = .3 #TODO: Adapt Exploration vs exploitation parameter
+    random_prob = .2 #TODO: Adapt Exploration vs exploitation parameter
     if self.train and random.random() < random_prob:
         self.logger.debug("Choosing action purely at random.")
         # 80% walk in any direction. wait 20%. Bomb 0%
@@ -58,10 +58,10 @@ def act(self, game_state: dict) -> str:
     #return np.random.choice(ACTIONS, p=self.model[0])
     return ACTIONS[np.argmax(self.model[features])] #Gives action with maximal reward for given state
     
- #The following two functions are defined in here so they can also be used in the train.py
 
-def look_for_targets(free_space, start, targets, logger=None):
-    """Find distance to the closest target (target can be specified in use)
+#The following two functions are defined in here so they can also be used in the train.py
+def look_for_targets(free_space, start, targets, logger=None, dir=False):
+    """Find distance to the closest target (target can be specified in use (coin/opponent/crate...))
 
     Performs a breadth-first search of the reachable free tiles until a special target is encountered.
     Args:
@@ -70,7 +70,7 @@ def look_for_targets(free_space, start, targets, logger=None):
         targets: list or array holding the coordinates of all target tiles.
         logger: optional logger object for debugging.
     Returns:
-        distance to the closest target
+        distance to the closest target or direction of closest target
     """
     if len(targets) == 0:
         return 17
@@ -80,30 +80,36 @@ def look_for_targets(free_space, start, targets, logger=None):
     dist_so_far = {start: 0}
     best = start
     best_dist = np.sum(np.abs(np.subtract(targets, start)), axis=1).min()
-
-    while len(frontier) > 0:
-        current = frontier.pop(0)
-        # Find distance from current position to all targets, track closest
-        d = np.sum(np.abs(np.subtract(targets, current)), axis=1).min()
-        if d + dist_so_far[current] <= best_dist:
-            best = current
-            best_dist = d + dist_so_far[current]
-        if d == 0:
-            # Found path to a target's exact position, mission accomplished!
-            best = current
-            break
-        # Add unexplored free neighboring tiles to the queue in a random order
-        x, y = current
-        neighbors = [(x, y) for (x, y) in [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)] if free_space[x, y]]
-        random.shuffle(neighbors)
-        for neighbor in neighbors:
-            if neighbor not in parent_dict:
-                frontier.append(neighbor)
-                parent_dict[neighbor] = current
-                dist_so_far[neighbor] = dist_so_far[current] + 1
-    #if logger: logger.debug(f'Suitable target found at {best}')
-    #if logger: logger.debug(f'Suitable target found with distance {best_dist}')
-    return best_dist+1
+    if(dir):
+        while len(frontier) > 0:
+            current = frontier.pop(0)
+            # Find distance from current position to all targets, track closest
+            d = np.sum(np.abs(np.subtract(targets, current)), axis=1).min()
+            if d + dist_so_far[current] <= best_dist:
+                best = current
+                best_dist = d + dist_so_far[current]
+            if d == 0:
+                # Found path to a target's exact position, mission accomplished!
+                best = current
+                break
+            # Add unexplored free neighboring tiles to the queue in a random order
+            x, y = current
+            neighbors = [(x, y) for (x, y) in [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)] if free_space[x, y]]
+            random.shuffle(neighbors)
+            for neighbor in neighbors:
+                if neighbor not in parent_dict:
+                    frontier.append(neighbor)
+                    parent_dict[neighbor] = current
+                    dist_so_far[neighbor] = dist_so_far[current] + 1
+        #if logger: logger.debug(f'Suitable target found with distance {best_dist}')
+        # Determine the first step towards the best found target tile
+        current = best
+        
+        while True:
+            if parent_dict[current] == start: return best_dist,current
+            current = parent_dict[current]
+        
+    return best_dist
 
 def destruction(arena, others_map, x,y):
     """
@@ -216,7 +222,7 @@ def state_to_features(self, game_state: dict) -> np.array:
         if (arena[i,j] == 0):
             features[num]=0
         # if tile is Wall, crate, sure death, bomb, or other agent
-        if (arena[i,j] == -1 or arena[i,j]== 1 or bomb_map[i,j]<=1 or bomb_positions[i,j]==1 or others_map[i,j]==1 or explosion_map[i,j]>0):
+        if (arena[i,j] == -1 or arena[i,j]== 1 or bomb_map[i,j]==1 or bomb_positions[i,j]==1 or others_map[i,j]==1 or explosion_map[i,j]>0):
             features[num]=1
         # possible danger (a bomb in the area may explode soon)
         elif (arena[i,j] == 0 and bomb_map[i,j]<=4):
@@ -224,7 +230,7 @@ def state_to_features(self, game_state: dict) -> np.array:
         #Phase dependent value
         else:
             if(features[5]==0):
-                if(look_for_targets(free_space, (i, j), coins, self.logger)<distance_nextcoin):
+                if(look_for_targets(free_space, (i, j), coins, self.logger)<distance_nextcoin or (i,j) in coins):
                     features[num]=3
             elif(features[5]==1):
                 if((destruction(arena, others_map,i,j)>possible_destruction) or (look_for_targets(free_space, (i, j), crates, self.logger)<distance_nextcrate)):
