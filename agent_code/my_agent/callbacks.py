@@ -25,7 +25,19 @@ def setup(self):
 
     if not os.path.isfile("my-saved-model.pt"):
         self.logger.info("Setting up model from scratch.")
-        self.model = np.ones((10, 10, 10, 10, 10, 6))  # one dimension for each feature and one for the actions
+        #self.model = np.ones((10, 10, 10, 10, 10, 6))  # one dimension for each feature and one for the actions
+
+        self.model = np.ones((
+            # classifying
+            3, 3, 3, 3, 3,
+            # defensive
+            6, 6, 6, 6, 6,
+            # offensive
+            3, 3, 3, 3, 3,
+            # explorative
+
+            # actions
+            6), dtype=np.float32)
 
     else:
         self.logger.info("Loading model from saved state.")
@@ -93,29 +105,60 @@ def state_to_features(self, game_state: dict) -> np.array:
     ## utilities and declarations
 
     # numpyify the two lists for better access
-    bombs = np.array(game_state["bombs"], dtype=object)
+    bombs = np.array(game_state["bombs"], dtype=object)  # TODO explicit definition not necessary anymore
     opponents = np.array(game_state["others"], dtype=object)
 
 
     # coordinates of agents current position
-    x,y = game_state["self"][-1]
+    xs,ys = game_state["self"][-1]
 
 
     # compute future explosion map
     future_explosion_map = create_future_explosion_map(bombs, game_state["field"].T)
 
+    features = []
+
+    num_features = len(np.array(self.model.shape[:-1]))
+    features = np.empty(num_features, dtype=int)
+
+    for i, (x, y) in enumerate([(xs, ys), (xs-1, ys), (xs+1, ys), (xs, ys-1), (xs, ys+1)]):
+        # classifying
+        features[i] = game_state["field"].T[x, y] + 1
+
+        # defensive
+        if future_explosion_map[x, y] != 0:
+            features[i + 5] = future_explosion_map[x, y]
+        elif game_state["explosion_map"].T[x, y] != 0:
+            features[i + 5] = 4
+        else:
+            features[i + 5] = 5
+
+        # offensive
+        if opponents.size != 0 and (x, y) in list(opponents[:, -1]):
+            features[i + 10] = 0
+        elif (x, y) in list(game_state["coins"]):
+            features[i + 10] = 1
+        else:
+            features[i + 10] = 2
+
+
 
     ## computing features
-    current_field  = get_field_value(x,   y,   game_state, future_explosion_map, opponents)
-    left_field     = get_field_value(x-1, y,   game_state, future_explosion_map, opponents)
-    right_field    = get_field_value(x+1, y,   game_state, future_explosion_map, opponents)
-    top_field      = get_field_value(x,   y-1, game_state, future_explosion_map, opponents)
-    bottom_field   = get_field_value(x,   y+1, game_state, future_explosion_map, opponents)
+    #current_field  = get_field_value(x,   y,   game_state, future_explosion_map, opponents)
+    #left_field     = get_field_value(x-1, y,   game_state, future_explosion_map, opponents)
+    #right_field    = get_field_value(x+1, y,   game_state, future_explosion_map, opponents)
+    #top_field      = get_field_value(x,   y-1, game_state, future_explosion_map, opponents)
+    #bottom_field   = get_field_value(x,   y+1, game_state, future_explosion_map, opponents)
 
     # save future_explosion_map to game_state
     game_state["future_explosion_map"] = future_explosion_map  # TODO not working!
 
-    return tuple([current_field, left_field, right_field, top_field, bottom_field])
+    print("here:\n")
+    print(tuple(features))
+
+    return tuple(features)
+
+    #return tuple([current_field, left_field, right_field, top_field, bottom_field])
 
 
 def get_field_value(i, j, game_state, future_explosion_map, opponents):
@@ -133,13 +176,29 @@ def get_field_value(i, j, game_state, future_explosion_map, opponents):
 
     """
 
-    # wall: -1
-    # free: 0
-    # crate: 1
-    # future explosions: countdown + 2 in [2, 5]
-    # present explosions: 6
-    # opponent: 7
-    # coin: 8
+    ## classifying
+    # wall: 0
+    # free: 1
+    # crate: 2
+
+
+    ## defensive
+    # future explosion: countdown in [0, 3]
+    # present explosion: 4
+    # no explosion:5
+
+    ## offensive
+    # opponent: 0
+    # coin: 1
+    # nothing: 2
+
+    # TODO: add
+    # TODO: unterscheiden zwischen coin und enemy!! maybe a mode which the agent can enter?
+
+    ## explorative 
+    # towards next coin: 1
+    # towards next enemy: 2
+    # away from both: 3
 
 
     # caution: order of lookup matters!

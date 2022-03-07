@@ -102,14 +102,11 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
 
     old_features = state_to_features(self, old_game_state)
     new_features = state_to_features(self, new_game_state)
-
-
     old_model = self.model[old_features]
     new_model = self.model[new_features]
 
 
-
-    # do temporal difference learning
+    # do temporal Q-learning (TD)
     old_model[ACTIONS[self_action]] = old_model[ACTIONS[self_action]] + self.alpha * (
             reward_from_events(self, events) +
             self.gamma * np.max(new_model) -
@@ -150,9 +147,9 @@ def reward_from_events(self, events: List[str]) -> int:
     certain behavior.
     """
     game_rewards = {
-        e.COIN_COLLECTED: 3,
+        e.COIN_COLLECTED: 4,
         e.KILLED_OPPONENT: 5,
-        e.CRATE_DESTROYED: 2,
+        e.CRATE_DESTROYED: 3,
         e.COIN_FOUND: 3,
         e.KILLED_SELF: -3,
         e.OPPONENT_ELIMINATED: 5,
