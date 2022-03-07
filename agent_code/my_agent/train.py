@@ -20,6 +20,7 @@ RECORD_ENEMY_TRANSITIONS = 1.0  # record enemy transitions with probability ...
 PASSIVE_IN_DANGER_EVENT = "PASSIVE_IN_DANGER"
 ESCAPED_DANGER_EVENT    = "ESCAPED_DANGER"
 MOVED_INTO_DANGER_EVENT = "MOVED_INTO_DANGER"
+BOMB_AND_STAY_EVENT     = "BOMB_AND_STAY"
 
 
 # action to int dit
@@ -92,6 +93,10 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     if old_danger_level == 0 and new_danger_level > 0:
         events.append(MOVED_INTO_DANGER_EVENT)
 
+    # if dropped bomb in last action and didn't move:
+    if self.transitions and old_position == new_position and self.transitions[-1].action == "WAIT":
+        events.append(BOMB_AND_STAY_EVENT)
+
 
     # calculate current transition
     current_transition = Transition(state_to_features(self, old_game_state), self_action, state_to_features(self, new_game_state), reward_from_events(self, events))
@@ -154,10 +159,11 @@ def reward_from_events(self, events: List[str]) -> int:
         e.KILLED_SELF: -3,
         e.OPPONENT_ELIMINATED: 5,
         e.INVALID_ACTION: -.3,
-        e.SURVIVED_ROUND: 2,
-        PASSIVE_IN_DANGER_EVENT: -2,
-        ESCAPED_DANGER_EVENT: 2.5,
-        MOVED_INTO_DANGER_EVENT: -1.5
+        e.SURVIVED_ROUND: .5,
+        PASSIVE_IN_DANGER_EVENT: -3,
+        ESCAPED_DANGER_EVENT: 2,
+        MOVED_INTO_DANGER_EVENT: -2,
+        BOMB_AND_STAY_EVENT: -3
     }
 
     reward_sum = 0

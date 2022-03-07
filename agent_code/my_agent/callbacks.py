@@ -25,24 +25,16 @@ def setup(self):
 
     if not os.path.isfile("my-saved-model.pt"):
         self.logger.info("Setting up model from scratch.")
-        #self.model = np.ones((10, 10, 10, 10, 10, 6))  # one dimension for each feature and one for the actions
 
-        self.category_sizes = np.array([3, 6, 3])  # classifying, defensive, offensive
-        self.num_features  = np.sum(self.category_sizes)*5
-
-        self.model = np.ones((self.num_features, 6))
-
-        """self.model = np.ones((
-            # classifying
-            3, 3, 3, 3, 3,
+        self.model = np.ones((
             # defensive
-            6, 6, 6, 6, 6,
+            7, 7, 7, 7, 7,
             # offensive
             3, 3, 3, 3, 3,
             # explorative
 
             # actions
-            6), dtype=np.float32)"""
+            6), dtype=np.float32)
 
     else:
         self.logger.info("Loading model from saved state.")
@@ -75,67 +67,7 @@ def act(self, game_state: dict) -> str:
 
     self.logger.debug("Querying model for action.")
 
-    get_Q_values(self, state_to_features(self, game_state))
-
     return ACTIONS[np.argmax(self.model[state_to_features(self, game_state)])]
-
-
-def get_Q_values(self, features):
-    """
-    Extract Q-Value from Q-Table corresponding to feature value
-
-    INPUT:
-        self: agent
-        features: the features
-    OUTPUT:
-        Q-values corresponding to features
-
-    """
-
-    Q_values = np.empty((len(features), 6))
-
-    #print(Q_values.shape)
-    #print(features)
-
-    # shape of features: 5*classifying, 5*defensive, 5*offensive
-
-    # shape of model: 5*3 (classifying), 5*6 (defensive), 5*3 (offfensive)
-
-
-    # loop over category
-    for i, feature in enumerate(features):
-        # get category
-        category = i // 5
-
-        # get size of category
-        print(i, category)
-        category_size = self.category_sizes[category]
-
-        # get field (left, right, top etc.)
-        field = i % 5
-
-        # get features value position. First skipt the previous categories, then the previous fields.
-        # Then add the feature value
-        value_position = 5*np.sum(self.category_sizes[:category]) + field*category_size + feature
-
-        #print(category, category_size, field)
-        #print(value_position)
-        #print(self.model.shape)
-        #print(self.model[value_position])
-
-        Q_values[i] = self.model[value_position]
-
-
-        # i % 5  = category                            (check)
-        # self.category_sizes[i%5] = size of category  (check)
-        # i // 5 = field                               (check) 
-
-        # value position = 5*np.sum(self.category_sizes[:category]) + size of category * field + feature     
-        # feature value  = self.model[value position]
-
-    print(Q_values)
-
-
 
 
 def state_to_features(self, game_state: dict) -> np.array:
@@ -181,145 +113,34 @@ def state_to_features(self, game_state: dict) -> np.array:
     # compute future explosion map
     future_explosion_map = create_future_explosion_map(bombs, game_state["field"].T)
 
-
-    features = np.empty(5*len(self.category_sizes), dtype=int)
+    num_features = len(np.array(self.model.shape[:-1]))
+    features = np.empty(num_features, dtype=int)
 
     for i, (x, y) in enumerate([(xs, ys), (xs-1, ys), (xs+1, ys), (xs, ys-1), (xs, ys+1)]):
         # classifying
-        features[i] = game_state["field"].T[x, y] + 1
+        #features[i] = game_state["field"].T[x, y] + 1
 
         # defensive
         if future_explosion_map[x, y] != 0:
-            features[i + 5] = future_explosion_map[x, y]
+            features[i] = future_explosion_map[x, y] - 1  # start at zero to save memory
         elif game_state["explosion_map"].T[x, y] != 0:
-            features[i + 5] = 4
+            features[i] = 3
         else:
-            features[i + 5] = 5
+            features[i] = game_state["field"].T[x, y] + 5
 
         # offensive
         if opponents.size != 0 and (x, y) in list(opponents[:, -1]):
-            features[i + 10] = 0
+            features[i + 5] = 0
         elif (x, y) in list(game_state["coins"]):
-            features[i + 10] = 1
+            features[i + 5] = 1
         else:
-            features[i + 10] = 2
+            features[i + 5] = 2
+
 
     # save future_explosion_map to game_state
     game_state["future_explosion_map"] = future_explosion_map  # TODO not working!
 
     return tuple(features)
-
-
-def get_field_value(i, j, game_state, future_explosion_map, opponents):
-    """
-
-    classify field (i, j) with its corresponding feature value
-
-    INPUT:
-        i,j:        coordinates on map
-        game_state: current game state
-        bombs:      numpyified bombs array
-        opponents:  numpyified opponents array
-    OUTPUT:
-        field classification with corresponding value
-
-    """
-
-    ## classifying
-    # wall: 0
-    # free: 1
-    # crate: 2
-
-
-    ## defensive
-    # future explosion: countdown in [0, 3]
-    # present explosion: 4
-    # no explosion:5
-
-    ## offensive
-    # opponent: 0
-    # coin: 1
-    # nothing: 2
-
-    # TODO: add
-    # TODO: unterscheiden zwischen coin und enemy!! maybe a mode which the agent can enter?
-
-    ## explorative 
-    # towards next coin: 1
-    # towards next enemy: 2
-    # away from both: 3
-
-
-    # caution: order of lookup matters!
-
-    # future explosion
-    if future_explosion_map[i, j] > 0:
-        return future_explosion_map[i, j] + 2
-
-    # current explosion
-    elif game_state["explosion_map"].T[i, j] == 1:
-        return 6
-
-    # opponent
-    elif opponents.size != 0 and (i, j) in list(opponents[:, -1]):
-        return 7
-
-    # coin
-    elif (i, j) in list(game_state["coins"]):
-        return 8
-
-    # wall, crate, empty
-    return game_state["field"].T[i, j]
-
-
-def look_for_targets(free_space, start, targets, logger=None):
-    """Find direction of closest target that can be reached via free tiles.
-
-    Performs a breadth-first search of the reachable free tiles until a target is encountered.
-    If no target can be reached, the path that takes the agent closest to any target is chosen.
-
-    Args:
-        free_space: Boolean numpy array. True for free tiles and False for obstacles.
-        start: the coordinate from which to begin the search.
-        targets: list or array holding the coordinates of all target tiles.
-        logger: optional logger object for debugging.
-    Returns:
-        coordinate of first step towards closest target or towards tile closest to any target.
-    """
-    if len(targets) == 0: return None
-
-    frontier = [start]
-    parent_dict = {start: start}
-    dist_so_far = {start: 0}
-    best = start
-    best_dist = np.sum(np.abs(np.subtract(targets, start)), axis=1).min()
-
-    while len(frontier) > 0:
-        current = frontier.pop(0)
-        # Find distance from current position to all targets, track closest
-        d = np.sum(np.abs(np.subtract(targets, current)), axis=1).min()
-        if d + dist_so_far[current] <= best_dist:
-            best = current
-            best_dist = d + dist_so_far[current]
-        if d == 0:
-            # Found path to a target's exact position, mission accomplished!
-            best = current
-            break
-        # Add unexplored free neighboring tiles to the queue in a random order
-        x, y = current
-        neighbors = [(x, y) for (x, y) in [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)] if free_space[x, y]]
-        shuffle(neighbors)
-        for neighbor in neighbors:
-            if neighbor not in parent_dict:
-                frontier.append(neighbor)
-                parent_dict[neighbor] = current
-                dist_so_far[neighbor] = dist_so_far[current] + 1
-    if logger: logger.debug(f'Suitable target found at {best}')
-    # Determine the first step towards the best found target tile
-    current = best
-    while True:
-        if parent_dict[current] == start: return current
-        current = parent_dict[current]
 
 
 def create_future_explosion_map(bombs, arena):
@@ -335,7 +156,8 @@ def create_future_explosion_map(bombs, arena):
 
     width, height = arena.shape
 
-    arena_abs = np.abs(arena)
+    arena_walls = arena
+    arena_walls[arena_walls != -1] = 0
 
     future_explosion_map = np.zeros((width, height), dtype=int)
 
@@ -344,14 +166,14 @@ def create_future_explosion_map(bombs, arena):
 
     # loop over all currently placed bombs
     for (y, x), t in bombs:  # transposing once again
-        for i in range(4):  # TODO: why do I have to transpose here? Check this!
-            if x - i > 0 and not wall_inbetween(x-i, y, x, y, arena_abs):
+        for i in range(4):
+            if x - i > 0 and not wall_inbetween(x-i, y, x, y, arena_walls):
                 future_explosion_map[x-i, y] = t
-            if x + i < width - 1 and not wall_inbetween(x+i, y, x, y, arena_abs):
+            if x + i < width - 1 and not wall_inbetween(x+i, y, x, y, arena_walls):
                 future_explosion_map[x+i, y] = t
-            if y - i > 0 and not wall_inbetween(x, y-i, x, y, arena_abs):
+            if y - i > 0 and not wall_inbetween(x, y-i, x, y, arena_walls):
                 future_explosion_map[x, y-i] = t
-            if y + i < height - 1 and not wall_inbetween(x, y+i, x, y, arena_abs):
+            if y + i < height - 1 and not wall_inbetween(x, y+i, x, y, arena_walls):
                 future_explosion_map[x, y+i] = t
 
 
@@ -361,14 +183,14 @@ def create_future_explosion_map(bombs, arena):
     return future_explosion_map
 
 
-def wall_inbetween(x1, y1, x2, y2, arena_abs):
+def wall_inbetween(x1, y1, x2, y2, arena_walls):
     """
     Checks if there is a wall inbetween (x1, y1) and (x2, y2)
 
 
     INPUT:
         xi, yi: coordinates
-        arena_abs: np.abs of field
+        arena_walls: np.abs of field
 
     OUTPUT:
         boolean indicating whether there is a wall inbetwee the two tiles 
@@ -384,7 +206,7 @@ def wall_inbetween(x1, y1, x2, y2, arena_abs):
     y_min = min(y1, y2)
     y_max = max(y1, y2) + 1
 
-    return np.sum(arena_abs[slice(x_min, x_max), slice(y_min, y_max)]) != 0
+    return np.sum(arena_walls[slice(x_min, x_max), slice(y_min, y_max)]) != 0
 
 
 
@@ -405,5 +227,3 @@ def get_danger_level(i, j, future_explosion_map):
     # TODO: add current_explosions_map lookup
 
     return future_explosion_map[i, j]
-
-
