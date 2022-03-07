@@ -6,7 +6,7 @@ import pickle
 from typing import List
 
 import events as e
-from .callbacks import state_to_features, get_danger_level, create_future_explisions_map
+from .callbacks import state_to_features, get_danger_level, create_future_explosion_map
 
 # This is only an example!
 Transition = namedtuple('Transition',
@@ -64,20 +64,19 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
         return
 
 
-    # TODO: dont stay when in danger, and dont be in danger at the end
-
     # TODO: add reward when agent is next to a coin
 
     old_position = old_game_state["self"][-1]
     new_position = new_game_state["self"][-1]
 
     # TODO: don't do there calculations twice. Save them somehow in the state_to_features callback
-    old_future_explosions_map = create_future_explisions_map(np.array(old_game_state["bombs"], dtype=object), old_game_state["field"])
-    new_future_explosions_map = create_future_explisions_map(np.array(new_game_state["bombs"], dtype=object), new_game_state["field"])
+    old_future_explosion_map = create_future_explosion_map(np.array(old_game_state["bombs"], dtype=object), old_game_state["field"].T)
+    new_future_explosion_map = create_future_explosion_map(np.array(new_game_state["bombs"], dtype=object), new_game_state["field"].T)
 
 
-    old_danger_level = get_danger_level(*old_position, old_future_explosions_map)
-    new_danger_level = get_danger_level(*new_position, new_future_explosions_map)
+    old_danger_level = get_danger_level(*old_position, old_future_explosion_map)
+    new_danger_level = get_danger_level(*new_position, new_future_explosion_map)
+
 
     ## own events to hand out rewards
 
@@ -151,17 +150,17 @@ def reward_from_events(self, events: List[str]) -> int:
     certain behavior.
     """
     game_rewards = {
-        e.COIN_COLLECTED: 4,
+        e.COIN_COLLECTED: 3,
         e.KILLED_OPPONENT: 5,
-        e.CRATE_DESTROYED: 2.5,
-        e.COIN_FOUND: 2.5,
-        e.KILLED_SELF: -6,
+        e.CRATE_DESTROYED: 2,
+        e.COIN_FOUND: 3,
+        e.KILLED_SELF: -3,
         e.OPPONENT_ELIMINATED: 5,
-        e.INVALID_ACTION: -2,
-        e.SURVIVED_ROUND: 4,
+        e.INVALID_ACTION: -.3,
+        e.SURVIVED_ROUND: 2,
         PASSIVE_IN_DANGER_EVENT: -2,
-        ESCAPED_DANGER_EVENT: 4,
-        MOVED_INTO_DANGER_EVENT: -2.5
+        ESCAPED_DANGER_EVENT: 2.5,
+        MOVED_INTO_DANGER_EVENT: -1.5
     }
 
     reward_sum = 0

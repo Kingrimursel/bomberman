@@ -29,6 +29,7 @@ done
 # if new is passed, create new model
 if [ "$new" == true ];
 then
+  echo -e "${RED}creating new model...${NC}"
   mv agent_code/$agent/my-saved-model.pt agent_code/$agent/my-saved-model_old.pt
 fi
 
@@ -38,4 +39,8 @@ for i in $(seq $its); do
 	echo -e "${RED} $i of $its ${NC}"
 	python3 main.py play --no-gui --my-agent $agent --train 1
 done
+
+# presenting
+echo -e "${RED}presenting result...${NC}"
+python3 main.py play --my-agent $agent
 
