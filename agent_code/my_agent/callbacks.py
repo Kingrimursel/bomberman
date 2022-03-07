@@ -27,7 +27,12 @@ def setup(self):
         self.logger.info("Setting up model from scratch.")
         #self.model = np.ones((10, 10, 10, 10, 10, 6))  # one dimension for each feature and one for the actions
 
-        self.model = np.ones((
+        self.category_sizes = np.array([3, 6, 3])  # classifying, defensive, offensive
+        self.num_features  = np.sum(self.category_sizes)*5
+
+        self.model = np.ones((self.num_features, 6))
+
+        """self.model = np.ones((
             # classifying
             3, 3, 3, 3, 3,
             # defensive
@@ -37,7 +42,7 @@ def setup(self):
             # explorative
 
             # actions
-            6), dtype=np.float32)
+            6), dtype=np.float32)"""
 
     else:
         self.logger.info("Loading model from saved state.")
@@ -70,7 +75,67 @@ def act(self, game_state: dict) -> str:
 
     self.logger.debug("Querying model for action.")
 
+    get_Q_values(self, state_to_features(self, game_state))
+
     return ACTIONS[np.argmax(self.model[state_to_features(self, game_state)])]
+
+
+def get_Q_values(self, features):
+    """
+    Extract Q-Value from Q-Table corresponding to feature value
+
+    INPUT:
+        self: agent
+        features: the features
+    OUTPUT:
+        Q-values corresponding to features
+
+    """
+
+    Q_values = np.empty((len(features), 6))
+
+    #print(Q_values.shape)
+    #print(features)
+
+    # shape of features: 5*classifying, 5*defensive, 5*offensive
+
+    # shape of model: 5*3 (classifying), 5*6 (defensive), 5*3 (offfensive)
+
+
+    # loop over category
+    for i, feature in enumerate(features):
+        # get category
+        category = i // 5
+
+        # get size of category
+        print(i, category)
+        category_size = self.category_sizes[category]
+
+        # get field (left, right, top etc.)
+        field = i % 5
+
+        # get features value position. First skipt the previous categories, then the previous fields.
+        # Then add the feature value
+        value_position = 5*np.sum(self.category_sizes[:category]) + field*category_size + feature
+
+        #print(category, category_size, field)
+        #print(value_position)
+        #print(self.model.shape)
+        #print(self.model[value_position])
+
+        Q_values[i] = self.model[value_position]
+
+
+        # i % 5  = category                            (check)
+        # self.category_sizes[i%5] = size of category  (check)
+        # i // 5 = field                               (check) 
+
+        # value position = 5*np.sum(self.category_sizes[:category]) + size of category * field + feature     
+        # feature value  = self.model[value position]
+
+    print(Q_values)
+
+
 
 
 def state_to_features(self, game_state: dict) -> np.array:
@@ -116,10 +181,8 @@ def state_to_features(self, game_state: dict) -> np.array:
     # compute future explosion map
     future_explosion_map = create_future_explosion_map(bombs, game_state["field"].T)
 
-    features = []
 
-    num_features = len(np.array(self.model.shape[:-1]))
-    features = np.empty(num_features, dtype=int)
+    features = np.empty(5*len(self.category_sizes), dtype=int)
 
     for i, (x, y) in enumerate([(xs, ys), (xs-1, ys), (xs+1, ys), (xs, ys-1), (xs, ys+1)]):
         # classifying
@@ -141,24 +204,10 @@ def state_to_features(self, game_state: dict) -> np.array:
         else:
             features[i + 10] = 2
 
-
-
-    ## computing features
-    #current_field  = get_field_value(x,   y,   game_state, future_explosion_map, opponents)
-    #left_field     = get_field_value(x-1, y,   game_state, future_explosion_map, opponents)
-    #right_field    = get_field_value(x+1, y,   game_state, future_explosion_map, opponents)
-    #top_field      = get_field_value(x,   y-1, game_state, future_explosion_map, opponents)
-    #bottom_field   = get_field_value(x,   y+1, game_state, future_explosion_map, opponents)
-
     # save future_explosion_map to game_state
     game_state["future_explosion_map"] = future_explosion_map  # TODO not working!
 
-    print("here:\n")
-    print(tuple(features))
-
     return tuple(features)
-
-    #return tuple([current_field, left_field, right_field, top_field, bottom_field])
 
 
 def get_field_value(i, j, game_state, future_explosion_map, opponents):

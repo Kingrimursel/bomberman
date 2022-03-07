@@ -1,10 +1,9 @@
-2022-03-07 13:31:00,821 [my_agent_code] INFO: Setting up model from scratch.
-2022-03-07 13:31:00,821 [my_agent_wrapper] ERROR: Unable to allocate 10.3 GiB for an array with shape (3, 3, 3, 3, 3, 6, 6, 6, 6, 6, 3, 3, 3, 3, 3, 6) and data type float32
+2022-03-07 16:51:57,424 [my_agent_code] INFO: Setting up model from scratch.
+2022-03-07 16:51:57,782 [my_agent_code] DEBUG: Querying model for action.
+2022-03-07 16:51:57,784 [my_agent_wrapper] ERROR: too many indices for array: array is 2-dimensional, but 15 were indexed
 Traceback (most recent call last):
   File "/home/philipp/workspace/bomberman/agents.py", line 248, in process_event
     event_result = getattr(module, event_name)(self.fake_self, *event_args)
-  File "/home/philipp/workspace/bomberman/agent_code/my_agent/callbacks.py", line 30, in setup
-    self.model = np.ones((
-  File "/home/philipp/.local/lib/python3.9/site-packages/numpy/core/numeric.py", line 203, in ones
-    a = empty(shape, dtype, order)
-numpy.core._exceptions._ArrayMemoryError: Unable to allocate 10.3 GiB for an array with shape (3, 3, 3, 3, 3, 6, 6, 6, 6, 6, 3, 3, 3, 3, 3, 6) and data type float32
+  File "/home/philipp/workspace/bomberman/agent_code/my_agent/callbacks.py", line 80, in act
+    return ACTIONS[np.argmax(self.model[state_to_features(self, game_state)])]
+IndexError: too many indices for array: array is 2-dimensional, but 15 were indexed
