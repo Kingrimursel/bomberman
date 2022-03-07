@@ -1,4 +1,922 @@
-2022-03-07 13:29:24,073 [rule_based_agent_0_code] DEBUG: Successfully entered setup code
-2022-03-07 13:29:24,408 [rule_based_agent_0_code] INFO: Picking action according to rule set
-2022-03-07 13:29:24,408 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'UP', 'WAIT', 'BOMB']
-2022-03-07 13:29:24,410 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 15)
+2022-03-07 17:48:42,887 [rule_based_agent_0_code] DEBUG: Successfully entered setup code
+2022-03-07 17:48:43,214 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:43,214 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'UP', 'WAIT', 'BOMB']
+2022-03-07 17:48:43,215 [rule_based_agent_0_code] DEBUG: Suitable target found at (1, 14)
+2022-03-07 17:48:43,313 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:43,313 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:43,315 [rule_based_agent_0_code] DEBUG: Suitable target found at (1, 14)
+2022-03-07 17:48:43,417 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:43,417 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN']
+2022-03-07 17:48:43,419 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 13)
+2022-03-07 17:48:43,529 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:43,530 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'WAIT']
+2022-03-07 17:48:43,533 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 13)
+2022-03-07 17:48:43,625 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:43,626 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT']
+2022-03-07 17:48:43,628 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 13)
+2022-03-07 17:48:43,727 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:43,728 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'WAIT']
+2022-03-07 17:48:43,731 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 13)
+2022-03-07 17:48:43,827 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:43,828 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'WAIT']
+2022-03-07 17:48:43,832 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 13)
+2022-03-07 17:48:43,928 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:43,928 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'UP', 'WAIT']
+2022-03-07 17:48:43,931 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 13)
+2022-03-07 17:48:44,028 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:44,028 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:44,031 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 13)
+2022-03-07 17:48:44,129 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:44,130 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:44,132 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 13)
+2022-03-07 17:48:44,227 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:44,227 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN']
+2022-03-07 17:48:44,232 [rule_based_agent_0_code] DEBUG: Suitable target found at (1, 11)
+2022-03-07 17:48:44,317 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:44,318 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN', 'WAIT']
+2022-03-07 17:48:44,320 [rule_based_agent_0_code] DEBUG: Suitable target found at (1, 11)
+2022-03-07 17:48:44,435 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:44,436 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'UP', 'WAIT']
+2022-03-07 17:48:44,441 [rule_based_agent_0_code] DEBUG: Suitable target found at (1, 11)
+2022-03-07 17:48:44,530 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:44,530 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'WAIT']
+2022-03-07 17:48:44,535 [rule_based_agent_0_code] DEBUG: Suitable target found at (1, 11)
+2022-03-07 17:48:44,629 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:44,629 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'UP', 'WAIT']
+2022-03-07 17:48:44,634 [rule_based_agent_0_code] DEBUG: Suitable target found at (1, 11)
+2022-03-07 17:48:44,729 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:44,729 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:44,733 [rule_based_agent_0_code] DEBUG: Suitable target found at (1, 11)
+2022-03-07 17:48:44,829 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:44,829 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:44,833 [rule_based_agent_0_code] DEBUG: Suitable target found at (1, 11)
+2022-03-07 17:48:44,930 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:44,930 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:44,933 [rule_based_agent_0_code] DEBUG: Suitable target found at (1, 11)
+2022-03-07 17:48:45,028 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:45,029 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:45,031 [rule_based_agent_0_code] DEBUG: Suitable target found at (1, 11)
+2022-03-07 17:48:45,129 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:45,130 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN']
+2022-03-07 17:48:45,134 [rule_based_agent_0_code] DEBUG: Suitable target found at (4, 13)
+2022-03-07 17:48:45,229 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:45,230 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN', 'WAIT']
+2022-03-07 17:48:45,235 [rule_based_agent_0_code] DEBUG: Suitable target found at (4, 13)
+2022-03-07 17:48:45,329 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:45,330 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:45,335 [rule_based_agent_0_code] DEBUG: Suitable target found at (4, 13)
+2022-03-07 17:48:45,434 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:45,434 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'WAIT']
+2022-03-07 17:48:45,438 [rule_based_agent_0_code] DEBUG: Suitable target found at (4, 13)
+2022-03-07 17:48:45,534 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:45,535 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:45,538 [rule_based_agent_0_code] DEBUG: Suitable target found at (4, 13)
+2022-03-07 17:48:45,634 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:45,635 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT']
+2022-03-07 17:48:45,637 [rule_based_agent_0_code] DEBUG: Suitable target found at (6, 13)
+2022-03-07 17:48:45,732 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:45,732 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT', 'BOMB']
+2022-03-07 17:48:45,735 [rule_based_agent_0_code] DEBUG: Suitable target found at (6, 13)
+2022-03-07 17:48:45,832 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:45,833 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'WAIT', 'BOMB']
+2022-03-07 17:48:45,835 [rule_based_agent_0_code] DEBUG: Suitable target found at (6, 13)
+2022-03-07 17:48:45,920 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:45,920 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT']
+2022-03-07 17:48:45,922 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 11)
+2022-03-07 17:48:46,029 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:46,029 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'WAIT']
+2022-03-07 17:48:46,034 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 11)
+2022-03-07 17:48:46,131 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:46,132 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT']
+2022-03-07 17:48:46,135 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 11)
+2022-03-07 17:48:46,233 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:46,233 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'UP', 'DOWN']
+2022-03-07 17:48:46,237 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 11)
+2022-03-07 17:48:46,333 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:46,333 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN', 'WAIT']
+2022-03-07 17:48:46,338 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 11)
+2022-03-07 17:48:46,430 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:46,431 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'UP', 'WAIT']
+2022-03-07 17:48:46,436 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 11)
+2022-03-07 17:48:46,529 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:46,530 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:46,535 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 11)
+2022-03-07 17:48:46,630 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:46,631 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:46,635 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 11)
+2022-03-07 17:48:46,731 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:46,731 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:46,734 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 11)
+2022-03-07 17:48:46,817 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:46,817 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:46,819 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 10)
+2022-03-07 17:48:46,933 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:46,933 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:46,934 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 10)
+2022-03-07 17:48:47,020 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:47,021 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN']
+2022-03-07 17:48:47,022 [rule_based_agent_0_code] DEBUG: Suitable target found at (4, 11)
+2022-03-07 17:48:47,121 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:47,121 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'DOWN', 'WAIT']
+2022-03-07 17:48:47,122 [rule_based_agent_0_code] DEBUG: Suitable target found at (4, 11)
+2022-03-07 17:48:47,234 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:47,235 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'WAIT']
+2022-03-07 17:48:47,236 [rule_based_agent_0_code] DEBUG: Suitable target found at (4, 11)
+2022-03-07 17:48:47,331 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:47,332 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT']
+2022-03-07 17:48:47,335 [rule_based_agent_0_code] DEBUG: Suitable target found at (4, 11)
+2022-03-07 17:48:47,439 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:47,445 [rule_based_agent_0_code] DEBUG: Valid actions: ['WAIT']
+2022-03-07 17:48:47,447 [rule_based_agent_0_code] DEBUG: Suitable target found at (4, 11)
+2022-03-07 17:48:47,527 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:47,527 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'WAIT']
+2022-03-07 17:48:47,529 [rule_based_agent_0_code] DEBUG: Suitable target found at (4, 11)
+2022-03-07 17:48:47,632 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:47,632 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:47,635 [rule_based_agent_0_code] DEBUG: Suitable target found at (4, 11)
+2022-03-07 17:48:47,732 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:47,732 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'WAIT', 'BOMB']
+2022-03-07 17:48:47,734 [rule_based_agent_0_code] DEBUG: Suitable target found at (4, 11)
+2022-03-07 17:48:47,832 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:47,833 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT']
+2022-03-07 17:48:47,840 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 6)
+2022-03-07 17:48:47,933 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:47,933 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:47,940 [rule_based_agent_0_code] DEBUG: Suitable target found at (1, 8)
+2022-03-07 17:48:48,031 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:48,032 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:48,039 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 6)
+2022-03-07 17:48:48,129 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:48,129 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN']
+2022-03-07 17:48:48,136 [rule_based_agent_0_code] DEBUG: Suitable target found at (1, 8)
+2022-03-07 17:48:48,231 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:48,232 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN', 'WAIT']
+2022-03-07 17:48:48,240 [rule_based_agent_0_code] DEBUG: Suitable target found at (7, 11)
+2022-03-07 17:48:48,331 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:48,331 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:48,340 [rule_based_agent_0_code] DEBUG: Suitable target found at (7, 11)
+2022-03-07 17:48:48,431 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:48,431 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:48,439 [rule_based_agent_0_code] DEBUG: Suitable target found at (7, 11)
+2022-03-07 17:48:48,531 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:48,532 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:48,538 [rule_based_agent_0_code] DEBUG: Suitable target found at (7, 11)
+2022-03-07 17:48:49,514 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:49,515 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:49,517 [rule_based_agent_0_code] DEBUG: Suitable target found at (1, 2)
+2022-03-07 17:48:49,614 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:49,614 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'WAIT', 'BOMB']
+2022-03-07 17:48:49,616 [rule_based_agent_0_code] DEBUG: Suitable target found at (1, 2)
+2022-03-07 17:48:49,716 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:49,716 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP']
+2022-03-07 17:48:49,718 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 1)
+2022-03-07 17:48:49,814 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:49,815 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'WAIT']
+2022-03-07 17:48:49,817 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 1)
+2022-03-07 17:48:49,915 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:49,916 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT']
+2022-03-07 17:48:49,918 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 1)
+2022-03-07 17:48:50,015 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:50,015 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'WAIT']
+2022-03-07 17:48:50,017 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 1)
+2022-03-07 17:48:50,113 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:50,114 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'WAIT']
+2022-03-07 17:48:50,116 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 1)
+2022-03-07 17:48:50,214 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:50,214 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'WAIT']
+2022-03-07 17:48:50,216 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 1)
+2022-03-07 17:48:50,314 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:50,314 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT', 'BOMB']
+2022-03-07 17:48:50,317 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 1)
+2022-03-07 17:48:50,419 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:50,420 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'WAIT', 'BOMB']
+2022-03-07 17:48:50,421 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 1)
+2022-03-07 17:48:50,515 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:50,516 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT']
+2022-03-07 17:48:50,519 [rule_based_agent_0_code] DEBUG: Suitable target found at (1, 5)
+2022-03-07 17:48:50,616 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:50,616 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'WAIT']
+2022-03-07 17:48:50,620 [rule_based_agent_0_code] DEBUG: Suitable target found at (1, 5)
+2022-03-07 17:48:50,716 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:50,716 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'DOWN', 'WAIT']
+2022-03-07 17:48:50,719 [rule_based_agent_0_code] DEBUG: Suitable target found at (1, 5)
+2022-03-07 17:48:50,809 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:50,809 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN', 'WAIT']
+2022-03-07 17:48:50,811 [rule_based_agent_0_code] DEBUG: Suitable target found at (1, 5)
+2022-03-07 17:48:50,913 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:50,914 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:50,916 [rule_based_agent_0_code] DEBUG: Suitable target found at (1, 5)
+2022-03-07 17:48:51,013 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:51,013 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:51,016 [rule_based_agent_0_code] DEBUG: Suitable target found at (1, 5)
+2022-03-07 17:48:51,114 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:51,114 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'WAIT', 'BOMB']
+2022-03-07 17:48:51,116 [rule_based_agent_0_code] DEBUG: Suitable target found at (1, 5)
+2022-03-07 17:48:51,216 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:51,217 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP']
+2022-03-07 17:48:51,223 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 4)
+2022-03-07 17:48:51,314 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:51,314 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'WAIT']
+2022-03-07 17:48:51,320 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 4)
+2022-03-07 17:48:51,416 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:51,416 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:51,423 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 4)
+2022-03-07 17:48:51,515 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:51,515 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP']
+2022-03-07 17:48:51,520 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 4)
+2022-03-07 17:48:51,614 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:51,614 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'WAIT']
+2022-03-07 17:48:51,621 [rule_based_agent_0_code] DEBUG: Suitable target found at (4, 3)
+2022-03-07 17:48:51,714 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:51,715 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT']
+2022-03-07 17:48:51,719 [rule_based_agent_0_code] DEBUG: Suitable target found at (4, 3)
+2022-03-07 17:48:51,814 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:51,814 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'DOWN', 'WAIT']
+2022-03-07 17:48:51,819 [rule_based_agent_0_code] DEBUG: Suitable target found at (4, 3)
+2022-03-07 17:48:51,913 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:51,914 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:51,917 [rule_based_agent_0_code] DEBUG: Suitable target found at (4, 3)
+2022-03-07 17:48:52,012 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:52,013 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:52,015 [rule_based_agent_0_code] DEBUG: Suitable target found at (4, 3)
+2022-03-07 17:48:52,111 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:52,111 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'WAIT', 'BOMB']
+2022-03-07 17:48:52,113 [rule_based_agent_0_code] DEBUG: Suitable target found at (4, 3)
+2022-03-07 17:48:52,214 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:52,215 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT']
+2022-03-07 17:48:52,222 [rule_based_agent_0_code] DEBUG: Suitable target found at (5, 6)
+2022-03-07 17:48:52,314 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:52,315 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:52,322 [rule_based_agent_0_code] DEBUG: Suitable target found at (5, 6)
+2022-03-07 17:48:52,421 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:52,421 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:52,427 [rule_based_agent_0_code] DEBUG: Suitable target found at (6, 5)
+2022-03-07 17:48:52,515 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:52,515 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'UP', 'WAIT']
+2022-03-07 17:48:52,521 [rule_based_agent_0_code] DEBUG: Suitable target found at (5, 6)
+2022-03-07 17:48:52,620 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:52,620 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN', 'WAIT']
+2022-03-07 17:48:52,623 [rule_based_agent_0_code] DEBUG: Suitable target found at (2, 3)
+2022-03-07 17:48:52,721 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:52,721 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'UP', 'WAIT']
+2022-03-07 17:48:52,724 [rule_based_agent_0_code] DEBUG: Suitable target found at (6, 5)
+2022-03-07 17:48:52,822 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:52,822 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT', 'BOMB']
+2022-03-07 17:48:52,826 [rule_based_agent_0_code] DEBUG: Suitable target found at (6, 5)
+2022-03-07 17:48:52,917 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:52,917 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:52,919 [rule_based_agent_0_code] DEBUG: Suitable target found at (5, 6)
+2022-03-07 17:48:53,012 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:53,012 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'WAIT', 'BOMB']
+2022-03-07 17:48:53,014 [rule_based_agent_0_code] DEBUG: Suitable target found at (5, 6)
+2022-03-07 17:48:53,114 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:53,114 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP']
+2022-03-07 17:48:53,117 [rule_based_agent_0_code] DEBUG: Suitable target found at (6, 5)
+2022-03-07 17:48:53,215 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:53,215 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT']
+2022-03-07 17:48:53,218 [rule_based_agent_0_code] DEBUG: Suitable target found at (6, 5)
+2022-03-07 17:48:53,315 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:53,315 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'WAIT']
+2022-03-07 17:48:53,317 [rule_based_agent_0_code] DEBUG: Suitable target found at (6, 5)
+2022-03-07 17:48:53,422 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:53,422 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT']
+2022-03-07 17:48:53,425 [rule_based_agent_0_code] DEBUG: Suitable target found at (6, 5)
+2022-03-07 17:48:53,516 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:53,516 [rule_based_agent_0_code] DEBUG: Valid actions: ['WAIT']
+2022-03-07 17:48:53,518 [rule_based_agent_0_code] DEBUG: Suitable target found at (6, 5)
+2022-03-07 17:48:53,617 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:53,618 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'WAIT']
+2022-03-07 17:48:53,620 [rule_based_agent_0_code] DEBUG: Suitable target found at (6, 5)
+2022-03-07 17:48:53,710 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:53,710 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:53,711 [rule_based_agent_0_code] DEBUG: Suitable target found at (6, 5)
+2022-03-07 17:48:53,816 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:53,817 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'WAIT', 'BOMB']
+2022-03-07 17:48:53,818 [rule_based_agent_0_code] DEBUG: Suitable target found at (6, 5)
+2022-03-07 17:48:53,917 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:53,918 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT']
+2022-03-07 17:48:53,923 [rule_based_agent_0_code] DEBUG: Suitable target found at (5, 8)
+2022-03-07 17:48:54,017 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:54,017 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:54,022 [rule_based_agent_0_code] DEBUG: Suitable target found at (6, 3)
+2022-03-07 17:48:54,118 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:54,118 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:54,121 [rule_based_agent_0_code] DEBUG: Suitable target found at (5, 8)
+2022-03-07 17:48:54,216 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:54,217 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:54,219 [rule_based_agent_0_code] DEBUG: Suitable target found at (5, 8)
+2022-03-07 17:48:54,317 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:54,317 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:54,321 [rule_based_agent_0_code] DEBUG: Suitable target found at (4, 9)
+2022-03-07 17:48:54,423 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:54,424 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'UP', 'WAIT']
+2022-03-07 17:48:54,426 [rule_based_agent_0_code] DEBUG: Suitable target found at (6, 9)
+2022-03-07 17:48:54,516 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:54,516 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'WAIT', 'BOMB']
+2022-03-07 17:48:54,518 [rule_based_agent_0_code] DEBUG: Suitable target found at (6, 9)
+2022-03-07 17:48:54,616 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:54,617 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT']
+2022-03-07 17:48:54,619 [rule_based_agent_0_code] DEBUG: Suitable target found at (4, 9)
+2022-03-07 17:48:54,717 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:54,718 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'UP', 'WAIT']
+2022-03-07 17:48:54,720 [rule_based_agent_0_code] DEBUG: Suitable target found at (4, 9)
+2022-03-07 17:48:54,816 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:54,817 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:54,820 [rule_based_agent_0_code] DEBUG: Suitable target found at (4, 9)
+2022-03-07 17:48:54,916 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:54,917 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP']
+2022-03-07 17:48:54,920 [rule_based_agent_0_code] DEBUG: Suitable target found at (4, 9)
+2022-03-07 17:48:55,016 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:55,017 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'WAIT']
+2022-03-07 17:48:55,020 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 9)
+2022-03-07 17:48:55,116 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:55,117 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:55,121 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 9)
+2022-03-07 17:48:55,216 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:55,217 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:55,220 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 9)
+2022-03-07 17:48:55,316 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:55,316 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'UP', 'WAIT', 'BOMB']
+2022-03-07 17:48:55,319 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 9)
+2022-03-07 17:48:55,426 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:55,426 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT', 'BOMB']
+2022-03-07 17:48:55,428 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 9)
+2022-03-07 17:48:55,509 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:55,509 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'WAIT', 'BOMB']
+2022-03-07 17:48:55,510 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 9)
+2022-03-07 17:48:55,617 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:55,618 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT']
+2022-03-07 17:48:55,624 [rule_based_agent_0_code] DEBUG: Suitable target found at (10, 9)
+2022-03-07 17:48:55,718 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:55,719 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'WAIT']
+2022-03-07 17:48:55,725 [rule_based_agent_0_code] DEBUG: Suitable target found at (10, 9)
+2022-03-07 17:48:55,816 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:55,817 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'UP', 'WAIT']
+2022-03-07 17:48:55,822 [rule_based_agent_0_code] DEBUG: Suitable target found at (10, 9)
+2022-03-07 17:48:55,917 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:55,917 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'WAIT']
+2022-03-07 17:48:55,925 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 9)
+2022-03-07 17:48:56,017 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:56,017 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:56,022 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 6)
+2022-03-07 17:48:56,118 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:56,118 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:56,123 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 6)
+2022-03-07 17:48:56,217 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:56,218 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:56,230 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 6)
+2022-03-07 17:48:56,316 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:56,316 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:56,332 [rule_based_agent_0_code] DEBUG: Suitable target found at (8, 15)
+2022-03-07 17:48:56,414 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:56,414 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:56,418 [rule_based_agent_0_code] DEBUG: Suitable target found at (3, 5)
+2022-03-07 17:48:56,516 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:56,516 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:56,519 [rule_based_agent_0_code] DEBUG: Suitable target found at (4, 5)
+2022-03-07 17:48:56,616 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:56,616 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:56,618 [rule_based_agent_0_code] DEBUG: Suitable target found at (4, 5)
+2022-03-07 17:48:56,717 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:56,718 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'UP', 'DOWN']
+2022-03-07 17:48:56,733 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 7)
+2022-03-07 17:48:56,818 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:56,819 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN', 'WAIT']
+2022-03-07 17:48:56,833 [rule_based_agent_0_code] DEBUG: Suitable target found at (8, 15)
+2022-03-07 17:48:56,918 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:56,919 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:56,932 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 7)
+2022-03-07 17:48:57,018 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:57,019 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN']
+2022-03-07 17:48:57,032 [rule_based_agent_0_code] DEBUG: Suitable target found at (8, 15)
+2022-03-07 17:48:57,119 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:57,119 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT']
+2022-03-07 17:48:57,130 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 7)
+2022-03-07 17:48:57,219 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:57,219 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT']
+2022-03-07 17:48:57,228 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 7)
+2022-03-07 17:48:57,318 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:57,319 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:57,327 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 7)
+2022-03-07 17:48:57,421 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:57,422 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT', 'BOMB']
+2022-03-07 17:48:57,426 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 7)
+2022-03-07 17:48:57,516 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:57,516 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT', 'BOMB']
+2022-03-07 17:48:57,521 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 7)
+2022-03-07 17:48:57,617 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:57,617 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT', 'BOMB']
+2022-03-07 17:48:57,621 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 7)
+2022-03-07 17:48:57,719 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:57,719 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:57,723 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 7)
+2022-03-07 17:48:57,819 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:57,820 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:57,822 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 7)
+2022-03-07 17:48:57,918 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:57,919 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:57,921 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 7)
+2022-03-07 17:48:58,019 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:58,019 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN']
+2022-03-07 17:48:58,023 [rule_based_agent_0_code] DEBUG: Suitable target found at (9, 9)
+2022-03-07 17:48:58,118 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:58,118 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN', 'WAIT']
+2022-03-07 17:48:58,120 [rule_based_agent_0_code] DEBUG: Suitable target found at (10, 9)
+2022-03-07 17:48:58,219 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:58,220 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:58,222 [rule_based_agent_0_code] DEBUG: Suitable target found at (10, 9)
+2022-03-07 17:48:58,322 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:58,322 [rule_based_agent_0_code] DEBUG: Valid actions: ['WAIT']
+2022-03-07 17:48:58,324 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 9)
+2022-03-07 17:48:58,431 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:58,432 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'WAIT']
+2022-03-07 17:48:58,434 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 10)
+2022-03-07 17:48:58,520 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:58,521 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'WAIT']
+2022-03-07 17:48:58,523 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 9)
+2022-03-07 17:48:58,622 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:58,622 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'BOMB']
+2022-03-07 17:48:58,627 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 10)
+2022-03-07 17:48:58,721 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:58,722 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:58,725 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 11)
+2022-03-07 17:48:58,819 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:58,819 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:58,821 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 11)
+2022-03-07 17:48:58,923 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:58,923 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'UP', 'DOWN']
+2022-03-07 17:48:58,927 [rule_based_agent_0_code] DEBUG: Suitable target found at (8, 11)
+2022-03-07 17:48:59,022 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:59,022 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'WAIT']
+2022-03-07 17:48:59,026 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 11)
+2022-03-07 17:48:59,120 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:59,121 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:59,130 [rule_based_agent_0_code] DEBUG: Suitable target found at (7, 7)
+2022-03-07 17:48:59,221 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:59,222 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT']
+2022-03-07 17:48:59,231 [rule_based_agent_0_code] DEBUG: Suitable target found at (7, 7)
+2022-03-07 17:48:59,321 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:59,321 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:59,331 [rule_based_agent_0_code] DEBUG: Suitable target found at (7, 7)
+2022-03-07 17:48:59,424 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:59,425 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT']
+2022-03-07 17:48:59,434 [rule_based_agent_0_code] DEBUG: Suitable target found at (7, 7)
+2022-03-07 17:48:59,520 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:59,521 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:59,529 [rule_based_agent_0_code] DEBUG: Suitable target found at (7, 7)
+2022-03-07 17:48:59,622 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:59,623 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:48:59,629 [rule_based_agent_0_code] DEBUG: Suitable target found at (7, 7)
+2022-03-07 17:48:59,720 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:59,721 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'UP', 'DOWN', 'WAIT']
+2022-03-07 17:48:59,726 [rule_based_agent_0_code] DEBUG: Suitable target found at (7, 7)
+2022-03-07 17:48:59,820 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:59,821 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT', 'BOMB']
+2022-03-07 17:48:59,824 [rule_based_agent_0_code] DEBUG: Suitable target found at (7, 7)
+2022-03-07 17:48:59,921 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:48:59,921 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT', 'BOMB']
+2022-03-07 17:48:59,924 [rule_based_agent_0_code] DEBUG: Suitable target found at (7, 7)
+2022-03-07 17:49:00,021 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:00,021 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT', 'BOMB']
+2022-03-07 17:49:00,023 [rule_based_agent_0_code] DEBUG: Suitable target found at (7, 7)
+2022-03-07 17:49:00,128 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:00,128 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'WAIT', 'BOMB']
+2022-03-07 17:49:00,129 [rule_based_agent_0_code] DEBUG: Suitable target found at (7, 7)
+2022-03-07 17:49:00,222 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:00,223 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT']
+2022-03-07 17:49:00,233 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 12)
+2022-03-07 17:49:00,323 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:00,324 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'WAIT']
+2022-03-07 17:49:00,331 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 11)
+2022-03-07 17:49:00,417 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:00,417 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT']
+2022-03-07 17:49:00,421 [rule_based_agent_0_code] DEBUG: Suitable target found at (7, 10)
+2022-03-07 17:49:01,794 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:01,794 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:01,797 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 3)
+2022-03-07 17:49:01,892 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:01,892 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:01,895 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 3)
+2022-03-07 17:49:01,995 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:01,995 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'WAIT', 'BOMB']
+2022-03-07 17:49:01,997 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 3)
+2022-03-07 17:49:02,095 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:02,095 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP']
+2022-03-07 17:49:02,099 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 1)
+2022-03-07 17:49:02,200 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:02,200 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'WAIT']
+2022-03-07 17:49:02,204 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 1)
+2022-03-07 17:49:02,300 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:02,300 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'DOWN', 'WAIT']
+2022-03-07 17:49:02,305 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 1)
+2022-03-07 17:49:02,400 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:02,400 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'WAIT']
+2022-03-07 17:49:02,404 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 1)
+2022-03-07 17:49:02,503 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:02,503 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT']
+2022-03-07 17:49:02,506 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 1)
+2022-03-07 17:49:02,600 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:02,600 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'WAIT']
+2022-03-07 17:49:02,603 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 1)
+2022-03-07 17:49:02,700 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:02,701 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT', 'BOMB']
+2022-03-07 17:49:02,704 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 1)
+2022-03-07 17:49:02,796 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:02,797 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'WAIT', 'BOMB']
+2022-03-07 17:49:02,799 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 1)
+2022-03-07 17:49:02,896 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:02,896 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT']
+2022-03-07 17:49:02,901 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 3)
+2022-03-07 17:49:02,995 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:02,996 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'WAIT']
+2022-03-07 17:49:03,001 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 6)
+2022-03-07 17:49:03,096 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:03,097 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT']
+2022-03-07 17:49:03,102 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 6)
+2022-03-07 17:49:03,196 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:03,196 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN']
+2022-03-07 17:49:03,202 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 3)
+2022-03-07 17:49:03,296 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:03,296 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN', 'WAIT']
+2022-03-07 17:49:03,301 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 3)
+2022-03-07 17:49:03,396 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:03,397 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'UP', 'DOWN', 'WAIT']
+2022-03-07 17:49:03,401 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 6)
+2022-03-07 17:49:03,496 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:03,497 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:03,500 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 6)
+2022-03-07 17:49:03,596 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:03,597 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:03,599 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 6)
+2022-03-07 17:49:03,696 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:03,696 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'WAIT', 'BOMB']
+2022-03-07 17:49:03,698 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 6)
+2022-03-07 17:49:03,796 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:03,797 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP']
+2022-03-07 17:49:03,802 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 3)
+2022-03-07 17:49:03,895 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:03,896 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'WAIT']
+2022-03-07 17:49:03,901 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 4)
+2022-03-07 17:49:03,997 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:03,998 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:49:04,002 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 4)
+2022-03-07 17:49:04,097 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:04,098 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'UP']
+2022-03-07 17:49:04,103 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 4)
+2022-03-07 17:49:04,197 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:04,198 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'WAIT']
+2022-03-07 17:49:04,201 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 3)
+2022-03-07 17:49:04,297 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:04,298 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'DOWN', 'WAIT']
+2022-03-07 17:49:04,300 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 4)
+2022-03-07 17:49:04,396 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:04,397 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'WAIT', 'BOMB']
+2022-03-07 17:49:04,399 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 4)
+2022-03-07 17:49:04,505 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:04,506 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP']
+2022-03-07 17:49:04,509 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 3)
+2022-03-07 17:49:04,598 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:04,598 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT']
+2022-03-07 17:49:04,601 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 3)
+2022-03-07 17:49:04,698 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:04,699 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT']
+2022-03-07 17:49:04,702 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 3)
+2022-03-07 17:49:04,797 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:04,797 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT']
+2022-03-07 17:49:04,800 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 3)
+2022-03-07 17:49:04,897 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:04,897 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'WAIT']
+2022-03-07 17:49:04,900 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 3)
+2022-03-07 17:49:04,990 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:04,990 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'UP', 'DOWN', 'WAIT']
+2022-03-07 17:49:04,992 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 3)
+2022-03-07 17:49:05,097 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:05,097 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT', 'BOMB']
+2022-03-07 17:49:05,101 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 3)
+2022-03-07 17:49:05,196 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:05,197 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:05,199 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 3)
+2022-03-07 17:49:05,295 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:05,296 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'WAIT', 'BOMB']
+2022-03-07 17:49:05,298 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 3)
+2022-03-07 17:49:05,396 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:05,396 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT']
+2022-03-07 17:49:05,402 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 7)
+2022-03-07 17:49:05,506 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:05,506 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'UP', 'DOWN', 'WAIT']
+2022-03-07 17:49:05,512 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 7)
+2022-03-07 17:49:05,596 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:05,597 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:49:05,601 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 7)
+2022-03-07 17:49:05,698 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:05,699 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:49:05,701 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 7)
+2022-03-07 17:49:05,799 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:05,799 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:49:05,801 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 7)
+2022-03-07 17:49:05,899 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:05,900 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:49:05,903 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 9)
+2022-03-07 17:49:05,999 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:06,000 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:06,003 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 9)
+2022-03-07 17:49:06,099 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:06,099 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:06,102 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 9)
+2022-03-07 17:49:06,200 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:06,200 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'WAIT', 'BOMB']
+2022-03-07 17:49:06,204 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 9)
+2022-03-07 17:49:06,302 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:06,303 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT']
+2022-03-07 17:49:06,306 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 10)
+2022-03-07 17:49:06,403 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:06,404 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:49:06,406 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 10)
+2022-03-07 17:49:06,503 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:06,504 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'WAIT']
+2022-03-07 17:49:06,506 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 10)
+2022-03-07 17:49:06,601 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:06,602 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN']
+2022-03-07 17:49:06,606 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 10)
+2022-03-07 17:49:06,702 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:06,703 [rule_based_agent_0_code] DEBUG: Valid actions: ['WAIT']
+2022-03-07 17:49:06,705 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 10)
+2022-03-07 17:49:06,799 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:06,800 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'WAIT']
+2022-03-07 17:49:06,802 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 10)
+2022-03-07 17:49:06,899 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:06,900 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:06,903 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 10)
+2022-03-07 17:49:07,000 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:07,001 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'WAIT', 'BOMB']
+2022-03-07 17:49:07,002 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 10)
+2022-03-07 17:49:07,098 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:07,098 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP']
+2022-03-07 17:49:07,103 [rule_based_agent_0_code] DEBUG: Suitable target found at (9, 10)
+2022-03-07 17:49:07,197 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:07,198 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'UP', 'WAIT']
+2022-03-07 17:49:07,200 [rule_based_agent_0_code] DEBUG: Suitable target found at (9, 10)
+2022-03-07 17:49:07,299 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:07,299 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT']
+2022-03-07 17:49:07,305 [rule_based_agent_0_code] DEBUG: Suitable target found at (9, 10)
+2022-03-07 17:49:07,388 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:07,389 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT']
+2022-03-07 17:49:07,391 [rule_based_agent_0_code] DEBUG: Suitable target found at (9, 10)
+2022-03-07 17:49:07,507 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:07,507 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'WAIT']
+2022-03-07 17:49:07,513 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 11)
+2022-03-07 17:49:07,599 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:07,599 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'UP', 'WAIT']
+2022-03-07 17:49:07,605 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 11)
+2022-03-07 17:49:10,271 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:10,272 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'UP', 'WAIT', 'BOMB']
+2022-03-07 17:49:10,274 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 14)
+2022-03-07 17:49:10,372 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:10,372 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:10,375 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 14)
+2022-03-07 17:49:10,474 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:10,474 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN']
+2022-03-07 17:49:10,476 [rule_based_agent_0_code] DEBUG: Suitable target found at (14, 15)
+2022-03-07 17:49:10,576 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:10,577 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'WAIT']
+2022-03-07 17:49:10,579 [rule_based_agent_0_code] DEBUG: Suitable target found at (14, 15)
+2022-03-07 17:49:10,678 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:10,679 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'WAIT']
+2022-03-07 17:49:10,681 [rule_based_agent_0_code] DEBUG: Suitable target found at (14, 15)
+2022-03-07 17:49:10,765 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:10,766 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT']
+2022-03-07 17:49:10,767 [rule_based_agent_0_code] DEBUG: Suitable target found at (14, 15)
+2022-03-07 17:49:10,879 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:10,879 [rule_based_agent_0_code] DEBUG: Valid actions: ['WAIT']
+2022-03-07 17:49:10,881 [rule_based_agent_0_code] DEBUG: Suitable target found at (14, 15)
+2022-03-07 17:49:10,967 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:10,967 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'WAIT']
+2022-03-07 17:49:10,968 [rule_based_agent_0_code] DEBUG: Suitable target found at (14, 15)
+2022-03-07 17:49:11,064 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:11,064 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'UP', 'WAIT', 'BOMB']
+2022-03-07 17:49:11,066 [rule_based_agent_0_code] DEBUG: Suitable target found at (14, 15)
+2022-03-07 17:49:11,167 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:11,167 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'WAIT', 'BOMB']
+2022-03-07 17:49:11,168 [rule_based_agent_0_code] DEBUG: Suitable target found at (14, 15)
+2022-03-07 17:49:11,278 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:11,279 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT']
+2022-03-07 17:49:11,283 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 10)
+2022-03-07 17:49:11,377 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:11,377 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'WAIT']
+2022-03-07 17:49:11,381 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 10)
+2022-03-07 17:49:11,467 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:11,468 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:49:11,472 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 10)
+2022-03-07 17:49:11,577 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:11,578 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:49:11,581 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 10)
+2022-03-07 17:49:11,679 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:11,679 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:49:11,681 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 10)
+2022-03-07 17:49:11,781 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:11,781 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:49:11,784 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 10)
+2022-03-07 17:49:11,881 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:11,881 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:11,882 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 10)
+2022-03-07 17:49:11,978 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:11,979 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN']
+2022-03-07 17:49:11,981 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 15)
+2022-03-07 17:49:12,071 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:12,071 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN', 'WAIT']
+2022-03-07 17:49:12,074 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 15)
+2022-03-07 17:49:12,166 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:12,166 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:49:12,170 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 15)
+2022-03-07 17:49:12,281 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:12,281 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN']
+2022-03-07 17:49:12,285 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 15)
+2022-03-07 17:49:12,380 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:12,381 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN', 'WAIT']
+2022-03-07 17:49:12,386 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 15)
+2022-03-07 17:49:12,480 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:12,480 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'UP', 'WAIT']
+2022-03-07 17:49:12,485 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 15)
+2022-03-07 17:49:12,580 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:12,581 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT']
+2022-03-07 17:49:12,584 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 15)
+2022-03-07 17:49:12,680 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:12,680 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT', 'BOMB']
+2022-03-07 17:49:12,683 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 15)
+2022-03-07 17:49:12,778 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:12,779 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT', 'BOMB']
+2022-03-07 17:49:12,782 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 15)
+2022-03-07 17:49:12,880 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:12,880 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'WAIT', 'BOMB']
+2022-03-07 17:49:12,882 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 15)
+2022-03-07 17:49:12,981 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:12,981 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT']
+2022-03-07 17:49:12,986 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 7)
+2022-03-07 17:49:13,080 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:13,080 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'WAIT']
+2022-03-07 17:49:13,086 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 7)
+2022-03-07 17:49:13,181 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:13,182 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT']
+2022-03-07 17:49:13,188 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 7)
+2022-03-07 17:49:13,282 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:13,282 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT']
+2022-03-07 17:49:13,289 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 7)
+2022-03-07 17:49:13,382 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:13,382 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'WAIT']
+2022-03-07 17:49:13,389 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 12)
+2022-03-07 17:49:13,481 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:13,482 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:49:13,487 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 7)
+2022-03-07 17:49:13,581 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:13,582 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:13,588 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 7)
+2022-03-07 17:49:13,682 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:13,683 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:13,689 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 7)
+2022-03-07 17:49:13,780 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:13,780 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:13,785 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 7)
+2022-03-07 17:49:13,880 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:13,881 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:49:13,885 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 7)
+2022-03-07 17:49:13,980 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:13,981 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:13,984 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 7)
+2022-03-07 17:49:14,081 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:14,081 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:14,084 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 7)
+2022-03-07 17:49:14,181 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:14,182 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:14,184 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 7)
+2022-03-07 17:49:14,283 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:14,283 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN']
+2022-03-07 17:49:14,290 [rule_based_agent_0_code] DEBUG: Suitable target found at (8, 15)
+2022-03-07 17:49:14,382 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:14,382 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN', 'WAIT']
+2022-03-07 17:49:14,388 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 12)
+2022-03-07 17:49:14,487 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:14,488 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:49:14,495 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 12)
+2022-03-07 17:49:14,583 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:14,583 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN']
+2022-03-07 17:49:14,590 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 12)
+2022-03-07 17:49:14,682 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:14,683 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN', 'WAIT']
+2022-03-07 17:49:14,689 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 7)
+2022-03-07 17:49:14,784 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:14,784 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:49:14,791 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 6)
+2022-03-07 17:49:14,882 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:14,882 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:14,889 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 7)
+2022-03-07 17:49:14,982 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:14,983 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:49:14,990 [rule_based_agent_0_code] DEBUG: Suitable target found at (12, 7)
+2022-03-07 17:49:15,082 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:15,083 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:15,093 [rule_based_agent_0_code] DEBUG: Suitable target found at (9, 5)
+2022-03-07 17:49:15,182 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:15,183 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:15,187 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 7)
+2022-03-07 17:49:15,270 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:15,270 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'UP', 'DOWN', 'WAIT']
+2022-03-07 17:49:15,273 [rule_based_agent_0_code] DEBUG: Suitable target found at (13, 6)
+2022-03-07 17:49:15,379 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:15,379 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:15,389 [rule_based_agent_0_code] DEBUG: Suitable target found at (9, 5)
+2022-03-07 17:49:15,485 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:15,486 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:15,496 [rule_based_agent_0_code] DEBUG: Suitable target found at (8, 7)
+2022-03-07 17:49:15,577 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:15,577 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:15,585 [rule_based_agent_0_code] DEBUG: Suitable target found at (8, 7)
+2022-03-07 17:49:15,677 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:15,677 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'UP', 'DOWN', 'WAIT']
+2022-03-07 17:49:15,694 [rule_based_agent_0_code] DEBUG: Suitable target found at (8, 15)
+2022-03-07 17:49:15,777 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:15,778 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:15,792 [rule_based_agent_0_code] DEBUG: Suitable target found at (8, 15)
+2022-03-07 17:49:15,878 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:15,879 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:15,892 [rule_based_agent_0_code] DEBUG: Suitable target found at (8, 15)
+2022-03-07 17:49:15,978 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:15,978 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:49:15,984 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 12)
+2022-03-07 17:49:16,079 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:16,079 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:16,085 [rule_based_agent_0_code] DEBUG: Suitable target found at (8, 15)
+2022-03-07 17:49:16,178 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:16,179 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:16,184 [rule_based_agent_0_code] DEBUG: Suitable target found at (8, 15)
+2022-03-07 17:49:16,279 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:16,279 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:16,284 [rule_based_agent_0_code] DEBUG: Suitable target found at (8, 15)
+2022-03-07 17:49:16,378 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:16,379 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:49:16,382 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 11)
+2022-03-07 17:49:16,487 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:16,487 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:16,489 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 12)
+2022-03-07 17:49:16,586 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:16,587 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN']
+2022-03-07 17:49:16,594 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 12)
+2022-03-07 17:49:16,679 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:16,680 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN', 'WAIT']
+2022-03-07 17:49:16,683 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 11)
+2022-03-07 17:49:16,781 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:16,781 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'UP', 'WAIT']
+2022-03-07 17:49:16,785 [rule_based_agent_0_code] DEBUG: Suitable target found at (15, 10)
+2022-03-07 17:49:16,881 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:16,881 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'WAIT']
+2022-03-07 17:49:16,887 [rule_based_agent_0_code] DEBUG: Suitable target found at (8, 15)
+2022-03-07 17:49:16,981 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:16,981 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT']
+2022-03-07 17:49:16,986 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 12)
+2022-03-07 17:49:17,080 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:17,081 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT']
+2022-03-07 17:49:17,085 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 12)
+2022-03-07 17:49:17,180 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:17,181 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'UP', 'WAIT']
+2022-03-07 17:49:17,185 [rule_based_agent_0_code] DEBUG: Suitable target found at (8, 15)
+2022-03-07 17:49:17,282 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:17,283 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT', 'BOMB']
+2022-03-07 17:49:17,285 [rule_based_agent_0_code] DEBUG: Suitable target found at (8, 15)
+2022-03-07 17:49:17,381 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:17,381 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT', 'BOMB']
+2022-03-07 17:49:17,383 [rule_based_agent_0_code] DEBUG: Suitable target found at (8, 15)
+2022-03-07 17:49:17,490 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:17,491 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'WAIT', 'BOMB']
+2022-03-07 17:49:17,493 [rule_based_agent_0_code] DEBUG: Suitable target found at (8, 15)
+2022-03-07 17:49:17,582 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:17,582 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT']
+2022-03-07 17:49:17,587 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 12)
+2022-03-07 17:49:17,682 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:17,683 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'WAIT']
+2022-03-07 17:49:17,687 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 12)
+2022-03-07 17:49:17,782 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:17,783 [rule_based_agent_0_code] DEBUG: Valid actions: ['LEFT', 'RIGHT', 'WAIT']
+2022-03-07 17:49:17,787 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 12)
+2022-03-07 17:49:17,883 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:17,883 [rule_based_agent_0_code] DEBUG: Valid actions: ['RIGHT', 'UP']
+2022-03-07 17:49:17,889 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 12)
+2022-03-07 17:49:17,986 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:17,987 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'WAIT']
+2022-03-07 17:49:17,990 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 12)
+2022-03-07 17:49:18,082 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:18,082 [rule_based_agent_0_code] DEBUG: Valid actions: ['UP', 'DOWN', 'WAIT']
+2022-03-07 17:49:18,084 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 12)
+2022-03-07 17:49:18,182 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:18,183 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN', 'WAIT', 'BOMB']
+2022-03-07 17:49:18,185 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 12)
+2022-03-07 17:49:18,283 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:18,284 [rule_based_agent_0_code] DEBUG: Valid actions: []
+2022-03-07 17:49:18,286 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 13)
+2022-03-07 17:49:18,377 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:18,377 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN']
+2022-03-07 17:49:18,379 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 14)
+2022-03-07 17:49:18,495 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:18,496 [rule_based_agent_0_code] DEBUG: Valid actions: ['DOWN']
+2022-03-07 17:49:18,499 [rule_based_agent_0_code] DEBUG: Suitable target found at (11, 15)
+2022-03-07 17:49:18,584 [rule_based_agent_0_code] INFO: Picking action according to rule set
+2022-03-07 17:49:18,584 [rule_based_agent_0_code] DEBUG: Valid actions: []
+2022-03-07 17:49:18,587 [rule_based_agent_0_code] DEBUG: Suitable target found at (10, 15)
