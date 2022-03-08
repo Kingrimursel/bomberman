@@ -18,6 +18,10 @@ RECORD_ENEMY_TRANSITIONS = 1.0  # record enemy transitions with probability ...
 PLACEHOLDER_EVENT = "PLACEHOLDER"
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> fb8011ff1abc6fdc6ab8e53dd8bc9b549bb384af
 def setup_training(self):
     """
     Initialise self for training purpose.
