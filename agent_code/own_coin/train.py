@@ -11,7 +11,7 @@ from .callbacks import state_to_features, look_for_targets
 # Additional structures
 Transition = namedtuple('Transition',
                         ('state', 'action', 'next_state', 'reward'))
-ACTIONS    = {'UP': 0, 'RIGHT': 1, 'DOWN': 2,'LEFT': 3 , 'WAIT': 4, 'BOMB': 5}
+ACTIONS_TO_INDEX    = {'UP': 0, 'RIGHT': 1, 'DOWN': 2,'LEFT': 3 , 'WAIT': 4, 'BOMB': 5}
 
 # Hyperparameters
 TRANSITION_HISTORY_SIZE  = 3
@@ -23,7 +23,6 @@ RECORD_ENEMY_TRANSITIONS = 1.0
 APPROACH_COIN  = "APPROACH_COIN"
 AWAY_FROM_COIN = "AWAY_FROM_COIN"
 VICTORY        = "VICTORY"
-REPEATED_MOVE  = "REPEATED_MOVE"
 
 
 def setup_training(self):
@@ -46,7 +45,7 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     :param old_game_state: The state that was passed to the last call of `act`.
     :param self_action: The action that you took.
     :param new_game_state: The state the agent is in now.
-    :param events: The events that occurred when going from  `old_game_state` to `new_game_state`
+    :param events: The events that occurred when going from `old_game_state` to `new_game_state`
     """
     self.logger.debug(f'Encountered game event(s) {", ".join(map(repr, events))} in step {new_game_state["step"]}')
 
@@ -72,7 +71,7 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     new_free_tiles = [(x, y) for x in cols for y in rows if (new_arena[x, y] == 0)]
     new_free_space = new_arena == 0 #For the function
 
-    # Own events to hand out rewards
+    # Own events to hand out rewards.
     if len(new_coins)>0 and look_for_targets(old_free_space, (old_x, old_y), old_coins, dir=True)[1] == (new_x, new_y):
         events.append(APPROACH_COIN)
     if len(new_coins)>0 and look_for_targets(old_free_space, (old_x, old_y), old_coins, dir=True)[1] != (new_x, new_y):
@@ -87,7 +86,7 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     #     prev_rewards = np.array([reward for (old_state,action,new_state,reward) in self.transitions])
     #
     #     old_states   = np.append(old_states, old_game_state)
-    #     actions      = np.append(actions, ACTIONS[self_action])
+    #     actions      = np.append(actions, ACTIONS_TO_INDEX[self_action])
     #     new_states   = np.append(new_states, new_game_state)
     #     prev_rewards = np.append(prev_rewards, current_reward)
     #
@@ -96,10 +95,10 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     #     self.model[state_to_features(self, old_states[0])][[0]] = self.model[state_to_features(self, old_states[0])][actions[0]] + self.alpha*(np.sum(gamma_exp*prev_rewards +(self.gamma**TRANSITION_HISTORY_SIZE)*np.max(self.model[state_to_features(self, new_game_state)]))-self.model[state_to_features(self, old_states[0])][actions[0]])
     #     self.logger.info(f"Model updated")
 
-    #Update Q-function(model) here
-    #Q-Learning:
+    # Q-Learning:
     self.model[state_to_features(self, old_game_state)][action[self_action]] = self.model[state_to_features(self, old_game_state)][action[self_action]] + self.alpha*(reward_from_events(self, events)+self.gamma*(np.max(self.model[state_to_features(self, new_game_state)]))-self.model[state_to_features(self, old_game_state)][action[self_action]]) #Q-Learning
-    #SARSA:
+
+    # SARSA:
     #self.model[state_to_features(self, old_game_state)][action[self_action]] = self.model[state_to_features(self, old_game_state)][action[self_action]] + self.alpha*(reward_from_events(self, events)+self.gamma*(self.model[state_to_features(self, new_game_state)][action[self_action]])-self.model[state_to_features(self, old_game_state)][action[self_action]]) #SARSA
 
     with open("my-saved-model.pt", "wb") as file:
@@ -150,7 +149,6 @@ def reward_from_events(self, events: List[str]):
         #e.BOMB_DROPPED:-500,
         APPROACH_COIN:1,
         AWAY_FROM_COIN:-2,
-        #REPEATED_MOVE:-1,
         }
 
     reward_sum = 0
