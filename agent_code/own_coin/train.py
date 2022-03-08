@@ -32,6 +32,8 @@ def setup_training(self):
 
     :param self: This object is passed to all callbacks and you can set arbitrary values.
     """
+    self.alpha = ALPHA
+    self.gamma = GAMMA
     self.transitions = deque(maxlen=TRANSITION_HISTORY_SIZE)
 
 
@@ -46,10 +48,6 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     :param events: The events that occurred when going from  `old_game_state` to `new_game_state`
     """
     self.logger.debug(f'Encountered game event(s) {", ".join(map(repr, events))} in step {new_game_state["step"]}')
-
-    # Define hyperparameters.
-    self.alpha = ALPHA
-    self.gamma = GAMMA
 
     if(old_game_state != None and new_game_state != None):
         #Define old game state roperties TODO: Do not yet need all of them but probably for finetuning the rewardshaping
@@ -72,12 +70,12 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
         new_free_space = new_arena == 0 #For the function
 
         # Own events to hand out rewards
-        if len(new_coins)>0 and look_for_targets(old_free_space, (old_x, old_y), old_coins,dir=True)[1]==(new_x, new_y):
+        if len(new_coins)>0 and look_for_targets(old_free_space, (old_x, old_y), old_coins, dir=True)[1] == (new_x, new_y):
             events.append(APPROACH_COIN)
-        if len(new_coins)>0 and look_for_targets(old_free_space, (old_x, old_y), old_coins,dir=True)[1]!=(new_x, new_y):
+        if len(new_coins)>0 and look_for_targets(old_free_space, (old_x, old_y), old_coins, dir=True)[1] != (new_x, new_y):
             events.append(AWAY_FROM_COIN)
 
-        if(len(self.transitions) >= TRANSITION_HISTORY_SIZE):
+        if len(self.transitions) >= TRANSITION_HISTORY_SIZE:
             previous_actions = [a for (s,a,ns,r) in self.transitions]
             if(self_action == previous_actions[1] and previous_actions[0]==previous_actions[2] and previous_actions[1]!=previous_actions[2]):
                 events.append(REPEATED_MOVE)
@@ -108,7 +106,7 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
 
     with open("my-saved-model.pt", "wb") as file:
         pickle.dump(self.model, file)
-    # state_to_features is defined in callbacks.py
+
     self.transitions.append(Transition(old_game_state, self_action, new_game_state, reward_from_events(self, events)))
 
 
@@ -118,15 +116,19 @@ def end_of_round(self, last_game_state: dict, last_action: str, events: List[str
     This replaces game_events_occurred in this round.
 
     :param self: The same object that is passed to all of your callbacks.
-    :param last_game_state:
+    :param last_game_state: Current game state.
+    :param last_action: Action that was took in last step.
+    :param events: Events that occured in transition to last_game_stat.
     """
     self.logger.debug(f'Encountered event(s) {", ".join(map(repr, events))} in final step')
+
+    # Add last transition.
     self.transitions.append(Transition(last_game_state, last_action, None, reward_from_events(self, events)))
 
     #TODO: Where should the reward for a victory be put into?
     score_others = [s for (n, s, b, xy) in last_game_state['others']]
-    score_own = last_game_state['self'][1]
-    if len(score_others)>0 and score_own>max(score_others):
+    score_own    = last_game_state['self'][1]
+    if len(score_others) > 0 and score_own > max(score_others):
         events.append(VICTORY)
 
     # Store updated model
@@ -134,11 +136,14 @@ def end_of_round(self, last_game_state: dict, last_action: str, events: List[str
         pickle.dump(self.model, file)
 
 
-def reward_from_events(self, events: List[str]) -> int:
+def reward_from_events(self, events: List[str]):
     """
     Here you can modify the rewards your agent get so as to en/discourage certain behavior.
+
+    :param self: The same object that was passed to all other functions.
+    :param events: List of events that need to consider to reward actions.
     """
-    #TODO: Create good rewards/penalties with good values. Avoid repeating moves somehow
+    #TODO: Create good rewards/penalties with good values. Avoid repeating moves somehow.
     game_rewards = {
         e.COIN_COLLECTED: 1,
         e.INVALID_ACTION:-100,
