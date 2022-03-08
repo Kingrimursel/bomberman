@@ -6,7 +6,7 @@ import pickle
 from typing import List
 
 import events as e
-from .callbacks import state_to_features, get_danger_level, create_future_explosion_map
+from .callbacks import state_to_features, get_danger_level, create_future_explosion_map, look_for_targets
 
 # This is only an example!
 Transition = namedtuple('Transition',
@@ -17,10 +17,12 @@ TRANSITION_HISTORY_SIZE = 3  # keep only ... last transitions
 RECORD_ENEMY_TRANSITIONS = 1.0  # record enemy transitions with probability ...
 
 # Events
-PASSIVE_IN_DANGER_EVENT = "PASSIVE_IN_DANGER"
-ESCAPED_DANGER_EVENT    = "ESCAPED_DANGER"
-MOVED_INTO_DANGER_EVENT = "MOVED_INTO_DANGER"
-BOMB_AND_STAY_EVENT     = "BOMB_AND_STAY"
+PASSIVE_IN_DANGER_EVENT       = "PASSIVE_IN_DANGER"
+ESCAPED_DANGER_EVENT          = "ESCAPED_DANGER"
+MOVED_INTO_DANGER_EVENT       = "MOVED_INTO_DANGER"
+BOMB_AND_STAY_EVENT           = "BOMB_AND_STAY"
+REPEATED_INVALID_ACTION_EVENT = "REPEATED_INVALID_ACTION"
+MOVED_TOWARDS_NEXT_COIN_EVENT = "MOVED_TOWARDS_NEXT_COIN"
 
 
 # action to int dit
@@ -75,27 +77,47 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     new_future_explosion_map = create_future_explosion_map(np.array(new_game_state["bombs"], dtype=object), new_game_state["field"].T)
 
 
-    old_danger_level = get_danger_level(*old_position, old_future_explosion_map)
-    new_danger_level = get_danger_level(*new_position, new_future_explosion_map)
+    old_danger_level = get_danger_level(*old_position, old_future_explosion_map, old_game_state)
+    new_danger_level = get_danger_level(*new_position, new_future_explosion_map, new_game_state)
 
+
+    free_space      = new_game_state["field"].T == 0
+    old_d_next_coin = look_for_targets(free_space, old_position, old_game_state["coins"], self.logger)
+    new_d_next_coin     = look_for_targets(free_space, new_position, new_game_state["coins"], self.logger)
+
+    # TODO: punish moving into existing explosion
 
     ## own events to hand out rewards
 
+    last_transition = self.transitions[-1] if self.transitions else None
+
     # if agent has not moved even though he was in danger
     if old_position == new_position and old_danger_level != 0:
-            events.append(PASSIVE_IN_DANGER_EVENT)
+        events.append(PASSIVE_IN_DANGER_EVENT)
 
     # if agent has escaped a dangerous situation
-    if old_danger_level > 0 and new_danger_level == 0:
+    if old_danger_level != 0 and new_danger_level == 0 and old_position != new_position and not \
+        (old_position != new_position and old_danger_level == 1 and new_danger_level == 0):
         events.append(ESCAPED_DANGER_EVENT)
 
-    # agent got into danger from a safe position
-    if old_danger_level == 0 and new_danger_level > 0:
-        events.append(MOVED_INTO_DANGER_EVENT)
+    # agent got into danger from a safe position. If last transition was BOMB it was on purpose
+    if old_danger_level == 0 and new_danger_level != 0 and self_action != "BOMB":
+        events.append(MOVED_INTO_DANGER_EVENT)  ## TODO abschwächen je nach alter der Bombe. je älter desto schlimmer
+
 
     # if dropped bomb in last action and didn't move:
-    if self.transitions and old_position == new_position and self.transitions[-1].action == "WAIT":
+    if old_position == new_position and last_transition and last_transition.action == "BOMB" and self_action == "WAIT":
         events.append(BOMB_AND_STAY_EVENT)
+
+
+    # if same move and same position, repeated illegal move
+    if "INVALID_ACTION" in events and last_transition and last_transition.action == self_action:
+        events.append(REPEATED_INVALID_ACTION_EVENT)
+
+
+    # moved into direction of coin
+    if old_d_next_coin < new_d_next_coin:
+        events.append(MOVED_TOWARDS_NEXT_COIN_EVENT)
 
 
     # calculate current transition
@@ -151,19 +173,22 @@ def reward_from_events(self, events: List[str]) -> int:
     Here you can modify the rewards your agent get so as to en/discourage
     certain behavior.
     """
+
     game_rewards = {
         e.COIN_COLLECTED: 4,
         e.KILLED_OPPONENT: 5,
-        e.CRATE_DESTROYED: 3,
-        e.COIN_FOUND: 3,
-        e.KILLED_SELF: -3,
+        e.CRATE_DESTROYED: 1,
+        e.COIN_FOUND: 1,
+        e.KILLED_SELF: -5,
         e.OPPONENT_ELIMINATED: 5,
-        e.INVALID_ACTION: -.3,
-        e.SURVIVED_ROUND: .5,
-        PASSIVE_IN_DANGER_EVENT: -3,
-        ESCAPED_DANGER_EVENT: 2,
-        MOVED_INTO_DANGER_EVENT: -2,
-        BOMB_AND_STAY_EVENT: -3
+        e.INVALID_ACTION: -1,
+        e.SURVIVED_ROUND: .2,
+        PASSIVE_IN_DANGER_EVENT: -4,
+        ESCAPED_DANGER_EVENT: 5,
+        MOVED_INTO_DANGER_EVENT: -3,
+        BOMB_AND_STAY_EVENT: -3,
+        REPEATED_INVALID_ACTION_EVENT: -3,
+        MOVED_TOWARDS_NEXT_COIN_EVENT: 6
     }
 
     reward_sum = 0

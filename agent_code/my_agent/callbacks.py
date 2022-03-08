@@ -47,6 +47,55 @@ def setup(self):
     self.exploration_prob = .1
 
 
+def look_for_targets(free_space, start, targets, logger=None):
+    """Find distance to the closest target (target can be specified in use)
+    Performs a breadth-first search of the reachable free tiles until a special target is encountered.
+    Args:
+        free_space: Boolean numpy array. True for free tiles and False for obstacles.
+        start: the coordinate from which to begin the search.
+        targets: list or array holding the coordinates of all target tiles.
+        logger: optional logger object for debugging.
+    Returns:
+        distance to the closest target
+    """
+
+    if len(targets) == 0:
+        return 17
+
+    frontier = [start]
+    parent_dict = {start: start}
+    dist_so_far = {start: 0}
+    best = start
+    best_dist = np.sum(np.abs(np.subtract(targets, start)), axis=1).min()
+
+    while len(frontier) > 0:
+        current = frontier.pop(0)
+        # Find distance from current position to all targets, track closest
+        d = np.sum(np.abs(np.subtract(targets, current)), axis=1).min()
+        if d + dist_so_far[current] <= best_dist:
+            best = current
+            best_dist = d + dist_so_far[current]
+        if d == 0:
+            # Found path to a target's exact position, mission accomplished!
+            best = current
+            break
+        # Add unexplored free neighboring tiles to the queue in a random order
+        x, y = current
+        neighbors = [(x, y) for (x, y) in [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)] if free_space[x, y]]
+        random.shuffle(neighbors)
+        for neighbor in neighbors:
+            if neighbor not in parent_dict:
+                frontier.append(neighbor)
+                parent_dict[neighbor] = current
+                dist_so_far[neighbor] = dist_so_far[current] + 1
+    #if logger: logger.debug(f'Suitable target found at {best}')
+    #if logger: logger.debug(f'Suitable target found with distance {best_dist}')
+
+    # TODO: strecke mitnehmen, sodass man nicht für jeden nachbarn die distanz erneut berechnen muss.
+
+    return best_dist
+
+
 def act(self, game_state: dict) -> str:
     """
     Your agent should parse the input, think, and take a decision.
@@ -89,11 +138,13 @@ def state_to_features(self, game_state: dict) -> np.array:
     # the cites can take different values, depending on the circumstances like type etc.
 
     # TODO: add map awareness
+
     # TODO: add feature that shows you to next coin. I.e. if moving to a tile brings you closer to
     # the coin, give it a higher value
     # TODO: add feature that shows you to next opponent
-    # TODO: currently the features shadow each other. I should probably create new feature for each tile and each current feature?
+    # TODO: add looking for next crate
 
+    # TODO: reward step into direction of coin
 
     # This is the dict before the game begins and after it ends
     if game_state is None:
@@ -105,7 +156,6 @@ def state_to_features(self, game_state: dict) -> np.array:
     bombs = np.array(game_state["bombs"], dtype=object)  # TODO explicit definition not necessary anymore
     opponents = np.array(game_state["others"], dtype=object)
 
-
     # coordinates of agents current position
     xs,ys = game_state["self"][-1]
 
@@ -113,12 +163,27 @@ def state_to_features(self, game_state: dict) -> np.array:
     # compute future explosion map
     future_explosion_map = create_future_explosion_map(bombs, game_state["field"].T)
 
+    # compute distance to next coin
+    free_space = game_state["field"].T == 0
+
+    d_next_coin     = look_for_targets(free_space, (xs, ys), game_state["coins"], self.logger)
+    #d_next_opponent = look_for_targets(free_space, (xs, ys), opponents[:, -1]   , self.logger)
+
+
+    # actually calculate features
     num_features = len(np.array(self.model.shape[:-1]))
     features = np.empty(num_features, dtype=int)
 
+    width, height = game_state["field"].shape
     for i, (x, y) in enumerate([(xs, ys), (xs-1, ys), (xs+1, ys), (xs, ys-1), (xs, ys+1)]):
-        # classifying
-        #features[i] = game_state["field"].T[x, y] + 1
+
+        # if we are in the boundary
+        if x >= 0 and x < width - 1 and y >= 0 and y < height - 1:
+            updated_d_next_coin     = look_for_targets(free_space, (x, y), game_state["coins"], self.logger)
+            #updated_d_next_opponent = look_for_targets(free_space, (x, y), opponents[:, -1]   , self.logger)
+        else:
+            updated_d_next_coin     = 1000
+            #updated_d_next_opponent = 1000
 
         # defensive
         if future_explosion_map[x, y] != 0:
@@ -131,7 +196,7 @@ def state_to_features(self, game_state: dict) -> np.array:
         # offensive
         if opponents.size != 0 and (x, y) in list(opponents[:, -1]):
             features[i + 5] = 0
-        elif (x, y) in list(game_state["coins"]):
+        elif updated_d_next_coin < d_next_coin:
             features[i + 5] = 1
         else:
             features[i + 5] = 2
@@ -156,7 +221,7 @@ def create_future_explosion_map(bombs, arena):
 
     width, height = arena.shape
 
-    arena_walls = arena
+    arena_walls = arena.copy()
     arena_walls[arena_walls != -1] = 0
 
     future_explosion_map = np.zeros((width, height), dtype=int)
@@ -211,7 +276,7 @@ def wall_inbetween(x1, y1, x2, y2, arena_walls):
 
 
 
-def get_danger_level(i, j, future_explosion_map):
+def get_danger_level(i, j, future_explosion_map, game_state):
     """
     returns danger level on tile (i,j). Only determined by the bomb timer on this tile
 
@@ -226,4 +291,7 @@ def get_danger_level(i, j, future_explosion_map):
 
     # TODO: add current_explosions_map lookup
 
-    return future_explosion_map[i, j]
+    if game_state["explosion_map"].T[j, i] != 0:
+        return -1
+
+    return future_explosion_map[j, i]
