@@ -4,21 +4,13 @@ import random
 
 import numpy as np
 
-
+# Addition structures.
 ACTIONS = ['UP', 'RIGHT', 'DOWN', 'LEFT', 'WAIT', 'BOMB']
 
 
 def setup(self):
     """
     Setup your code. This is called once when loading each agent.
-    Make sure that you prepare everything such that act(...) can be called.
-
-    When in training mode, the separate `setup_training` in train.py is called
-    after this method. This separation allows you to share your trained agent
-    with other students, without revealing your training code.
-
-    In this example, our model is a set of probabilities over actions
-    that are independent of the game state.
 
     :param self: This object is passed to all callbacks and you can set arbitrary values.
     """
@@ -42,12 +34,11 @@ def act(self, game_state: dict) -> str:
     :param game_state: The dictionary that describes everything on the board.
     :return: The action to take as a string.
     """
-
     #exponential exploration/exploitation
     # if(game_state['round']>1):
     #     random_prob = np.exp(-0.01*game_state['round'])
     # else:
-    random_prob=.2
+    random_prob = .2
 
     if self.train and random.random() < random_prob:
         self.logger.debug("Choosing action purely at random.")
@@ -56,29 +47,26 @@ def act(self, game_state: dict) -> str:
 
     self.logger.debug("Querying model for action.")
 
-
-
     features = state_to_features(self, game_state) #get features from game_state
+
     self.logger.info(f"FEATURE CALCULATED")
     self.logger.info(f"Features: {features}")
     #return np.random.choice(ACTIONS, p=self.model[0])
 
-    
     return ACTIONS[np.argmax(self.model[features])] #Gives action with maximal reward for given state
 
 
 #The following two functions are defined in here so they can also be used in the train.py
 def look_for_targets(free_space, start, targets, logger=None, dir=False):
-    """Find distance to the closest target (target can be specified in use (coin/opponent/crate...))
+    """
+    Find distance to the closest target (target can be specified in use (coin/opponent/crate...))
 
     Performs a breadth-first search of the reachable free tiles until a special target is encountered.
-    Args:
-        free_space: Boolean numpy array. True for free tiles and False for obstacles.
-        start: the coordinate from which to begin the search.
-        targets: list or array holding the coordinates of all target tiles.
-        logger: optional logger object for debugging.
-    Returns:
-        distance to the closest target or direction of closest target
+    :param free_space: Boolean numpy array. True for free tiles and False for obstacles.
+    :param start: the coordinate from which to begin the search.
+    :param targets: list or array holding the coordinates of all target tiles.
+    :param logger: optional logger object for debugging.
+    :return: distance to the closest target or direction of closest target
     """
     if len(targets) == 0:
         if dir: return 17, (0,0)
@@ -121,98 +109,78 @@ def look_for_targets(free_space, start, targets, logger=None, dir=False):
 
 
 def state_to_features(self, game_state: dict) -> np.array:
-
     """
-    Converts the game state to the input of the model, i.e.
-    a feature vector.
+    Converts the game state to the input of the model, i.e. a feature vector.
 
-
-    INPUT:
-    self: instance on which it is used (agent)
-    game_state:  A dictionary describing the current game board.
-
-
-    OUTPUT:
-    tuple with 6 entries for the features
+    :param self: Instance on which it is used (agent).
+    :param game_state: A dictionary describing the current game board.
+    :return: Tuple with 6 entries for the features.
     """
-
-
-
-    features = np.zeros(6, dtype='int')
-
-
-
+    features = np.zeros(6, dtype=np.int64)
 
     # This is the dict before the game begins and after it ends
     if game_state is None:
         return None
 
-    # Gather information about the game state
-    arena = game_state['field']
-    step = game_state['step']
+    # Gather information about the game state.
+    arena        = game_state['field']
+    step         = game_state['step']
     n,s,b,(x, y) = game_state['self']
-    others = [(n, s, b, xy) for (n, s, b, xy) in game_state['others']] #For calculating the number of coins collected yet
-    coins = game_state['coins']
+    others       = [(n, s, b, xy) for (n, s, b, xy) in game_state['others']] #For calculating the number of coins collected yet
+    coins        = game_state['coins']
 
-    cols = range(1, arena.shape[0] - 1)
-    rows = range(1, arena.shape[0] - 1)
-    walls = [(x, y) for x in cols for y in rows if (arena[x, y] == -1)]
+    cols       = range(1, arena.shape[0] - 1)
+    rows       = range(1, arena.shape[0] - 1)
+    walls      = [(x, y) for x in cols for y in rows if (arena[x, y] == -1)]
     free_tiles = [(x, y) for x in cols for y in rows if (arena[x, y] == 0)]
     free_space = arena == 0 #For the function
-    # TODO: test
-
-
-
 
     #Phase Feature (5) (Needed for other features, because of that determined first)
     #Determine total number of found coins
     total_agents = 0
-    if(step==1):
-        total_agents= len(game_state['others'])
+    if step == 1:
+        total_agents = len(game_state['others'])
 
-    totalscore=0
+    totalscore = 0
     for n,s,b,(xo,yo) in others:
-        totalscore+=s
-    totalcoins=totalscore-((total_agents-len(others))*5)
+        totalscore += s
+    totalcoins = totalscore - (total_agents - len(others))*5
 
-    if(len(coins)>0):
-        features[5]=0
-    elif(totalcoins<9):
-        features[5]=1
+    if len(coins) > 0:
+        features[5] = 0
+    elif totalcoins < 9:
+        features[5] = 1
     else:
-        features[5]=2
-
+        features[5] = 2
 
     #Neighbor tile features (0-3)
     #All the three are needed for the phase dependent decision
     distance_nextcoin, closest_to_coin = look_for_targets(free_space, (x, y), coins, self.logger, dir=True) #distance to closest coin
     #This is in order (Left, Right, Above, Below)
-    for num, (i,j) in enumerate([(x + h, y) for h in [-1, 1]] + [(x, y + h) for h in [-1, 1]]):
+    for num, (i,j) in enumerate([(x+h, y) for h in [-1, 1]] + [(x, y+h) for h in [-1, 1]]):
         #if tile is free
-        if (arena[i,j] == 0):
-            features[num]=0
+        if arena[i,j] == 0:
+            features[num] = 0
         # if tile is Wall
-        if (arena[i,j] == -1):
+        if arena[i,j] == -1:
             features[num]=1
         # possible danger (a bomb in the area may explode soon)
-        elif (arena[i,j] == 0 and False): #Value for later with opponents
+        elif arena[i,j] == 0 and False: #Value for later with opponents
             features[num]=2
         #Phase dependent value
         else:
-            if(features[5]==0):
+            if features[5] == 0:
                 #When tile is closest to next coin, mark with this value
-                if((i,j)==closest_to_coin):
+                if (i,j) == closest_to_coin:
                     features[num]=3
             # The following cases do not occur in this game mode, they are for later
-            elif(features[5]==1):
-                features[num]=3
-            elif(features[5]==2):
-                features[num]=3
-
-
+            elif features[5] == 1:
+                features[num] = 3
+            elif features[5] == 2 :
+                features[num] = 3
 
     #Feature for current tile (4) (Also more important for later tasks, in coin task always 1)
-    features[4]=1
+    features[4] = 1
     #wait does not lead to sure death and (can not place bomb (current field is bomb or bomb was placed recently) or placing bomb leads to sure death(trapped))
     # if(bomb_map[x,y]>0 and (bomb_positions[x,y]==1 or features[0]==features[1]==features[2]==features[3]==1 or not b)):
     #     features[4]=0
@@ -225,9 +193,6 @@ def state_to_features(self, game_state: dict) -> np.array:
     #     features[4]=3
     # elif(bomb_map[x,y]==0 or bomb_positions[x,y]==1): #Bomb placed on current tile or wait is safe death
     #     features[4]=4
-
-
-
 
     output = tuple(features)
     #self.logger.debug(f'Features Calculated: {output}')
