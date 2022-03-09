@@ -7,6 +7,8 @@ import numpy as np
 # Addition structures.
 ACTIONS = ['UP', 'RIGHT', 'DOWN', 'LEFT', 'WAIT', 'BOMB']
 
+# Constants
+NAME = 'my-saved-model'
 
 def setup(self):
     """
@@ -14,14 +16,16 @@ def setup(self):
 
     :param self: This object is passed to all callbacks and you can set arbitrary values.
     """
-    if not os.path.isfile("my-saved-model.pt"): #if no model saved
+    self.code_name = NAME
+
+    if not os.path.isfile("self.code_name" + ".pt"): #if no model saved
         self.logger.info("Setting up model from scratch.")
         weights = np.random.rand(len(ACTIONS))
         self.model = np.ones((4,4,4,4,5,3,6))*[.25, .25, .25, .25, .0, .0] #Initial guess
 
     else: #if model saved, no matter if in train mode or not, load current model #TODO: Why is this not done in the given code? In training mode a random model is picked always
         self.logger.info("Loading model from saved state.")
-        with open("my-saved-model.pt", "rb") as file:
+        with open(self.code_name + ".pt", "rb") as file:
             self.model = pickle.load(file)
 
 

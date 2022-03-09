@@ -52,7 +52,7 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     if(old_game_state != None and new_game_state != None):
         return
 
-    #Define old game state roperties TODO: Do not yet need all of them but probably for finetuning the rewardshaping
+    # Define old game state roperties TODO: Do not yet need all of them but probably for finetuning the rewardshaping
     old_arena      = old_game_state['field']
     old_step       = old_game_state['step']
     old_n, old_s, old_b,(old_x, old_y) = old_game_state['self']
@@ -63,7 +63,7 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     old_free_tiles = [(x, y) for x in cols for y in rows if (old_arena[x, y] == 0)]
     old_free_space = old_arena == 0
 
-    #Define new game state properties TODO: Do not yet need all of them but probably for finetuning the rewardshaping
+    # Define new game state properties TODO: Do not yet need all of them but probably for finetuning the rewardshaping
     new_arena      = new_game_state['field']
     new_step       = new_game_state['step']
     new_n, new_s, new_b,(new_x, new_y) = new_game_state['self']
@@ -78,22 +78,22 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
         events.append(AWAY_FROM_COIN)
 
     #N-Step Q Learning:
-    #     current_reward = reward_from_events(self, events)
+    #current_reward = reward_from_events(self, events)
     #
-    #     old_states   = np.array([old_state for (old_state,action,new_state,reward) in self.transitions])
-    #     actions      = np.array([ACTIONS[a] for (old_state,a,new_state,reward) in self.transitions])
-    #     new_states   = np.array([new_state for (old_state,action,new_state,reward) in self.transitions])
-    #     prev_rewards = np.array([reward for (old_state,action,new_state,reward) in self.transitions])
+    #old_states   = np.array([old_state for (old_state,action,new_state,reward) in self.transitions])
+    #actions      = np.array([ACTIONS[a] for (old_state,a,new_state,reward) in self.transitions])
+    #new_states   = np.array([new_state for (old_state,action,new_state,reward) in self.transitions])
+    #prev_rewards = np.array([reward for (old_state,action,new_state,reward) in self.transitions])
     #
-    #     old_states   = np.append(old_states, old_game_state)
-    #     actions      = np.append(actions, ACTIONS_TO_INDEX[self_action])
-    #     new_states   = np.append(new_states, new_game_state)
-    #     prev_rewards = np.append(prev_rewards, current_reward)
+    #old_states   = np.append(old_states, old_game_state)
+    #actions      = np.append(actions, ACTIONS_TO_INDEX[self_action])
+    #new_states   = np.append(new_states, new_game_state)
+    #prev_rewards = np.append(prev_rewards, current_reward)
     #
-    #     gamma_exp = np.array([self.gamma**k for k in range(0,len(actions))])
+    #gamma_exp = np.array([self.gamma**k for k in range(0,len(actions))])
     #
-    #     self.model[state_to_features(self, old_states[0])][[0]] = self.model[state_to_features(self, old_states[0])][actions[0]] + self.alpha*(np.sum(gamma_exp*prev_rewards +(self.gamma**TRANSITION_HISTORY_SIZE)*np.max(self.model[state_to_features(self, new_game_state)]))-self.model[state_to_features(self, old_states[0])][actions[0]])
-    #     self.logger.info(f"Model updated")
+    #self.model[state_to_features(self, old_states[0])][[0]] = self.model[state_to_features(self, old_states[0])][actions[0]] + self.alpha*(np.sum(gamma_exp*prev_rewards +(self.gamma**TRANSITION_HISTORY_SIZE)*np.max(self.model[state_to_features(self, new_game_state)]))-self.model[state_to_features(self, old_states[0])][actions[0]])
+    #self.logger.info(f"Model updated")
 
     # Q-Learning:
     self.model[state_to_features(self, old_game_state)][action[self_action]] = self.model[state_to_features(self, old_game_state)][action[self_action]] + self.alpha*(reward_from_events(self, events)+self.gamma*(np.max(self.model[state_to_features(self, new_game_state)]))-self.model[state_to_features(self, old_game_state)][action[self_action]]) #Q-Learning
@@ -101,7 +101,7 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     # SARSA:
     #self.model[state_to_features(self, old_game_state)][action[self_action]] = self.model[state_to_features(self, old_game_state)][action[self_action]] + self.alpha*(reward_from_events(self, events)+self.gamma*(self.model[state_to_features(self, new_game_state)][action[self_action]])-self.model[state_to_features(self, old_game_state)][action[self_action]]) #SARSA
 
-    with open("my-saved-model.pt", "wb") as file:
+    with open(self.code_name + ".pt", "wb") as file:
         pickle.dump(self.model, file)
 
     self.transitions.append(Transition(old_game_state, self_action, new_game_state, reward_from_events(self, events)))
@@ -129,7 +129,7 @@ def end_of_round(self, last_game_state: dict, last_action: str, events: List[str
         events.append(VICTORY)
 
     # Store updated model
-    with open("my-saved-model.pt", "wb") as file:
+    with open(self.code_name + ".pt", "wb") as file:
         pickle.dump(self.model, file)
 
 
