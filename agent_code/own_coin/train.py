@@ -11,7 +11,9 @@ from .callbacks import state_to_features, look_for_targets
 # Additional structures
 Transition = namedtuple('Transition',
                         ('state', 'action', 'next_state', 'reward'))
+ACTIONS             = ['UP', 'RIGHT', 'DOWN', 'LEFT', 'WAIT', 'BOMB']
 ACTIONS_TO_INDEX    = {'UP': 0, 'RIGHT': 1, 'DOWN': 2,'LEFT': 3 , 'WAIT': 4, 'BOMB': 5}
+
 
 # Hyperparameters
 TRANSITION_HISTORY_SIZE  = 3
@@ -51,7 +53,7 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     """
     self.logger.debug(f'Encountered game event(s) {", ".join(map(repr, events))} in step {new_game_state["step"]}')
 
-    if(old_game_state != None and new_game_state != None):
+    if old_game_state == None or new_game_state == None:
         return
 
     # Define old game state roperties TODO: Do not yet need all of them but probably for finetuning the rewardshaping
@@ -79,7 +81,12 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     if len(new_coins)>0 and look_for_targets(old_free_space, (old_x, old_y), old_coins, dir=True)[1] != (new_x, new_y):
         events.append(AWAY_FROM_COIN)
 
-    #N-Step Q Learning:
+    # Determine rewards and feature indices.
+    feature = state_to_features(self, old_game_state)
+    action  = ACTIONS_TO_INDEX[self_action]
+    rewards = reward_from_events(self, events)
+
+    #N-Step Q Learning
     #current_reward = reward_from_events(self, events)
     #
     #old_states   = np.array([old_state for (old_state,action,new_state,reward) in self.transitions])
@@ -97,10 +104,10 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     #self.model[state_to_features(self, old_states[0])][[0]] = self.model[state_to_features(self, old_states[0])][actions[0]] + self.alpha*(np.sum(gamma_exp*prev_rewards +(self.gamma**TRANSITION_HISTORY_SIZE)*np.max(self.model[state_to_features(self, new_game_state)]))-self.model[state_to_features(self, old_states[0])][actions[0]])
     #self.logger.info(f"Model updated")
 
-    # Q-Learning:
-    self.model[state_to_features(self, old_game_state)][action[self_action]] = self.model[state_to_features(self, old_game_state)][action[self_action]] + self.alpha*(reward_from_events(self, events)+self.gamma*(np.max(self.model[state_to_features(self, new_game_state)]))-self.model[state_to_features(self, old_game_state)][action[self_action]]) #Q-Learning
+    # Q-Learning
+    self.model[feature][action] = self.model[feature][action] + self.alpha*(rewards + self.gamma*(np.max(self.model[feature])) - self.model[feature][action])
 
-    # SARSA:
+    # SARSA
     #self.model[state_to_features(self, old_game_state)][action[self_action]] = self.model[state_to_features(self, old_game_state)][action[self_action]] + self.alpha*(reward_from_events(self, events)+self.gamma*(self.model[state_to_features(self, new_game_state)][action[self_action]])-self.model[state_to_features(self, old_game_state)][action[self_action]]) #SARSA
 
     with open(self.code_name + ".pt", "wb") as file:

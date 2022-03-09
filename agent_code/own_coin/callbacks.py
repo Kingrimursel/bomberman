@@ -116,7 +116,7 @@ def look_for_targets(free_space, start, targets, logger=None, dir=False):
     return best_dist
 
 
-def state_to_features(self, game_state: dict) -> np.array:
+def state_to_features(self, game_state: dict):
     """
     Converts the game state to the input of the model, i.e. a feature vector.
 
@@ -131,11 +131,11 @@ def state_to_features(self, game_state: dict) -> np.array:
         return None
 
     # Gather information about the game state.
-    arena        = game_state['field']
-    step         = game_state['step']
-    n,s,b,(x, y) = game_state['self']
-    others       = [(n, s, b, xy) for (n, s, b, xy) in game_state['others']] #For calculating the number of coins collected yet
-    coins        = game_state['coins']
+    arena           = game_state['field']
+    step            = game_state['step']
+    n, s, b, (x, y) = game_state['self']
+    others          = [(n, s, b, xy) for (n, s, b, xy) in game_state['others']] #For calculating the number of coins collected yet
+    coins           = game_state['coins']
 
     cols       = range(1, arena.shape[0] - 1)
     rows       = range(1, arena.shape[0] - 1)
@@ -143,14 +143,10 @@ def state_to_features(self, game_state: dict) -> np.array:
     free_tiles = [(x, y) for x in cols for y in rows if (arena[x, y] == 0)]
     free_space = arena == 0 #For the function
 
-    #Phase Feature (5) (Needed for other features, because of that determined first)
-    #Determine total number of found coins
-    total_agents = 0
-    if step == 1:
-        total_agents = len(game_state['others'])
-
+    # Phase Feature (5): Needed for other features, because of that determined first.
+    total_agents = len(game_state['others'])
     totalscore = 0
-    for n,s,b,(xo,yo) in others:
+    for _, s, _, _ in others:
         totalscore += s
     totalcoins = totalscore - (total_agents - len(others))*5
 
@@ -161,46 +157,24 @@ def state_to_features(self, game_state: dict) -> np.array:
     else:
         features[5] = 2
 
-    #Neighbor tile features (0-3)
-    #All the three are needed for the phase dependent decision
-    distance_nextcoin, closest_to_coin = look_for_targets(free_space, (x, y), coins, self.logger, dir=True) #distance to closest coin
-    #This is in order (Left, Right, Above, Below)
+    # Neighbor tile features (0-3)
+    # All the three are needed for the phase dependent decision.
+    _, closest_to_coin = look_for_targets(free_space, (x, y), coins, self.logger, dir=True) #distance to closest coin
+    # This is in order (Left, Right, Above, Below)
     for num, (i,j) in enumerate([(x+h, y) for h in [-1, 1]] + [(x, y+h) for h in [-1, 1]]):
-        #if tile is free
+        # if tile is free
         if arena[i,j] == 0:
-            features[num] = 0
+            # and if tile is closest to next coin
+            if features[5] == 0 and (i,j) == closest_to_coin:
+                features[num] = 3
+            else:
+                features[num] = 0
         # if tile is Wall
         if arena[i,j] == -1:
-            features[num]=1
-        # possible danger (a bomb in the area may explode soon)
-        elif arena[i,j] == 0 and False: #Value for later with opponents
-            features[num]=2
-        #Phase dependent value
-        else:
-            if features[5] == 0:
-                #When tile is closest to next coin, mark with this value
-                if (i,j) == closest_to_coin:
-                    features[num]=3
-            # The following cases do not occur in this game mode, they are for later
-            elif features[5] == 1:
-                features[num] = 3
-            elif features[5] == 2 :
-                features[num] = 3
+            features[num] = 1
 
     #Feature for current tile (4) (Also more important for later tasks, in coin task always 1)
     features[4] = 1
-    #wait does not lead to sure death and (can not place bomb (current field is bomb or bomb was placed recently) or placing bomb leads to sure death(trapped))
-    # if(bomb_map[x,y]>0 and (bomb_positions[x,y]==1 or features[0]==features[1]==features[2]==features[3]==1 or not b)):
-    #     features[4]=0
-    # #not (directly) trapped and the possible destruction is (0-2)/(3-5)/(>6)
-    # elif(features[0]!=1 and features[1]!=1 and features[2]!= 1 and features[3]!=1 and ( possible_destruction < 3)):
-    #     features[4]=1
-    # elif(features[0]!=1 and features[1]!=1 and features[2]!= 1 and features[3]!=1 and (3 <= possible_destruction < 6)):
-    #     features[4]=2
-    # elif(features[0]!=1 and features[1]!=1 and features[2]!= 1 and features[3]!=1 and (6 <= possible_destruction)):
-    #     features[4]=3
-    # elif(bomb_map[x,y]==0 or bomb_positions[x,y]==1): #Bomb placed on current tile or wait is safe death
-    #     features[4]=4
 
     output = tuple(features)
     #self.logger.debug(f'Features Calculated: {output}')
