@@ -15,8 +15,9 @@ ACTIONS_TO_INDEX    = {'UP': 0, 'RIGHT': 1, 'DOWN': 2,'LEFT': 3 , 'WAIT': 4, 'BO
 
 # Hyperparameters
 TRANSITION_HISTORY_SIZE  = 3
-ALPHA                    = 0.4
-GAMMA                    = 0.4
+ALPHA                    = .4
+GAMMA                    = .4
+EPSILON                  = .2
 RECORD_ENEMY_TRANSITIONS = 1.0
 
 # Events
@@ -31,8 +32,9 @@ def setup_training(self):
 
     :param self: This object is passed to all callbacks and you can set arbitrary values.
     """
-    self.alpha = ALPHA
-    self.gamma = GAMMA
+    self.alpha   = ALPHA
+    self.gamma   = GAMMA
+    self.epsilon = EPSILON
 
     self.transitions = deque(maxlen=TRANSITION_HISTORY_SIZE)
 

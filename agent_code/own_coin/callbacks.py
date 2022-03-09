@@ -8,7 +8,7 @@ import numpy as np
 ACTIONS = ['UP', 'RIGHT', 'DOWN', 'LEFT', 'WAIT', 'BOMB']
 
 # Constants
-NAME = 'my-saved-model'
+NAME = "my-saved-model"
 
 def setup(self):
     """
@@ -18,9 +18,8 @@ def setup(self):
     """
     self.code_name = NAME
 
-    if not os.path.isfile("self.code_name" + ".pt"): #if no model saved
+    if not os.path.isfile(self.code_name + ".pt"): #if no model saved
         self.logger.info("Setting up model from scratch.")
-        weights = np.random.rand(len(ACTIONS))
         self.model = np.ones((4,4,4,4,5,3,6))*[.25, .25, .25, .25, .0, .0] #Initial guess
 
     else: #if model saved, no matter if in train mode or not, load current model #TODO: Why is this not done in the given code? In training mode a random model is picked always
@@ -29,7 +28,7 @@ def setup(self):
             self.model = pickle.load(file)
 
 
-def act(self, game_state: dict) -> str:
+def act(self, game_state: dict):
     """
     Agent parses the input, think, and take a decision.
     When not in training mode, the maximum execution time for this method is 0.5s.
@@ -42,9 +41,8 @@ def act(self, game_state: dict) -> str:
     # if(game_state['round']>1):
     #     random_prob = np.exp(-0.01*game_state['round'])
     # else:
-    random_prob = .2
 
-    if self.train and random.random() < random_prob:
+    if self.train and random.random() < self.epsilon:
         self.logger.debug("Choosing action purely at random.")
         # 80% walk in any direction. wait 20%. Bomb 0%
         return np.random.choice(ACTIONS, p=[.25, .25, .25, .25, .0, .0])
@@ -60,7 +58,7 @@ def act(self, game_state: dict) -> str:
     return ACTIONS[np.argmax(self.model[features])] #Gives action with maximal reward for given state
 
 
-#The following two functions are defined in here so they can also be used in the train.py
+# The following two functions are defined in here so they can also be used in the train.py.
 def look_for_targets(free_space, start, targets, logger=None, dir=False):
     """
     Find distance to the closest target (target can be specified in use (coin/opponent/crate...))
@@ -76,11 +74,11 @@ def look_for_targets(free_space, start, targets, logger=None, dir=False):
         if dir: return 17, (0,0)
         return 17
 
-    frontier = [start]
+    frontier    = [start]
     parent_dict = {start: start}
     dist_so_far = {start: 0}
-    best = start
-    best_dist = np.sum(np.abs(np.subtract(targets, start)), axis=1).min()
+    best        = start
+    best_dist   = np.sum(np.abs(np.subtract(targets, start)), axis=1).min()
     while len(frontier) > 0:
         current = frontier.pop(0)
         # Find distance from current position to all targets, track closest
