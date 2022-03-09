@@ -47,7 +47,7 @@ def act(self, game_state: dict) -> str:
     # if(game_state['round']>1):
     #     random_prob = np.exp(-0.01*game_state['round'])
     # else:
-    random_prob=.02 #random move in 2% of cases
+    random_prob=.02 #random move in 2% of cases (8Moves per game)
 
 
     if self.train and random.random() < random_prob:
@@ -227,8 +227,8 @@ def state_to_features(self, game_state: dict) -> np.array:
     #Determine total number of found coins
     total_agents = 0 #TODO: Define depending on game mode, later always 3=opponent number)
     totalscore=0
-    for n,s,b,(xo,yo) in others:
-        totalscore+=s
+    for no,so,bo,(xo,yo) in others:
+        totalscore+=so
     totalcoins=totalscore-((total_agents-len(others))*5)
 
     if(len(coins)>0 and coin_reachable==True):
@@ -257,9 +257,11 @@ def state_to_features(self, game_state: dict) -> np.array:
         if (arena[i,j] == 0):
             features[num]=0
         #Phase dependent value
-        # possible danger (a bomb reaching this tile explodes soon)
+        # possible danger (a bomb reaching this tile explodes soon, but if only way out, mark 3 anyways)
         if (bomb_map[i,j]<5):
             features[num]=2
+            if(bomb_map[x,y]<5 and (i,j)==closest_to_safe):
+                features[num]=3
 
         if(len(coins)>0 and features[5]==0):
             #When tile is closest to next coin, mark with this value

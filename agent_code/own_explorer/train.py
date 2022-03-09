@@ -192,7 +192,7 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
                 drop_state_features = state_to_features(self, bomb_drop_state)
                 self.model[drop_state_features][5] = self.model[drop_state_features][5] + alpha*(reward_from_events(self, [ev for ev in events if (ev==e.CRATE_DESTROYED or ev==e.OPPONENT_ELIMINATED or ev==e.BOMB_EXPLODED or ev==e.COIN_FOUND)])+gamma*(np.max(self.model[state_to_features(self, self.transitions[1][0])]))-self.model[drop_state_features][5])
 
-        self.model[old_features][action[self_action]] = self.model[old_features][action[self_action]] + alpha*(reward_from_events(self, [ev for ev in events if (ev!=e.CRATE_DESTROYED and ev!= e.KILLED_SELF and ev!= e.OPPONENT_ELIMINATED) ])+gamma*(np.max(self.model[state_to_features(self, new_game_state)]))-self.model[old_features][action[self_action]]) #Q-Learning
+        self.model[old_features][action[self_action]] = self.model[old_features][action[self_action]] + alpha*(reward_from_events(self, [ev for ev in events if (ev!=e.CRATE_DESTROYED and ev!=e.COIN_FOUND and ev!= e.OPPONENT_ELIMINATED) ])+gamma*(np.max(self.model[state_to_features(self, new_game_state)]))-self.model[old_features][action[self_action]]) #Q-Learning
         #SARSA:
         #self.model[state_to_features(self, old_game_state)][action[self_action]] = self.model[state_to_features(self, old_game_state)][action[self_action]] + alpha*(reward_from_events(self, events)+gamma*(self.model[state_to_features(self, new_game_state)][action[self_action]])-self.model[state_to_features(self, old_game_state)][action[self_action]]) #SARSA
 
@@ -237,7 +237,6 @@ def end_of_round(self, last_game_state: dict, last_action: str, events: List[str
 
     #Bomb drop has been 4 moves earlier, also reward that one.
     if (e.BOMB_EXPLODED in events and e.KILLED_SELF not in events):
-
         bomb_drop_state = self.transitions[0][0] #Exactly the first entry in transitions, since four transitions are saved
         if(bomb_drop_state!=None ):
             drop_state_features = state_to_features(self, bomb_drop_state)
@@ -245,7 +244,7 @@ def end_of_round(self, last_game_state: dict, last_action: str, events: List[str
 
 
     #Q-Learning
-    self.model[old_features][action[last_action]] = self.model[old_features][action[last_action]] + alpha*(reward_from_events(self, [ev for ev in events if (ev!=e.CRATE_DESTROYED and ev!= e.OPPONENT_ELIMINATED) ]))#Only this part because new state does not exist. +gamma*(np.max(self.model[state_to_features(self, new_game_state)]))-self.model[old_features][action[self_action]]) #Q-Learning
+    self.model[old_features][action[last_action]] = self.model[old_features][action[last_action]] + alpha*(reward_from_events(self, [ev for ev in events if (ev!=e.CRATE_DESTROYED and ev!= e.OPPONENT_ELIMINATED and ev!=e.COIN_FOUND) ]))#Only this part because new state does not exist. +gamma*(np.max(self.model[state_to_features(self, new_game_state)]))-self.model[old_features][action[self_action]]) #Q-Learning
     #SARSA:
     #self.model[state_to_features(self, old_game_state)][action[self_action]] = self.model[state_to_features(self, old_game_state)][action[self_action]] + alpha*(reward_from_events(self, events)+gamma*(self.model[state_to_features(self, new_game_state)][action[self_action]])-self.model[state_to_features(self, old_game_state)][action[self_action]]) #SARSA
 
@@ -268,7 +267,7 @@ def reward_from_events(self, events: List[str]) -> int:
         e.KILLED_SELF:-100,
         e.BOMB_EXPLODED: 5,
         e.CRATE_DESTROYED: 5,
-        #e.OPPONENT_ELIMINATED: 5,
+        e.OPPONENT_ELIMINATED: 5,
         APPROACH_COIN:1,
         e.COIN_FOUND: 1,
         AWAY_FROM_COIN:-2,
