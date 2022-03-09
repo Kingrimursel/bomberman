@@ -32,7 +32,6 @@ BETTER_BOMB_POSSIBLE ="BETTER_BOMB_POSSIBLE"
 STUPID_BOMB = "STUPID_BOMB"
 STUPID_MOVE ="STUPID_MOVE"
 WRONG_DIRECTION="WRONG_DIRECTION"
-BOMB_CHANCE_MISSED ="BOMB_CHANCE_MISSED"
 
 
 
@@ -78,7 +77,7 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     #Define hyperparameters for training (adapt for each case)
     alpha=0.1
     gamma=0.8
-    self.logger.info(f"Action: {self_action}")
+    #self.logger.info(f"Action: {self_action}")
     #if(old_game_state==None): self.logger.info(f"Old Game State is None")
 
     #old_game_state is none in the first instance (discussed also in discord) because initial state is defined after game_events_occured is called, for whatever reason.
@@ -104,10 +103,9 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
 
         old_features = state_to_features(self, old_game_state)   #Features are sometimes ambigously and depend on BFS, that is why in rare cases the rewards to not match the action, but this is smoothed over time
         self.logger.info(f"Features: {old_features}")
-
         # Own events to hand out rewards
         #Coins and waits:
-        if(len(old_coins)>0 ):
+        if(len(old_coins)>0):
             coin_condition =  look_for_targets(old_free_space, (old_x, old_y), old_coins,dir=True)[1]==(new_x, new_y) #have to define because of BFS this sometimes just switches
         if len(old_coins)>0 and coin_condition:
             events.append(APPROACH_COIN)
@@ -152,8 +150,6 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
 
         if ((old_features[0]==3 or old_features[1]==3 or old_features[2]==3 or old_features[3]==3) and self_action =='BOMB'):
             events.append(BETTER_BOMB_POSSIBLE)
-        if ((old_features[0]!=3 and old_features[1]!=3 and old_features[2]!=3 and old_features[3]!=3) and (old_features[4]==2 or old_features[4]==3) and self_action!='BOMB'):
-            events.append(BOMB_CHANCE_MISSED)
 
 
 
@@ -190,7 +186,7 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
             bomb_drop_state = self.transitions[0][0] #Exactly the first entry in transitions, since four transitions are saved
             if(bomb_drop_state!=None ):
                 drop_state_features = state_to_features(self, bomb_drop_state)
-                self.model[drop_state_features][5] = self.model[drop_state_features][5] + alpha*(reward_from_events(self, [ev for ev in events if (ev==e.CRATE_DESTROYED or ev==e.OPPONENT_ELIMINATED or ev==e.BOMB_EXPLODED or ev==e.COIN_FOUND)])+gamma*(np.max(self.model[state_to_features(self, self.transitions[1][0])]))-self.model[drop_state_features][5])
+                self.model[drop_state_features][5] = self.model[drop_state_features][5] + alpha*(reward_from_events(self, [ev for ev in events if (ev==e.CRATE_DESTROYED or ev==e.OPPONENT_ELIMINATED or ev==e.BOMB_EXPLODED)])+gamma*(np.max(self.model[state_to_features(self, self.transitions[1][0])]))-self.model[drop_state_features][5])
 
         self.model[old_features][action[self_action]] = self.model[old_features][action[self_action]] + alpha*(reward_from_events(self, [ev for ev in events if (ev!=e.CRATE_DESTROYED and ev!= e.KILLED_SELF and ev!= e.OPPONENT_ELIMINATED) ])+gamma*(np.max(self.model[state_to_features(self, new_game_state)]))-self.model[old_features][action[self_action]]) #Q-Learning
         #SARSA:
@@ -236,12 +232,12 @@ def end_of_round(self, last_game_state: dict, last_action: str, events: List[str
 
 
     #Bomb drop has been 4 moves earlier, also reward that one.
-    if (e.BOMB_EXPLODED in events and e.KILLED_SELF not in events):
+    if (e.BOMB_EXPLODED in events):
 
         bomb_drop_state = self.transitions[0][0] #Exactly the first entry in transitions, since four transitions are saved
         if(bomb_drop_state!=None ):
             drop_state_features = state_to_features(self, bomb_drop_state)
-            self.model[drop_state_features][5] = self.model[drop_state_features][5] + alpha*(reward_from_events(self, [ev for ev in events if (ev==e.CRATE_DESTROYED or ev==e.OPPONENT_ELIMINATED or ev==e.COIN_FOUND)])+gamma*(np.max(self.model[state_to_features(self, self.transitions[1][0])]))-self.model[drop_state_features][5])
+            self.model[drop_state_features][5] = self.model[drop_state_features][5] + alpha*(reward_from_events(self, [ev for ev in events if (ev==e.CRATE_DESTROYED or ev==e.OPPONENT_ELIMINATED)])+gamma*(np.max(self.model[state_to_features(self, self.transitions[1][0])]))-self.model[drop_state_features][5])
 
 
     #Q-Learning
@@ -266,8 +262,8 @@ def reward_from_events(self, events: List[str]) -> int:
         e.COIN_COLLECTED: 1,
         e.INVALID_ACTION:-100,
         e.KILLED_SELF:-100,
-        e.BOMB_EXPLODED: 5,
-        e.CRATE_DESTROYED: 5,
+        e.BOMB_EXPLODED: 1,
+        e.CRATE_DESTROYED: 1,
         #e.OPPONENT_ELIMINATED: 5,
         APPROACH_COIN:1,
         e.COIN_FOUND: 1,
@@ -276,11 +272,10 @@ def reward_from_events(self, events: List[str]) -> int:
         WRONG_WAIT:-1,
         CORRECT_DIRECTION:1,
         WRONG_DIRECTION:-2,
-        BOMB_CHANCE_MISSED:-2,
         GOOD_BOMB:2,
         UNNECCESSARY_BOMB:-2,
         BETTER_BOMB_POSSIBLE:-2,
-        BEST_BOMB:6,
+        BEST_BOMB:4,
         STUPID_BOMB:-100,
         STUPID_WAIT:-100,
         e.MOVED_LEFT:-.25,
