@@ -9,6 +9,12 @@ from pathlib import Path
 import numpy as np
 from matplotlib import pyplot as plt
 
+class color:
+    RED='\033[0;31m'
+    GREEN='\033[0;32m'
+    BLUE='\033[0;34m'
+    PURPLE='\033[0;35m'
+    NC='\033[0m'
 
 
 def main():
@@ -47,12 +53,15 @@ def main():
 
 
     history_path = os.path.join(base_dir, "logs/analysis/history.npy")
+    placement_path = os.path.join(base_dir, "logs/analysis/placement.npy")
 
 
     # open files in read mode
     with open(history_path, "rb") as file:
         history = pickle.load(file)
 
+    with open(placement_path, "rb") as file:
+        placement = pickle.load(file)
 
     action_history   = {}
     lifetime_history = {}
@@ -82,9 +91,12 @@ def main():
         lifetime_history[game_counter] =  round_counter
 
 
-    del action_history["KILLED_SELF"]
-    del action_history["GOT_KILLED"]
-    del action_history["BOMB_EXPLODED"]
+    if "KILLED_SELF" in action_history:
+        del action_history["KILLED_SELF"]
+    if "GOT_KILLED" in action_history:
+        del action_history["GOT_KILLED"]
+    if "BOMB_EXPLODED" in action_history:
+        del action_history["BOMB_EXPLODED"]
 
     actions = action_history.keys()
     action_values = np.asmatrix(list(action_history.values()))
@@ -153,6 +165,28 @@ def main():
 
     plt.savefig(os.path.join(img_path, "lifetime.png"))
 
+
+    ## Finale Placement Plot
+    placement_list = []
+
+    for datetime in placement:
+        placement_list.extend(placement[datetime])
+
+    fig = plt.figure(figsize=(19, 9))
+
+    plt.fill_between(np.arange(len(placement_list)), placement_list, step="pre", alpha=0.4, color="navy")
+    plt.step(np.arange(len(placement_list)), placement_list, c="navy")
+
+    plt.xlabel("#game")
+    plt.ylabel("final placement")
+
+    plt.title("Agent {}: Final Placement".format(agent_name))
+
+    plt.savefig(os.path.join(img_path, "final_placement.png"))
+
+    # plt.show()
+
+    print(f"{color.GREEN}Images saved in output folder{color.NC}")
 
 if __name__ == "__main__":
     main()

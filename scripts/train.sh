@@ -82,5 +82,5 @@ cd ..
 
 # presenting
 echo -e "${GREEN}presenting result...${NC}"
-python3 main.py play --train 1 --my-agent $agent --scenario coin-heaven --scenario $scenario
+python3 main.py play --train 1 --my-agent $agent --scenario $scenario
 

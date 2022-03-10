@@ -8,6 +8,8 @@ from typing import List
 import events as e
 from .callbacks import state_to_features, look_for_targets
 
+from . import config
+
 Transition = namedtuple('Transition',
                         ('state', 'action', 'next_state', 'reward'))
 
@@ -57,11 +59,6 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     """
     self.logger.debug(f'Encountered game event(s) {", ".join(map(repr, events))} in step {new_game_state["step"]}')
 
-    #Define hyperparameters for training (adapt for each case
-    alpha=0.4
-    gamma=0.4
-
-
 
 
     if(old_game_state != None and new_game_state != None):
@@ -109,27 +106,28 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
         #     new_states = np.append(new_states, new_game_state)
         #     prev_rewards = np.append(prev_rewards, current_reward)
         #
-        #     gamma_exp = np.array([gamma**k for k in range(0,len(actions))])
+        #     gamma_exp = np.array([self.gamma**k for k in range(0,len(actions))])
         #
         #
         #
-        #     self.model[state_to_features(self, old_states[0])][actions[0]] = self.model[state_to_features(self, old_states[0])][actions[0]] + alpha*(np.sum(gamma_exp*prev_rewards +(gamma**TRANSITION_HISTORY_SIZE)*np.max(self.model[state_to_features(self, new_game_state)]))-self.model[state_to_features(self, old_states[0])][actions[0]])
+        #     self.model[state_to_features(self, old_states[0])][actions[0]] = self.model[state_to_features(self, old_states[0])][actions[0]] + self.alpha*(np.sum(self.gamma_exp*prev_rewards +(self.gamma**TRANSITION_HISTORY_SIZE)*np.max(self.model[state_to_features(self, new_game_state)]))-self.model[state_to_features(self, old_states[0])][actions[0]])
         #     self.logger.info(f"Model updated")
 
         #Update Q-function(model) here
         #Q-Learning:
-        self.model[state_to_features(self, old_game_state)][action[self_action]] = self.model[state_to_features(self, old_game_state)][action[self_action]] + alpha*(reward_from_events(self, events)+gamma*(np.max(self.model[state_to_features(self, new_game_state)]))-self.model[state_to_features(self, old_game_state)][action[self_action]]) #Q-Learning
+        self.model[state_to_features(self, old_game_state)][action[self_action]] = self.model[state_to_features(self, old_game_state)][action[self_action]] + self.alpha*(reward_from_events(self, events)+self.gamma*(np.max(self.model[state_to_features(self, new_game_state)]))-self.model[state_to_features(self, old_game_state)][action[self_action]]) #Q-Learning
         #SARSA:
-        #self.model[state_to_features(self, old_game_state)][action[self_action]] = self.model[state_to_features(self, old_game_state)][action[self_action]] + alpha*(reward_from_events(self, events)+gamma*(self.model[state_to_features(self, new_game_state)][action[self_action]])-self.model[state_to_features(self, old_game_state)][action[self_action]]) #SARSA
+        #self.model[state_to_features(self, old_game_state)][action[self_action]] = self.model[state_to_features(self, old_game_state)][action[self_action]] + self.alpha*(reward_from_events(self, events)+self.gamma*(self.model[state_to_features(self, new_game_state)][action[self_action]])-self.model[state_to_features(self, old_game_state)][action[self_action]]) #SARSA
 
 
 
-
-
-    with open("my-saved-model.pt", "wb") as file:
-        pickle.dump(self.model, file)
-    # state_to_features is defined in callbacks.py
-    self.transitions.append(Transition(old_game_state, self_action, new_game_state, reward_from_events(self, events)))
+    # We want to test in training mode aswell because we have access to the events in this case.
+    # But the model should not be updated in then
+    if config.TRULY_TRAIN:
+        with open("my-saved-model.pt", "wb") as file:
+            pickle.dump(self.model, file)
+        # state_to_features is defined in callbacks.py
+        self.transitions.append(Transition(old_game_state, self_action, new_game_state, reward_from_events(self, events)))
 
 
 
@@ -155,12 +153,17 @@ def end_of_round(self, last_game_state: dict, last_action: str, events: List[str
     if len(score_others)>0 and score_own>max(score_others):
         events.append(VICTORY)
 
+    # log agents placement at end of the game
+    agent_placement = len(score_others) - np.searchsorted(np.sort(score_others), score_own) + 1
+    self.logger.debug(f'Agents placement: {agent_placement}')
 
 
-
-    # Store updated model
-    with open("my-saved-model.pt", "wb") as file:
-        pickle.dump(self.model, file)
+    # We want to test in training mode aswell because we have access to the events in this case.
+    # But the model should not be updated in then
+    if config.TRULY_TRAIN:
+        # Store updated model
+        with open("my-saved-model.pt", "wb") as file:
+            pickle.dump(self.model, file)
 
 def reward_from_events(self, events: List[str]) -> int:
     """
