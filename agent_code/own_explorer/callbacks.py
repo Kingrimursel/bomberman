@@ -199,7 +199,9 @@ def state_to_features(self, game_state: dict) -> np.array:
     others = [(n, s, b, xy) for (n, s, b, xy) in game_state['others']] #For calculating the number of coins collected yet
     coins = game_state['coins']
     bomb_map = np.ones(arena.shape) * 5
+    free_space = arena == 0 #For the function
     for (xb, yb), t in bombs:
+        free_space[xb,yb]=False #Positions where bombs are are also non passable
         for (i, j) in potential_bomb(arena, xb, yb):
             if (0 < i < bomb_map.shape[0]) and (0 < j < bomb_map.shape[1]):
                 bomb_map[i, j] = min(bomb_map[i, j], t)   #Can be used as a measure for danger: 5 is nothing, 0 is sure death
@@ -208,8 +210,9 @@ def state_to_features(self, game_state: dict) -> np.array:
     walls = [(x, y) for x in cols for y in rows if (arena[x, y] == -1)]
     crates = [(x, y) for x in cols for y in rows if (arena[x, y] == 1)]
     free_tiles = [(x, y) for x in cols for y in rows if (arena[x, y] == 0)]
-    free_space = arena == 0 #For the function
-    free_space[bomb_xys]=False #Positions where bombs are are also non passable
+
+
+
 
     #All the three are needed for the phase dependent decision
     if(len(coins)>0):
@@ -218,7 +221,7 @@ def state_to_features(self, game_state: dict) -> np.array:
     if(len(crates)>0):
         distance_nextcrate, closest_to_crate, _ = look_for_targets(free_space, (x, y), crates, self.logger, dir=True) #distance to closest crate
     if bomb_map[x,y]<5:#(np.count_nonzero(bomb_map < 5)>0 or np.count_nonzero(explosion_map == 1)>0):
-        distance_nextsafe, closest_to_safe, safe_reachable = look_for_targets(free_space, (x, y), [(x,y) for (x,y) in np.array(np.where(bomb_map+explosion_map==5)).T if arena[x,y]==0], self.logger, dir=True) #distance to closest safe tile
+        distance_nextsafe, closest_to_safe, safe_reachable = look_for_targets(free_space, (x, y), [(x,y) for (x,y) in np.array(np.where(bomb_map+explosion_map==5)).T if free_space[x,y]], self.logger, dir=True) #distance to closest safe tile
 
 
     #Phase Feature (5) (Needed for other features, because of that determined first)
@@ -281,7 +284,7 @@ def state_to_features(self, game_state: dict) -> np.array:
         elif(features[5]==2):
             features[num]=3
         # if tile is Wall, crate, bomb, or death (bomb will explode or explosion lasts for next step or no escape from tile possible) stronger than everything else, so calculated last
-        if (arena[i,j] == -1 or arena[i,j] == 1 or (i,j) in bomb_xys or bomb_map[i,j]==0 or explosion_map[i,j]==1 or look_for_targets(free_space, (i, j), [(x,y) for (x,y) in np.array(np.where(bomb_map+explosion_map==5)).T if arena[x,y]==0], self.logger, dir=True)[0]>=(bomb_map[i,j]+1)): #TODO Condition for no escape from tile possible
+        if (arena[i,j] == -1 or arena[i,j] == 1 or (i,j) in bomb_xys or bomb_map[i,j]==0 or explosion_map[i,j]==1 or look_for_targets(free_space, (i, j), [(x,y) for (x,y) in np.array(np.where(bomb_map+explosion_map==5)).T if free_space[x,y]], self.logger, dir=True)[0]>=(bomb_map[i,j]+1) or not look_for_targets(free_space, (i, j), [(x,y) for (x,y) in np.array(np.where(bomb_map+explosion_map==5)).T if free_space[x,y]], self.logger, dir=True)[2]):
             features[num]=1
 
 
@@ -298,7 +301,7 @@ def state_to_features(self, game_state: dict) -> np.array:
         features[4]=2
     elif((features[0]!=1 or features[1]!=1 or features[2]!= 1 or features[3]!=1) and (6 <= possible_destruction)):
         features[4]=3
-    if(bomb_map[x,y]==0 or (x,y) in bomb_xys ): #Bomb is placed on current tile, or wait is safe death
+    if(bomb_map[x,y]==0 or (x,y) in bomb_xys or look_for_targets(free_space, (x, y), [(x,y) for (x,y) in np.array(np.where(bomb_map+explosion_map==5)).T if free_space[x,y]], self.logger, dir=True)[0]>=(bomb_map[x,y]+1)): #Bomb is placed on current tile, or wait is safe death
         features[4]=4
     if(features[5]==0 and len(coins)>0 and len(crates)>0 and distance_nextcoin<distance_nextcrate): #Only stop dropping bombs, when coin is close
         features[4]=1
