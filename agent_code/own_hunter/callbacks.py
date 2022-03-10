@@ -47,7 +47,7 @@ def act(self, game_state: dict) -> str:
     # if(game_state['round']>1):
     #     random_prob = np.exp(-0.01*game_state['round'])
     # else:
-    random_prob=.01 #random move in 1% of cases (4 Moves per game)
+    random_prob=.02 #random move in 1% of cases (4 Moves per game)
 
 
     if self.train and random.random() < random_prob:
