@@ -200,7 +200,7 @@ def state_to_features(self, game_state: dict) -> np.array:
     coins = game_state['coins']
     bomb_map = np.ones(arena.shape) * 5
     for (xb, yb), t in bombs:
-        for (i, j) in [(xb + h, yb) for h in range(-3, 4)] + [(xb, yb + h) for h in range(-3, 4)]:
+        for (i, j) in potential_bomb(arena, xb, yb):
             if (0 < i < bomb_map.shape[0]) and (0 < j < bomb_map.shape[1]):
                 bomb_map[i, j] = min(bomb_map[i, j], t)   #Can be used as a measure for danger: 5 is nothing, 0 is sure death
     cols = range(1, arena.shape[0] - 1)
@@ -209,7 +209,7 @@ def state_to_features(self, game_state: dict) -> np.array:
     crates = [(x, y) for x in cols for y in rows if (arena[x, y] == 1)]
     free_tiles = [(x, y) for x in cols for y in rows if (arena[x, y] == 0)]
     free_space = arena == 0 #For the function
-
+    free_space[bomb_xys]=False #Positions where bombs are are also non passable
 
     #All the three are needed for the phase dependent decision
     if(len(coins)>0):
@@ -280,8 +280,8 @@ def state_to_features(self, game_state: dict) -> np.array:
         #The following case will not occur in this section (only with opponents, later tasks)
         elif(features[5]==2):
             features[num]=3
-        # if tile is Wall, crate, bomb, or death (bomb will explode or explosion lasts for next step) stringer than everything else, so calculated last
-        if (arena[i,j] == -1 or arena[i,j] == 1 or (i,j) in bomb_xys or bomb_map[i,j]==0 or explosion_map[i,j]==1):
+        # if tile is Wall, crate, bomb, or death (bomb will explode or explosion lasts for next step or no escape from tile possible) stronger than everything else, so calculated last
+        if (arena[i,j] == -1 or arena[i,j] == 1 or (i,j) in bomb_xys or bomb_map[i,j]==0 or explosion_map[i,j]==1 or look_for_targets(free_space, (i, j), [(x,y) for (x,y) in np.array(np.where(bomb_map+explosion_map==5)).T if arena[x,y]==0], self.logger, dir=True)[0]>=(bomb_map[i,j]+1)): #TODO Condition for no escape from tile possible
             features[num]=1
 
 
