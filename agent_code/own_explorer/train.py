@@ -190,7 +190,7 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
             bomb_drop_state = self.transitions[0][0] #Exactly the first entry in transitions, since four transitions are saved
             if(bomb_drop_state!=None ):
                 drop_state_features = state_to_features(self, bomb_drop_state)
-                self.model[drop_state_features][5] = self.model[drop_state_features][5] + alpha*(reward_from_events(self, [ev for ev in events if (ev==e.CRATE_DESTROYED or ev==e.OPPONENT_ELIMINATED or ev==e.BOMB_EXPLODED or ev==e.COIN_FOUND)])+gamma*(np.max(self.model[state_to_features(self, self.transitions[1][0])]))-self.model[drop_state_features][5])
+                self.model[drop_state_features][5] = self.model[drop_state_features][5] + alpha*(reward_from_events(self, [ev for ev in events if (ev==e.CRATE_DESTROYED or ev==e.OPPONENT_ELIMINATED  or ev==e.COIN_FOUND)])+gamma*(np.max(self.model[state_to_features(self, self.transitions[1][0])]))-self.model[drop_state_features][5]) #Only rewarding destruction, not the fat that a bomb exploded
 
         self.model[old_features][action[self_action]] = self.model[old_features][action[self_action]] + alpha*(reward_from_events(self, [ev for ev in events if (ev!=e.CRATE_DESTROYED and ev!=e.COIN_FOUND and ev!= e.OPPONENT_ELIMINATED) ])+gamma*(np.max(self.model[state_to_features(self, new_game_state)]))-self.model[old_features][action[self_action]]) #Q-Learning
         #SARSA:
@@ -224,7 +224,7 @@ def end_of_round(self, last_game_state: dict, last_action: str, events: List[str
     alpha=0.1
     gamma=0.8
 
-    #VICTORY REWARD
+    #VICTORY REWARD #FIXME: Where should this be used? And: Does not work this way, dead opponents are not in 'others' anymore
     score_others = [s for (n, s, b, xy) in last_game_state['others']]
     score_own = last_game_state['self'][1]
     if len(score_others)>0 and score_own>max(score_others):
@@ -266,7 +266,7 @@ def reward_from_events(self, events: List[str]) -> int:
         e.INVALID_ACTION:-100,
         e.KILLED_SELF:-100,
         e.BOMB_EXPLODED: 5,
-        e.CRATE_DESTROYED: 5,
+        e.CRATE_DESTROYED: 1,
         e.OPPONENT_ELIMINATED: 5,
         APPROACH_COIN:1,
         e.COIN_FOUND: 1,
