@@ -47,13 +47,13 @@ def act(self, game_state: dict) -> str:
     # if(game_state['round']>1):
     #     random_prob = np.exp(-0.01*game_state['round'])
     # else:
-    random_prob=.02 #random move in 2% of cases (8Moves per game)
+    random_prob=.01 #random move in 1% of cases (4 Moves per game)
 
 
     if self.train and random.random() < random_prob:
         self.logger.debug("Choosing action purely at random.")
         # 0% walk in any direction. wait 0%. Bomb 100%
-        return np.random.choice(ACTIONS, p=[.1, .1, .1, .1, .1, .5])
+        return np.random.choice(ACTIONS, p=[.0, .0, .0, .0, .0, 1])
 
     self.logger.debug("Querying model for action.")
 
@@ -168,6 +168,16 @@ def destruction(arena, others, x,y):
             possible_destruction+=1
     return possible_destruction
 
+def bombmap_and_freemap(arena, bombs):
+    bomb_map = np.ones(arena.shape) * 5
+    free_space = arena == 0 #For the function
+    for (xb, yb), t in bombs:
+        free_space[xb,yb]=False #Positions where bombs are are also non passable
+        for (i, j) in potential_bomb(arena, xb, yb):
+            if (0 < i < bomb_map.shape[0]) and (0 < j < bomb_map.shape[1]):
+                bomb_map[i, j] = min(bomb_map[i, j], t)   #Can be used as a measure for danger: 5 is nothing, 0 is sure death
+    return free_space, bomb_map
+
 def state_to_features(self, game_state: dict) -> np.array:
 
     """
@@ -198,13 +208,7 @@ def state_to_features(self, game_state: dict) -> np.array:
     n,s,b,(x, y) = game_state['self']
     others = [(n, s, b, xy) for (n, s, b, xy) in game_state['others']] #For calculating the number of coins collected yet
     coins = game_state['coins']
-    bomb_map = np.ones(arena.shape) * 5
-    free_space = arena == 0 #For the function
-    for (xb, yb), t in bombs:
-        free_space[xb,yb]=False #Positions where bombs are are also non passable
-        for (i, j) in potential_bomb(arena, xb, yb):
-            if (0 < i < bomb_map.shape[0]) and (0 < j < bomb_map.shape[1]):
-                bomb_map[i, j] = min(bomb_map[i, j], t)   #Can be used as a measure for danger: 5 is nothing, 0 is sure death
+    free_space, bomb_map = bombmap_and_freemap(arena, bombs)
     cols = range(1, arena.shape[0] - 1)
     rows = range(1, arena.shape[0] - 1)
     walls = [(x, y) for x in cols for y in rows if (arena[x, y] == -1)]
@@ -226,13 +230,13 @@ def state_to_features(self, game_state: dict) -> np.array:
 
     #Phase Feature (5) (Needed for other features, because of that determined first)
     #Determine total number of found coins
-    total_agents = 0 #TODO: Define depending on game mode, later always 3=opponent number)
+    total_agents = 4 #TODO: Define depending on game mode, later always 3=opponent number)
     totalscore=0
     for no,so,bo,(xo,yo) in others:
         totalscore+=so
     totalcoins=totalscore-((total_agents-len(others))*5)
 
-    if(len(coins)>0 and coin_reachable==True):
+    if(len(coins)>0 and coin_reachable==True and (len(crates)==0 or distance_nextcoin<distance_nextcrate+8)): #Only change to collect mode if coin is in a reasonable region
         features[5]=0
     elif(totalcoins<9):
         features[5]=1
@@ -247,9 +251,10 @@ def state_to_features(self, game_state: dict) -> np.array:
     possible_destruction = destruction(arena, others,x, y)
 
 
-    highest_destruction = max([destruction(arena, others, i,j) for (i,j) in [(x + h, y) for h in [-1, 1]] + [(x, y + h) for h in [-1, 1]]])
+    highest_destruction = max([destruction(arena, others, i,j) for (i,j) in [(x + h, y) for h in [-1, 1]] + [(x, y + h) for h in [-1, 1]]]) #Highest destruction for all 4 neighbor tiles
 
-    max_destruction_tile = ([(x + h, y) for h in [-1, 1] if destruction(arena,others, x+h, y)==highest_destruction] + [(x, y + h) for h in [-1, 1] if destruction(arena,others, x, y+h)==highest_destruction])[0] #Pick Tile with highest destruction (For the case where multiple have the same destruction potential)
+    max_destruction_tiles = ([(x + h, y) for h in [-1, 1] if destruction(arena,others, x+h, y)==highest_destruction] + [(x, y + h) for h in [-1, 1] if destruction(arena,others, x, y+h)==highest_destruction]) #Pick Neighbor Tiles with highest destruction
+    max_destruction_tile = max_destruction_tiles[0]
     possible_bomb = potential_bomb(arena, x, y)
     danger_tiles = possible_bomb + [(i,j) for (i,j) in free_tiles if (bomb_map+explosion_map)[i,j]!=5] #All tiles affected by any explosion
     potential_escape = [(i,j) for (i,j) in free_tiles if (i,j) not in danger_tiles] #All tiles, that would still be safe when bomb is dropped
@@ -268,21 +273,26 @@ def state_to_features(self, game_state: dict) -> np.array:
 
         if(len(coins)>0 and features[5]==0):
             #When tile is closest to next coin, mark with this value
-            if((i,j)==closest_to_coin and (bomb_map+explosion_map)[i,j]==5):
+            if((i,j)==closest_to_coin and (bomb_map+explosion_map)[i,j]==5 and ( (len(crates)>0 and distance_nextcoin<(distance_nextcrate+5)) or len(crates)==0 or not b)):
                 features[num]=3
         #If in danger, set way out to 3, if not in danger set tile with most destruction potential to 3 or set way to next crate to 3, if no destruction possible
         elif(features[5]==1):
             if(bomb_map[x,y]<5 and (i,j)==closest_to_safe):
                 features[num]=3
-            #Encode neighbor tile with most destruction potential with 3, but only if current tile has lower destruction potential or no escape from current tile possible
-            elif(bomb_map[x,y]==5 and ((i,j)==max_destruction_tile or not look_for_targets(free_space, (x, y), potential_escape , self.logger, dir=True)[2]) and highest_destruction!=0):
-                features[num]=3
+            #Encode neighbor tile with most destruction potential with 3
+            elif bomb_map[x,y]==5 and highest_destruction!=0:
+                #if current tile has lower destruction potential
+                if((i,j)==max_destruction_tile and highest_destruction>possible_destruction):
+                    features[num]=3
+                #no escape from current tile possible and neighbor tile has second highest desctruction potential
+                elif(not look_for_targets(free_space, (x, y), potential_escape , self.logger, dir=True)[2] and (i,j)==max_destruction_tile):
+                    features[num]=3
             #If no destruction possible, mark way to next crate with 3.
             elif(len(crates)>0 and bomb_map[x,y]==5 and highest_destruction==0 and (i,j)==closest_to_crate and distance_nextcrate !=1):
                 features[num]=3
         #The following case will not occur in this section (only with opponents, later tasks)
         elif(features[5]==2):
-            features[num]=3
+            features[num]=1
         # if tile is Wall, crate, bomb, or death (bomb will explode or explosion lasts for next step or no escape from tile possible) stronger than everything else, so calculated last
         if (arena[i,j] == -1 or arena[i,j] == 1 or (i,j) in bomb_xys or bomb_map[i,j]==0 or explosion_map[i,j]==1 or look_for_targets(free_space, (i, j), [(x,y) for (x,y) in np.array(np.where(bomb_map+explosion_map==5)).T if free_space[x,y]], self.logger, dir=True)[0]>=(bomb_map[i,j]+1) or not look_for_targets(free_space, (i, j), [(x,y) for (x,y) in np.array(np.where(bomb_map+explosion_map==5)).T if free_space[x,y]], self.logger, dir=True)[2]):
             features[num]=1
@@ -297,9 +307,9 @@ def state_to_features(self, game_state: dict) -> np.array:
     #not (directly) trapped and the possible destruction is (0-2)/(3-5)/(>6)
     elif((features[0]!=1 or features[1]!=1 or features[2]!= 1 or features[3]!=1) and (possible_destruction == 0)):
         features[4]=1
-    elif((features[0]!=1 or features[1]!=1 or features[2]!= 1 or features[3]!=1) and (1 <= possible_destruction < 6)):
+    elif((features[0]!=1 or features[1]!=1 or features[2]!= 1 or features[3]!=1) and (1 <= possible_destruction < 5)):
         features[4]=2
-    elif((features[0]!=1 or features[1]!=1 or features[2]!= 1 or features[3]!=1) and (6 <= possible_destruction)):
+    elif((features[0]!=1 or features[1]!=1 or features[2]!= 1 or features[3]!=1) and (5 <= possible_destruction)):
         features[4]=3
     if(bomb_map[x,y]==0 or (x,y) in bomb_xys or look_for_targets(free_space, (x, y), [(x,y) for (x,y) in np.array(np.where(bomb_map+explosion_map==5)).T if free_space[x,y]], self.logger, dir=True)[0]>=(bomb_map[x,y]+1)): #Bomb is placed on current tile, or wait is safe death
         features[4]=4
