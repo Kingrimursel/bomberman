@@ -53,7 +53,7 @@ def act(self, game_state: dict) -> str:
     if self.train and random.random() < random_prob:
         self.logger.debug("Choosing action purely at random.")
         # 0% walk in any direction. wait 0%. Bomb 100%
-        return np.random.choice(ACTIONS, p=[.2, .2, .2, .2, .0, .2])
+        return np.random.choice(ACTIONS, p=[.1, .1, .1, .1, .1, .5])
 
     self.logger.debug("Querying model for action.")
 
@@ -135,7 +135,6 @@ def potential_bomb(arena,x,y):
     INPUT: (x,y) coordinates of tile
     OUTPUT: Array of all affected coordinates
     """
-    #TODO: Adapt this function, it should not show destruuction, if behind a wall. SAME HERE
     array=[]
     for h in range(1, 4):
         if(arena[x-h,y]==-1): break
@@ -159,7 +158,6 @@ def destruction(arena, others, x,y):
     INPUT: (x,y) coordinates of tile
     OUTPUT: count of enemies/crates, that would be destroyed
     """
-    #TODO: Adapt this function, it should not show destruction, if behind a wall.
     possible_destruction=0
 
     array = potential_bomb(arena, x, y)
@@ -247,6 +245,8 @@ def state_to_features(self, game_state: dict) -> np.array:
 
 
     highest_destruction = max([destruction(arena, others, i,j) for (i,j) in [(x + h, y) for h in [-1, 1]] + [(x, y + h) for h in [-1, 1]]])
+
+    max_destruction_tile = ([(x + h, y) for h in [-1, 1] if destruction(arena,others, x+h, y)==highest_destruction] + [(x, y + h) for h in [-1, 1] if destruction(arena,others, x, y+h)==highest_destruction])[0] #Pick Tile with highest destruction (For the case where multiple have the same destruction potential)
     possible_bomb = potential_bomb(arena, x, y)
     danger_tiles = possible_bomb + [(i,j) for (i,j) in free_tiles if (bomb_map+explosion_map)[i,j]!=5] #All tiles affected by any explosion
     potential_escape = [(i,j) for (i,j) in free_tiles if (i,j) not in danger_tiles] #All tiles, that would still be safe when bomb is dropped
@@ -271,8 +271,8 @@ def state_to_features(self, game_state: dict) -> np.array:
         elif(features[5]==1):
             if(bomb_map[x,y]<5 and (i,j)==closest_to_safe):
                 features[num]=3
-            #Encode neighbor tile with most destruction potential with 3
-            elif(bomb_map[x,y]==5 and destruction(arena, others,i, j)==highest_destruction and highest_destruction!=0):
+            #Encode neighbor tile with most destruction potential with 3, but only if current tile has lower destruction potential or no escape from current tile possible
+            elif(bomb_map[x,y]==5 and ((i,j)==max_destruction_tile or not look_for_targets(free_space, (x, y), potential_escape , self.logger, dir=True)[2]) and highest_destruction!=0):
                 features[num]=3
             #If no destruction possible, mark way to next crate with 3.
             elif(len(crates)>0 and bomb_map[x,y]==5 and highest_destruction==0 and (i,j)==closest_to_crate and distance_nextcrate !=1):
