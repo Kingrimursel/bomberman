@@ -6,7 +6,7 @@ import random
 import pickle
 from typing import List
 import events as e
-from .callbacks import state_to_features, look_for_targets, destruction, potential_bomb
+from .callbacks import state_to_features, look_for_targets, destruction, potential_bomb, bombmap_and_freemap
 
 Transition = namedtuple('Transition',
                         ('state', 'action', 'next_state', 'reward'))
@@ -87,19 +87,18 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
         old_arena = old_game_state['field']
         old_step = old_game_state['step']
         old_n,old_s,old_b,(old_x, old_y) = old_game_state['self']
+        old_bombs = old_game_state['bombs']
         old_coins = old_game_state['coins']
         cols = range(1, old_arena.shape[0] - 1)
         rows = range(1, old_arena.shape[0] - 1)
         walls = [(x, y) for x in cols for y in rows if (old_arena[x, y] == -1)]
-        old_free_tiles = [(x, y) for x in cols for y in rows if (old_arena[x, y] == 0)]
-        old_free_space = old_arena == 0
+        old_free_space, old_bomb_map = bombmap_and_freemap(old_arena, old_bombs)
 
         #Define new game state properties TODO: Do not yet need all of them but probably for finetuning the rewardshaping
         new_arena = new_game_state['field']
         new_step = new_game_state['step']
         new_n,new_s,new_b,(new_x, new_y) = new_game_state['self']
         new_coins = new_game_state['coins']
-        new_free_tiles = [(x, y) for x in cols for y in rows if (new_arena[x, y] == 0)]
         new_free_space = new_arena == 0 #For the function
 
         old_features = state_to_features(self, old_game_state)   #Features are sometimes ambigously and depend on BFS, that is why in rare cases the rewards to not match the action, but this is smoothed over time
@@ -109,9 +108,10 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
         #Coins and waits:
         if(len(old_coins)>0 ):
             coin_condition =  look_for_targets(old_free_space, (old_x, old_y), old_coins,dir=True)[1]==(new_x, new_y) #have to define because of BFS this sometimes just switches
-        if len(old_coins)>0 and coin_condition:
+            coin_reachable = look_for_targets(old_free_space, (old_x, old_y), old_coins,dir=True)[2]
+        if len(old_coins)>0 and coin_condition and coin_reachable:
             events.append(APPROACH_COIN)
-        if len(old_coins)>0 and not coin_condition and old_features[5]==0:
+        if len(old_coins)>0 and not coin_condition and old_features[5]==0 and coin_reachable and self_action != 'BOMB':
             events.append(AWAY_FROM_COIN)
 
         if (old_features[0]==old_features[1]==old_features[2]==old_features[3]==1 and self_action=='WAIT'):
@@ -150,7 +150,7 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
         if (old_features[4]==0 and self_action =='BOMB'):
             events.append(STUPID_BOMB)
 
-        if ((old_features[0]==3 or old_features[1]==3 or old_features[2]==3 or old_features[3]==3) and self_action =='BOMB'):
+        if ((old_features[0]==3 or old_features[1]==3 or old_features[2]==3 or old_features[3]==3) and self_action =='BOMB' and old_bomb_map[old_x,old_y]==5):
             events.append(BETTER_BOMB_POSSIBLE)
         if ((old_features[0]!=3 and old_features[1]!=3 and old_features[2]!=3 and old_features[3]!=3) and (old_features[4]==2 or old_features[4]==3) and self_action!='BOMB'):
             events.append(BOMB_CHANCE_MISSED)
@@ -276,7 +276,7 @@ def reward_from_events(self, events: List[str]) -> int:
         CORRECT_DIRECTION:1,
         WRONG_DIRECTION:-2,
         BOMB_CHANCE_MISSED:-2,
-        GOOD_BOMB:2,
+        GOOD_BOMB:1,
         UNNECCESSARY_BOMB:-2,
         BETTER_BOMB_POSSIBLE:-2,
         BEST_BOMB:6,
