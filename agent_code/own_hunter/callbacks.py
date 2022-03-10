@@ -4,6 +4,7 @@ import random
 
 import numpy as np
 
+from collections import  deque
 
 ACTIONS = ['UP', 'RIGHT', 'DOWN', 'LEFT', 'WAIT', 'BOMB']
 
@@ -32,6 +33,7 @@ def setup(self):
         with open("my-saved-model.pt", "rb") as file:
             self.model = pickle.load(file)
 
+    self.features= deque(maxlen=5)
 
 def act(self, game_state: dict) -> str:
     """
@@ -47,23 +49,24 @@ def act(self, game_state: dict) -> str:
     # if(game_state['round']>1):
     #     random_prob = np.exp(-0.01*game_state['round'])
     # else:
-    random_prob=.02 #random move in 1% of cases (4 Moves per game)
+    random_prob=.0 #random move in 1% of cases (4 Moves per game)
 
 
     if self.train and random.random() < random_prob:
         self.logger.debug("Choosing action purely at random.")
         # 0% walk in any direction. wait 0%. Bomb 100%
-        return np.random.choice(ACTIONS, p=[.2, .2, .2, .2, .0, .2])
+        return np.random.choice(ACTIONS, p=[.0, .0, .0, .0, .0, 1])
+        #return np.random.choice(ACTIONS, p=[.2, .2, .2, .2, .0, .2])
 
     self.logger.debug("Querying model for action.")
 
 
 
     features = state_to_features(self, game_state) #get features from game_state
-
+    self.features.append(features)
 
     #print('Features: ' +str(features))
-    self.logger.info(f"FEATURE CALCULATED")
+    self.logger.info(f"FEATURES CALCULATED")
     self.logger.info(f"Features: {features}")
     return ACTIONS[np.argmax(self.model[features])] #Gives action with maximal reward for given state
     #return np.random.choice(ACTIONS, p=[.2, .2, .2, .2, .1, .1])
@@ -232,10 +235,11 @@ def state_to_features(self, game_state: dict) -> np.array:
     #Determine total number of found coins
     total_agents = 3 #TODO: Define depending on game mode, later always 3=opponent number)
     totalscore=0
+    others_coord = []
     for no,so,bo,(xo,yo) in others:
+        others_coord.append((xo,yo))
         totalscore+=so
     totalcoins=totalscore-((total_agents-len(others))*5)
-
     if(len(coins)>0 and coin_reachable==True and (len(crates)==0 or distance_nextcoin<distance_nextcrate+5)): #Only change to collect mode if coin is in a reasonable region
         features[5]=0
     elif(totalcoins<9):
@@ -294,7 +298,7 @@ def state_to_features(self, game_state: dict) -> np.array:
         elif(features[5]==2):
             features[num]=1
         # if tile is Wall, crate, bomb, or death (bomb will explode or explosion lasts for next step or no escape from tile possible) stronger than everything else, so calculated last
-        if (arena[i,j] == -1 or arena[i,j] == 1 or (i,j) in bomb_xys or bomb_map[i,j]==0 or explosion_map[i,j]==1 or look_for_targets(free_space, (i, j), [(x,y) for (x,y) in np.array(np.where(bomb_map+explosion_map==5)).T if free_space[x,y]], self.logger, dir=True)[0]>=(bomb_map[i,j]+1) or not look_for_targets(free_space, (i, j), [(x,y) for (x,y) in np.array(np.where(bomb_map+explosion_map==5)).T if free_space[x,y]], self.logger, dir=True)[2]):
+        if ((i,j) in others_coord or arena[i,j] == -1 or arena[i,j] == 1 or (i,j) in bomb_xys or bomb_map[i,j]==0 or explosion_map[i,j]==1 or look_for_targets(free_space, (i, j), [(x,y) for (x,y) in np.array(np.where(bomb_map+explosion_map==5)).T if free_space[x,y]], self.logger, dir=True)[0]>=(bomb_map[i,j]+1) or not look_for_targets(free_space, (i, j), [(x,y) for (x,y) in np.array(np.where(bomb_map+explosion_map==5)).T if free_space[x,y]], self.logger, dir=True)[2]):
             features[num]=1
 
 
