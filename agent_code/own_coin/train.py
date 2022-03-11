@@ -40,7 +40,33 @@ def setup_training(self):
 
     self.transitions = deque(maxlen=TRANSITION_HISTORY_SIZE)
 
-def update_Q():
+
+def update_Q(feature: tuple, action: int, rewards: float, nstep=True, Qlearning=False, SARSA=False):
+
+    if np.sum([nstep, Qlearning, SARSA]) != 1:
+        raise TypeError(f"Choose only and at least one learning method. {np.sum([nstep, Qlearning, SARSA])} were given.")
+
+    if nstep:
+        n = TRANSITION_HISTORY_SIZE
+
+        transition = self.transitions.popleft()
+        feature    = state_to_features(transition[0])
+        action     = ACTIONS_TO_INDEX[transition[1]]
+
+        transitions  = np.array([np.array([state_to_features(s), state_to_features(s_prime), r]) for (s, _, s_prime, r) in self.transitions)
+        old_features = transitions[:, 0]
+        new_features = transitions[:, 2]
+        prev_rewards = transitions[:, 3]
+
+        gamma_pow = np.power(np.ones(n)*self.gamme, np.arange(n))
+
+        self.model[feature][action] = self.model[feature][action] + self.alpha * np.sum(gamma_pow*prev_rewards + self.gamma**n * self.model[feature][action] - self.model[feature][action])
+
+    elif SARSA:
+        self.model[feature][action] = self.model[feature][action] + self.alpha*(rewards + self.gamma*(self.model[feature][action]) - self.model[feature][action])
+
+    else:
+        self.model[feature][action] = self.model[feature][action] + self.alpha*(rewards + self.gamma*(np.max(self.model[feature])) - self.model[feature][action])
 
 
 def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_state: dict, events: List[str]):
@@ -81,34 +107,14 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     action  = ACTIONS_TO_INDEX[self_action]
     rewards = reward_from_events(self, events)
 
-    #N-Step Q Learning
-    #current_reward = reward_from_events(self, events)
-    #
-    #old_states   = np.array([old_state for (old_state,action,new_state,reward) in self.transitions])
-    #actions      = np.array([ACTIONS[a] for (old_state,a,new_state,reward) in self.transitions])
-    #new_states   = np.array([new_state for (old_state,action,new_state,reward) in self.transitions])
-    #prev_rewards = np.array([reward for (old_state,action,new_state,reward) in self.transitions])
-    #
-    #old_states   = np.append(old_states, old_game_state)
-    #actions      = np.append(actions, ACTIONS_TO_INDEX[self_action])
-    #new_states   = np.append(new_states, new_game_state)
-    #prev_rewards = np.append(prev_rewards, current_reward)
-    #
-    #gamma_exp = np.array([self.gamma**k for k in range(0,len(actions))])
-    #
-    #self.model[state_to_features(self, old_states[0])][[0]] = self.model[state_to_features(self, old_states[0])][actions[0]] + self.alpha*(np.sum(gamma_exp*prev_rewards +(self.gamma**TRANSITION_HISTORY_SIZE)*np.max(self.model[state_to_features(self, new_game_state)]))-self.model[state_to_features(self, old_states[0])][actions[0]])
-    #self.logger.info(f"Model updated")
+    # Add current transition.
+    self.transitions.append(Transition(old_game_state, self_action, new_game_state, rewards))
 
-    # Q-Learning
-    self.model[feature][action] = self.model[feature][action] + self.alpha*(rewards + self.gamma*(np.max(self.model[feature])) - self.model[feature][action])
-
-    # SARSA
-    #self.model[state_to_features(self, old_game_state)][action[self_action]] = self.model[state_to_features(self, old_game_state)][action[self_action]] + self.alpha*(reward_from_events(self, events)+self.gamma*(self.model[state_to_features(self, new_game_state)][action[self_action]])-self.model[state_to_features(self, old_game_state)][action[self_action]]) #SARSA
+    # Update Q matrix.
+    update_Q(feature, action, rewards, nstep=True)
 
     with open(self.code_name + ".pt", "wb") as file:
         pickle.dump(self.model, file)
-
-    self.transitions.append(Transition(old_game_state, self_action, new_game_state, reward_from_events(self, events)))
 
 
 def end_of_round(self, last_game_state: dict, last_action: str, events: List[str]):
