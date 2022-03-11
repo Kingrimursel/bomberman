@@ -45,7 +45,7 @@ def act(self, game_state: dict) -> str:
     :return: The action to take as a string.
     """
 
-    random_prob=.5 #random move in 20, 10, 5, 2, 1% of cases
+    random_prob=.1 #random move in 20, 10, 5, 2, 1% of cases
 
     features = state_to_features(self, game_state) #get features from game_state
     self.features.append(features)
@@ -56,7 +56,7 @@ def act(self, game_state: dict) -> str:
         self.logger.debug("Choosing action purely at random.")
         # 0% walk in any direction. wait 0%. Bomb 100%
         #return np.random.choice(ACTIONS, p=[.0, .0, .0, .0, .0, 1])
-        return np.random.choice(ACTIONS, p=[.2, .2, .2, .2, .0, .2])
+        return np.random.choice(ACTIONS, p=[.1, .1, .1, .1, .0, .6])
 
     self.logger.debug("Querying model for action.")
     return ACTIONS[np.argmax(self.model[features])] #Gives action with maximal reward for given state
@@ -208,7 +208,9 @@ def state_to_features(self, game_state: dict) -> np.array:
     walls = [(x, y) for x in cols for y in rows if (arena[x, y] == -1)]
     crates = [(x, y) for x in cols for y in rows if (arena[x, y] == 1)]
     free_tiles = [(x, y) for x in cols for y in rows if (arena[x, y] == 0)]
-
+    others_coord = []
+    for no,so,bo,(xo,yo) in others:
+        others_coord.append((xo,yo))
 
 
 
@@ -220,20 +222,13 @@ def state_to_features(self, game_state: dict) -> np.array:
         distance_nextcrate, closest_to_crate, _ = look_for_targets(free_space, (x, y), crates, self.logger, dir=True) #distance to closest crate
     if bomb_map[x,y]<5:#(np.count_nonzero(bomb_map < 5)>0 or np.count_nonzero(explosion_map == 1)>0):
         distance_nextsafe, closest_to_safe, safe_reachable = look_for_targets(free_space, (x, y), [(x,y) for (x,y) in np.array(np.where(bomb_map+explosion_map==5)).T if free_space[x,y]], self.logger, dir=True) #distance to closest safe tile
-
+    if len(others)>0:
+        distance_nextopponent, closest_to_opponent, opponent_reachable = look_for_targets(free_space, (x,y), others_coord, self.logger, dir=True)
 
     #Phase Feature (5) (Needed for other features, because of that determined first)
-    #Determine total number of found coins
-    total_agents = 3 #TODO: Define depending on game mode, later always 3=opponent number)
-    totalscore=0
-    others_coord = []
-    for no,so,bo,(xo,yo) in others:
-        others_coord.append((xo,yo))
-        totalscore+=so
-    totalcoins=totalscore-((total_agents-len(others))*5)
     if(len(coins)>0 and coin_reachable==True and (len(crates)==0 or distance_nextcoin<distance_nextcrate+5)): #Only change to collect mode if coin is in a reasonable region
         features[5]=0
-    elif(totalcoins<9):
+    elif(len(coins)>0 or len(others)==0):
         features[5]=1
     else:
         features[5]=2
@@ -243,7 +238,8 @@ def state_to_features(self, game_state: dict) -> np.array:
 
 
 
-    possible_destruction = destruction(arena, others,x, y)
+
+    possible_destruction = destruction(arena, others_coord,x, y)
 
 
     highest_destruction = max([destruction(arena, others, i,j) for (i,j) in [(x + h, y) for h in [-1, 1]] + [(x, y + h) for h in [-1, 1]]]) #Highest destruction for all 4 neighbor tiles
@@ -279,7 +275,7 @@ def state_to_features(self, game_state: dict) -> np.array:
                 #if current tile has lower destruction potential
                 if((i,j)==max_destruction_tile and highest_destruction>possible_destruction):
                     features[num]=3
-                #no escape from current tile possible and neighbor tile has second highest desctruction potential
+                #no escape from current tile possible if bomb dropped and neighbor tile has second highest desctruction potential
                 elif(not look_for_targets(free_space, (x, y), potential_escape , self.logger, dir=True)[2] and (i,j)==max_destruction_tile):
                     features[num]=3
             #If no destruction possible, mark way to next crate with 3.
@@ -287,8 +283,11 @@ def state_to_features(self, game_state: dict) -> np.array:
                 features[num]=3
         #The following case will not occur in this section (only with opponents, later tasks)
         elif(features[5]==2):
+            if(bomb_map[x,y]==5 and len(others)>0 and (i,j)==closest_to_opponent):
+                features[num]=3
+        if(len(others)==0 and len(crates)==0 and len(coins)==0): #Force to wait when everyone is dead and nothing to collect
             features[num]=1
-        # if tile is Wall, crate, bomb, or death (bomb will explode or explosion lasts for next step or no escape from tile possible) stronger than everything else, so calculated last
+        # if tile is other agent, Wall, crate, bomb, or death (bomb will explode or explosion lasts for next step or no escape from tile possible) stronger than everything else, so calculated last
         if ((i,j) in others_coord or arena[i,j] == -1 or arena[i,j] == 1 or (i,j) in bomb_xys or bomb_map[i,j]==0 or explosion_map[i,j]==1 or look_for_targets(free_space, (i, j), [(x,y) for (x,y) in np.array(np.where(bomb_map+explosion_map==5)).T if free_space[x,y]], self.logger, dir=True)[0]>=(bomb_map[i,j]+1) or not look_for_targets(free_space, (i, j), [(x,y) for (x,y) in np.array(np.where(bomb_map+explosion_map==5)).T if free_space[x,y]], self.logger, dir=True)[2]):
             features[num]=1
 
