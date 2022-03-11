@@ -45,10 +45,6 @@ def act(self, game_state: dict) -> str:
     :return: The action to take as a string.
     """
 
-    #exponential exploration/exploitation
-    # if(game_state['round']>1):
-    #     random_prob = np.exp(-0.01*game_state['round'])
-    # else:
     random_prob=.05 #random move in 2% of cases (4 Moves per game)
 
     features = state_to_features(self, game_state) #get features from game_state
@@ -63,12 +59,8 @@ def act(self, game_state: dict) -> str:
         return np.random.choice(ACTIONS, p=[.2, .2, .2, .2, .0, .2])
 
     self.logger.debug("Querying model for action.")
-
-
-
-
     return ACTIONS[np.argmax(self.model[features])] #Gives action with maximal reward for given state
-    #return np.random.choice(ACTIONS, p=[.2, .2, .2, .2, .1, .1])
+
 
 #The following two functions are defined in here so they can also be used in the train.py
 def look_for_targets(free_space, start, targets, logger=None, dir=False):

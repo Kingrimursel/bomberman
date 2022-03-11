@@ -44,10 +44,7 @@ def act(self, game_state: dict) -> str:
     :return: The action to take as a string.
     """
 
-    #exponential exploration/exploitation
-    # if(game_state['round']>1):
-    #     random_prob = np.exp(-0.01*game_state['round'])
-    # else:
+
     random_prob=.2
 
     features = state_to_features(self, game_state) #get features from game_state
@@ -61,13 +58,6 @@ def act(self, game_state: dict) -> str:
         return np.random.choice(ACTIONS, p=[.25, .25, .25, .25, .0, .0])
 
     self.logger.debug("Querying model for action.")
-
-
-
-
-    #return np.random.choice(ACTIONS, p=self.model[0])
-
-
     return ACTIONS[np.argmax(self.model[features])] #Gives action with maximal reward for given state
 
 
