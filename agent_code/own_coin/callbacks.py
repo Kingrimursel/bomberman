@@ -3,7 +3,7 @@ import pickle
 import random
 
 import numpy as np
-
+from collections import  deque
 
 ACTIONS = ['UP', 'RIGHT', 'DOWN', 'LEFT', 'WAIT', 'BOMB']
 
@@ -32,6 +32,7 @@ def setup(self):
         with open("my-saved-model.pt", "rb") as file:
             self.model = pickle.load(file)
 
+    self.features= deque(maxlen=5)
 
 def act(self, game_state: dict) -> str:
     """
@@ -49,6 +50,11 @@ def act(self, game_state: dict) -> str:
     # else:
     random_prob=.2
 
+    features = state_to_features(self, game_state) #get features from game_state
+    self.features.append(features)
+    self.logger.info(f"FEATURE CALCULATED")
+    self.logger.info(f"Features: {features}")
+
     if self.train and random.random() < random_prob:
         self.logger.debug("Choosing action purely at random.")
         # 80% walk in any direction. wait 20%. Bomb 0%
@@ -58,12 +64,10 @@ def act(self, game_state: dict) -> str:
 
 
 
-    features = state_to_features(self, game_state) #get features from game_state
-    self.logger.info(f"FEATURE CALCULATED")
-    self.logger.info(f"Features: {features}")
+
     #return np.random.choice(ACTIONS, p=self.model[0])
 
-    
+
     return ACTIONS[np.argmax(self.model[features])] #Gives action with maximal reward for given state
 
 

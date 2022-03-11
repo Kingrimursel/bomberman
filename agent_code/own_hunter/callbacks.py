@@ -49,25 +49,24 @@ def act(self, game_state: dict) -> str:
     # if(game_state['round']>1):
     #     random_prob = np.exp(-0.01*game_state['round'])
     # else:
-    random_prob=.0 #random move in 1% of cases (4 Moves per game)
+    random_prob=.05 #random move in 2% of cases (4 Moves per game)
 
+    features = state_to_features(self, game_state) #get features from game_state
+    self.features.append(features)
+    self.logger.info(f"FEATURES CALCULATED")
+    self.logger.info(f"Features: {features}")
 
     if self.train and random.random() < random_prob:
         self.logger.debug("Choosing action purely at random.")
         # 0% walk in any direction. wait 0%. Bomb 100%
-        return np.random.choice(ACTIONS, p=[.0, .0, .0, .0, .0, 1])
-        #return np.random.choice(ACTIONS, p=[.2, .2, .2, .2, .0, .2])
+        #return np.random.choice(ACTIONS, p=[.0, .0, .0, .0, .0, 1])
+        return np.random.choice(ACTIONS, p=[.2, .2, .2, .2, .0, .2])
 
     self.logger.debug("Querying model for action.")
 
 
 
-    features = state_to_features(self, game_state) #get features from game_state
-    self.features.append(features)
 
-    #print('Features: ' +str(features))
-    self.logger.info(f"FEATURES CALCULATED")
-    self.logger.info(f"Features: {features}")
     return ACTIONS[np.argmax(self.model[features])] #Gives action with maximal reward for given state
     #return np.random.choice(ACTIONS, p=[.2, .2, .2, .2, .1, .1])
 
