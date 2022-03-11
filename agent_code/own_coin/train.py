@@ -16,10 +16,21 @@ TRANSITION_HISTORY_SIZE = 3  # keep only ... last transitions
 #RECORD_ENEMY_TRANSITIONS = 1.0  # record enemy transitions with probability ...
 
 # Events
-APPROACH_COIN = "APPROACH_COIN"
-AWAY_FROM_COIN = "AWAY_FROM_COIN"
 VICTORY = "VICTORY"
 REPEATED_MOVE = "REPEATED_MOVE"
+DESTRUCTED_CRATE ="DESTRUCTED_CRATE"
+CORRECT_WAIT = "CORRECT_WAIT"
+WRONG_WAIT = "WRONG_WAIT"
+STUPID_WAIT = "STUPID_WAIT"
+CORRECT_DIRECTION = "CORRECT_DIRECTION"
+GOOD_BOMB = "GOOD_BOMB"
+UNNECCESSARY_BOMB = "UNNECCESSARY_BOMB"
+BEST_BOMB = "BEST_BOMB"
+BETTER_BOMB_POSSIBLE ="BETTER_BOMB_POSSIBLE"
+STUPID_BOMB = "STUPID_BOMB"
+STUPID_MOVE ="STUPID_MOVE"
+WRONG_DIRECTION="WRONG_DIRECTION"
+BOMB_CHANCE_MISSED ="BOMB_CHANCE_MISSED"
 
 #Make a dictionary to get position in vector out of action
 action = {'UP': 0, 'RIGHT': 1, 'DOWN': 2,'LEFT': 3 , 'WAIT': 4, 'BOMB': 5}
@@ -64,63 +75,65 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
 
 
 
-    if(old_game_state != None and new_game_state != None):
-        #Define old game state roperties TODO: Do not yet need all of them but probably for finetuning the rewardshaping
-        old_arena = old_game_state['field']
-        old_step = old_game_state['step']
-        old_n,old_s,old_b,(old_x, old_y) = old_game_state['self']
-        old_coins = old_game_state['coins']
-        cols = range(1, old_arena.shape[0] - 1)
-        rows = range(1, old_arena.shape[0] - 1)
-        walls = [(x, y) for x in cols for y in rows if (old_arena[x, y] == -1)]
-        old_free_tiles = [(x, y) for x in cols for y in rows if (old_arena[x, y] == 0)]
-        old_free_space = old_arena == 0
+    if old_game_state == None or len(self.features)==0:
+        return
 
-        #Define new game state properties TODO: Do not yet need all of them but probably for finetuning the rewardshaping
-        new_arena = new_game_state['field']
-        new_step = new_game_state['step']
-        new_n,new_s,new_b,(new_x, new_y) = new_game_state['self']
-        new_coins = new_game_state['coins']
-        new_free_tiles = [(x, y) for x in cols for y in rows if (new_arena[x, y] == 0)]
-        new_free_space = new_arena == 0 #For the function
-
-        # Own events to hand out rewards
-        if len(new_coins)>0 and look_for_targets(old_free_space, (old_x, old_y), old_coins,dir=True)[1]==(new_x, new_y):
-            events.append(APPROACH_COIN)
-        if len(new_coins)>0 and look_for_targets(old_free_space, (old_x, old_y), old_coins,dir=True)[1]!=(new_x, new_y):
-            events.append(AWAY_FROM_COIN)
+    #Define old game state roperties for reward shaping
+    old_arena = old_game_state['field']
+    old_n,old_s,old_b,(old_x, old_y) = old_game_state['self']
+    old_bombs = old_game_state['bombs']
 
 
-        if(len(self.transitions)>=TRANSITION_HISTORY_SIZE):
-            previous_actions = [a for (s,a,ns,r) in self.transitions]
-            if(self_action == previous_actions[1] and previous_actions[0]==previous_actions[2] and previous_actions[1]!=previous_actions[2]):
-                events.append(REPEATED_MOVE)
+    old_features = self.features[-1]   #Features are sometimes ambigously and depend on BFS, that is why in rare cases the rewards to not match the action, but this is smoothed over time
 
-        #N-Step Q Learning:
-        #     current_reward = reward_from_events(self, events)
-        #
-        #     old_states = np.array([old_state for (old_state,action,new_state,reward) in self.transitions])
-        #     actions = np.array([action[a] for (old_state,a,new_state,reward) in self.transitions])
-        #     new_states = np.array([new_state for (old_state,action,new_state,reward) in self.transitions])
-        #     prev_rewards = np.array([reward for (old_state,action,new_state,reward) in self.transitions])
-        #
-        #     old_states = np.append(old_states, old_game_state)
-        #     actions = np.append(actions, action[self_action])
-        #     new_states = np.append(new_states, new_game_state)
-        #     prev_rewards = np.append(prev_rewards, current_reward)
-        #
-        #     gamma_exp = np.array([gamma**k for k in range(0,len(actions))])
-        #
-        #
-        #
-        #     self.model[state_to_features(self, old_states[0])][actions[0]] = self.model[state_to_features(self, old_states[0])][actions[0]] + alpha*(np.sum(gamma_exp*prev_rewards +(gamma**TRANSITION_HISTORY_SIZE)*np.max(self.model[state_to_features(self, new_game_state)]))-self.model[state_to_features(self, old_states[0])][actions[0]])
-        #     self.logger.info(f"Model updated")
+    #MOVES: (APPROACH_COIN/AWAY_FROM_COIN is the same as this, thus not needed seperately)
+    if (old_features[0]==3 and self_action=='LEFT'):
+        events.append(CORRECT_DIRECTION)
+    if (old_features[1]==3 and self_action=='RIGHT'):
+        events.append(CORRECT_DIRECTION)
+    if (old_features[2]==3 and self_action=='UP'):
+        events.append(CORRECT_DIRECTION)
+    if (old_features[3]==3 and self_action=='DOWN'):
+        events.append(CORRECT_DIRECTION)
 
-        #Update Q-function(model) here
-        #Q-Learning:
-        self.model[state_to_features(self, old_game_state)][action[self_action]] = self.model[state_to_features(self, old_game_state)][action[self_action]] + alpha*(reward_from_events(self, events)+gamma*(np.max(self.model[state_to_features(self, new_game_state)]))-self.model[state_to_features(self, old_game_state)][action[self_action]]) #Q-Learning
-        #SARSA:
-        #self.model[state_to_features(self, old_game_state)][action[self_action]] = self.model[state_to_features(self, old_game_state)][action[self_action]] + alpha*(reward_from_events(self, events)+gamma*(self.model[state_to_features(self, new_game_state)][action[self_action]])-self.model[state_to_features(self, old_game_state)][action[self_action]]) #SARSA
+
+    #Only penalize if other move would really be bad, #TODO: Solve the problem with ambigous features
+    #The position of a three might be calculated differently here, than in
+    if (old_features[0]==3 and self_action!='LEFT' and old_features[1]!=0 and old_features[2]!=0 and old_features[3]!=0):
+        events.append(WRONG_DIRECTION)
+    if (old_features[1]==3 and self_action!='RIGHT'and old_features[0]!=3 and old_features[2]!=3 and old_features[3]!=3):
+        events.append(WRONG_DIRECTION)
+    if (old_features[2]==3 and self_action!='UP' and old_features[0]!=3 and old_features[1]!=3 and old_features[3]!=3):
+        events.append(WRONG_DIRECTION)
+    if (old_features[3]==3 and self_action!='DOWN' and old_features[0]!=3 and old_features[1]!=3 and old_features[2]!=3):
+        events.append(WRONG_DIRECTION)
+
+
+    #N-Step Q Learning:
+    #     current_reward = reward_from_events(self, events)
+    #
+    #     old_states = np.array([old_state for (old_state,action,new_state,reward) in self.transitions])
+    #     actions = np.array([action[a] for (old_state,a,new_state,reward) in self.transitions])
+    #     new_states = np.array([new_state for (old_state,action,new_state,reward) in self.transitions])
+    #     prev_rewards = np.array([reward for (old_state,action,new_state,reward) in self.transitions])
+    #
+    #     old_states = np.append(old_states, old_game_state)
+    #     actions = np.append(actions, action[self_action])
+    #     new_states = np.append(new_states, new_game_state)
+    #     prev_rewards = np.append(prev_rewards, current_reward)
+    #
+    #     gamma_exp = np.array([gamma**k for k in range(0,len(actions))])
+    #
+    #
+    #
+    #     self.model[state_to_features(self, old_states[0])][actions[0]] = self.model[state_to_features(self, old_states[0])][actions[0]] + alpha*(np.sum(gamma_exp*prev_rewards +(gamma**TRANSITION_HISTORY_SIZE)*np.max(self.model[state_to_features(self, new_game_state)]))-self.model[state_to_features(self, old_states[0])][actions[0]])
+    #     self.logger.info(f"Model updated")
+
+    #Update Q-function(model) here
+    #Q-Learning:
+    self.model[old_features][action[self_action]] = self.model[old_features][action[self_action]] + alpha*(reward_from_events(self, events)+gamma*(np.max(self.model[state_to_features(self, new_game_state)]))-self.model[old_features][action[self_action]]) #Q-Learning
+    #SARSA:
+    #self.model[state_to_features(self, old_game_state)][action[self_action]] = self.model[state_to_features(self, old_game_state)][action[self_action]] + alpha*(reward_from_events(self, events)+gamma*(self.model[state_to_features(self, new_game_state)][action[self_action]])-self.model[state_to_features(self, old_game_state)][action[self_action]]) #SARSA
 
 
 
@@ -149,13 +162,6 @@ def end_of_round(self, last_game_state: dict, last_action: str, events: List[str
     self.logger.debug(f'Encountered event(s) {", ".join(map(repr, events))} in final step')
     self.transitions.append(Transition(last_game_state, last_action, None, reward_from_events(self, events)))
 
-    #TODO: Where should the reward for a victory be put into?
-    score_others = [s for (n, s, b, xy) in last_game_state['others']]
-    score_own = last_game_state['self'][1]
-    if len(score_others)>0 and score_own>max(score_others):
-        events.append(VICTORY)
-
-
 
 
     # Store updated model
@@ -173,13 +179,10 @@ def reward_from_events(self, events: List[str]) -> int:
 
     game_rewards = {
         e.COIN_COLLECTED: 1,
-        e.INVALID_ACTION:-100,
-        e.WAITED:-100,
-        #e.KILLED_SELF:-500,
-        #e.BOMB_DROPPED:-500,
-        APPROACH_COIN:1,
-        AWAY_FROM_COIN:-2,
-        #REPEATED_MOVE:-1,
+        e.INVALID_ACTION:-5,
+        e.WAITED:-5,
+        CORRECT_DIRECTION:1,
+        WRONG_DIRECTION:-2,
 
 
 
