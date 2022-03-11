@@ -45,7 +45,7 @@ def act(self, game_state: dict) -> str:
     :return: The action to take as a string.
     """
 
-    random_prob=.05 #random move in 2% of cases (4 Moves per game)
+    random_prob=.5 #random move in 20, 10, 5, 2, 1% of cases
 
     features = state_to_features(self, game_state) #get features from game_state
     self.features.append(features)

@@ -27,7 +27,8 @@ GOOD_BOMB = "GOOD_BOMB"
 UNNECCESSARY_BOMB = "UNNECCESSARY_BOMB"
 BEST_BOMB = "BEST_BOMB"
 BETTER_BOMB_POSSIBLE ="BETTER_BOMB_POSSIBLE"
-STUPID_BOMB = "STUPID_BOMB"
+SUICIDE_BOMB = "SUICIDE_BOMB"
+SUICIDE_MOVE = "SUICIDE_MOVE"
 STUPID_MOVE ="STUPID_MOVE"
 WRONG_DIRECTION="WRONG_DIRECTION"
 BOMB_CHANCE_MISSED ="BOMB_CHANCE_MISSED"
@@ -113,17 +114,23 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
         events.append(CORRECT_DIRECTION)
 
 
-    #Only penalize if other move would really be bad, #TODO: Solve the problem with ambigous features
-    #The position of a three might be calculated differently here, than in
-    if (old_features[0]==3 and self_action!='LEFT' and old_features[1]!=0 and old_features[2]!=0 and old_features[3]!=0):
+    #Only penalize if other move would really be bad and good chance not taken
+    if (old_features[0]==3 and self_action!='LEFT' ):
         events.append(WRONG_DIRECTION)
-    if (old_features[1]==3 and self_action!='RIGHT'and old_features[0]!=3 and old_features[2]!=3 and old_features[3]!=3):
+    if (old_features[1]==3 and self_action!='RIGHT'):
         events.append(WRONG_DIRECTION)
-    if (old_features[2]==3 and self_action!='UP' and old_features[0]!=3 and old_features[1]!=3 and old_features[3]!=3):
+    if (old_features[2]==3 and self_action!='UP' ):
         events.append(WRONG_DIRECTION)
-    if (old_features[3]==3 and self_action!='DOWN' and old_features[0]!=3 and old_features[1]!=3 and old_features[2]!=3):
+    if (old_features[3]==3 and self_action!='DOWN' ):
         events.append(WRONG_DIRECTION)
-
+    if old_features[0]==1 and self_action =='LEFT':
+        events.append(SUICIDE_MOVE)
+    if old_features[1]==1 and self_action =='RIGHT':
+        events.append(SUICIDE_MOVE)
+    if old_features[2]==1 and self_action =='UP':
+        events.append(SUICIDE_MOVE)
+    if old_features[3]==1 and self_action =='DOWN':
+        events.append(SUICIDE_MOVE)
 
     #BOMBS:
     if (old_features[4]==1 and self_action =='BOMB' ):
@@ -133,7 +140,7 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     if (old_features[4]==3 and self_action =='BOMB' ):
         events.append(BEST_BOMB)
     if (old_features[4]==0 and self_action =='BOMB'):
-        events.append(STUPID_BOMB)
+        events.append(SUICIDE_BOMB)
 
     if ((old_features[0]==3 or old_features[1]==3 or old_features[2]==3 or old_features[3]==3) and self_action =='BOMB' and old_bomb_map[old_x,old_y]==5 and old_features[5]==1):
         events.append(BETTER_BOMB_POSSIBLE)
@@ -202,8 +209,13 @@ def end_of_round(self, last_game_state: dict, last_action: str, events: List[str
 
     :param self: The same object that is passed to all of your callbacks.
     """
+
+    self.logger.info(f"Action: {last_action}")
+
     self.logger.debug(f'Encountered event(s) {", ".join(map(repr, events))} in final step')
     #self.transitions.append(Transition(last_game_state, last_action, None, reward_from_events(self, events)))
+
+
 
     alpha=0.1
     gamma=0.8
@@ -240,8 +252,8 @@ def reward_from_events(self, events: List[str]) -> int:
 
     game_rewards = {
         e.COIN_COLLECTED: 1,
-        e.INVALID_ACTION:-100,
-        e.KILLED_SELF:-100,
+        e.INVALID_ACTION:-5,
+        e.KILLED_SELF:-5,
         e.CRATE_DESTROYED: 1,
         e.OPPONENT_ELIMINATED: 5,
         e.COIN_FOUND: 1,
@@ -254,8 +266,9 @@ def reward_from_events(self, events: List[str]) -> int:
         UNNECCESSARY_BOMB:-2,
         BETTER_BOMB_POSSIBLE:-2,
         BEST_BOMB:6,
-        STUPID_BOMB:-100,
-        STUPID_WAIT:-100,
+        SUICIDE_BOMB:-5,
+        SUICIDE_MOVE:-5,
+        STUPID_WAIT:-5,
         e.MOVED_LEFT:-.25,
         e.MOVED_DOWN:-.25,
         e.MOVED_UP:-.25,

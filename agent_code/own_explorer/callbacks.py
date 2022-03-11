@@ -45,7 +45,7 @@ def act(self, game_state: dict) -> str:
     :return: The action to take as a string.
     """
 
-    random_prob=.5 #random move in 1% of cases (4 Moves per game)
+    random_prob=.5 #random move in 20, 10, 5, 2, 1% of cases
 
     features = state_to_features(self, game_state) #get features from game_state
     self.features.append(features)
@@ -55,8 +55,8 @@ def act(self, game_state: dict) -> str:
     if self.train and random.random() < random_prob:
         self.logger.debug("Choosing action purely at random.")
         # 0% walk in any direction. wait 0%. Bomb 100%
-        return np.random.choice(ACTIONS, p=[.0, .0, .0, .0, .0, 1])
-        #return np.random.choice(ACTIONS, p=[.2, .2, .2, .2, .0, .2])
+        #return np.random.choice(ACTIONS, p=[.0, .0, .0, .0, .0, 1])
+        return np.random.choice(ACTIONS, p=[.2, .2, .2, .2, .0, .2])
 
     self.logger.debug("Querying model for action.")
     return ACTIONS[np.argmax(self.model[features])] #Gives action with maximal reward for given state
