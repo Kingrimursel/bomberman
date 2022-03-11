@@ -40,6 +40,8 @@ def setup_training(self):
 
     self.transitions = deque(maxlen=TRANSITION_HISTORY_SIZE)
 
+def update_Q():
+
 
 def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_state: dict, events: List[str]):
     """
@@ -53,27 +55,20 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     """
     self.logger.debug(f'Encountered game event(s) {", ".join(map(repr, events))} in step {new_game_state["step"]}')
 
-    if old_game_state == None or new_game_state == None:
+    if old_game_state == None:
         return
 
-    # Define old game state roperties TODO: Do not yet need all of them but probably for finetuning the rewardshaping
+    # Define old game state roperties.
     old_arena      = old_game_state['field']
-    old_step       = old_game_state['step']
-    old_n, old_s, old_b,(old_x, old_y) = old_game_state['self']
+    _, _, _,(old_x, old_y) = old_game_state['self']
     old_coins      = old_game_state['coins']
-    cols           = range(1, old_arena.shape[0] - 1)
-    rows           = range(1, old_arena.shape[0] - 1)
-    walls          = [(x, y) for x in cols for y in rows if (old_arena[x, y] == -1)]
-    old_free_tiles = [(x, y) for x in cols for y in rows if (old_arena[x, y] == 0)]
     old_free_space = old_arena == 0
 
-    # Define new game state properties TODO: Do not yet need all of them but probably for finetuning the rewardshaping
+    # Define new game state properties.
     new_arena      = new_game_state['field']
-    new_step       = new_game_state['step']
-    new_n, new_s, new_b,(new_x, new_y) = new_game_state['self']
+    _, _, _,(new_x, new_y) = new_game_state['self']
     new_coins      = new_game_state['coins']
-    new_free_tiles = [(x, y) for x in cols for y in rows if (new_arena[x, y] == 0)]
-    new_free_space = new_arena == 0 #For the function
+    new_free_space = new_arena == 0
 
     # Own events to hand out rewards.
     if len(new_coins)>0 and look_for_targets(old_free_space, (old_x, old_y), old_coins, dir=True)[1] == (new_x, new_y):
