@@ -105,8 +105,7 @@ def look_for_targets(free_space, start, targets, logger=None, dir=False):
                 parent_dict[neighbor] = current
                 dist_so_far[neighbor] = dist_so_far[current] + 1
 
-    #if logger: logger.debug(f'Suitable target found with distance {best_dist}')
-    # Determine the first step towards the best found target tile
+    # Determine the first step towards the best found target tile.
     current = best
     while True and dir:
         if parent_dict[current] == start:
@@ -126,40 +125,34 @@ def state_to_features(self, game_state: dict):
     """
     features = np.zeros(6, dtype=np.int64)
 
-    # This is the dict before the game begins and after it ends
+    # This is the dict before the game begins and after it ends.
     if game_state is None:
         return None
 
     # Gather information about the game state.
     arena           = game_state['field']
-    step            = game_state['step']
-    n, s, b, (x, y) = game_state['self']
-    others          = [(n, s, b, xy) for (n, s, b, xy) in game_state['others']] #For calculating the number of coins collected yet
+    _, _, _, (x, y) = game_state['self']
+    others          = [(n, s, b, xy) for (n, s, b, xy) in game_state['others']] # For calculating the number of coins collected yet
     coins           = game_state['coins']
+    free_space      = arena == 0 # For the function
 
-    cols       = range(1, arena.shape[0] - 1)
-    rows       = range(1, arena.shape[0] - 1)
-    walls      = [(x, y) for x in cols for y in rows if (arena[x, y] == -1)]
-    free_tiles = [(x, y) for x in cols for y in rows if (arena[x, y] == 0)]
-    free_space = arena == 0 #For the function
+    # CURRENT TILE FEATURE (4): Important for later tasks, in coin task always 1.
+    features[4] = 1
 
-    # Phase Feature (5): Needed for other features, because of that determined first.
-    total_agents = len(game_state['others'])
+    # PHASE FEATURE (5): Needed for other features, because of that determined first. More important later.
     totalscore = 0
     for _, s, _, _ in others:
         totalscore += s
-    totalcoins = totalscore - (total_agents - len(others))*5
 
     if len(coins) > 0:
         features[5] = 0
-    elif totalcoins < 9:
+    elif totalscore < 9:
         features[5] = 1
     else:
         features[5] = 2
 
-    # Neighbor tile features (0-3)
-    # All the three are needed for the phase dependent decision.
-    _, closest_to_coin = look_for_targets(free_space, (x, y), coins, self.logger, dir=True) #distance to closest coin
+    # NEIGHBOT TILE FEATURE (0-3):
+    _, closest_to_coin = look_for_targets(free_space, (x, y), coins, self.logger, dir=True)
     # This is in order (Left, Right, Above, Below)
     for num, (i,j) in enumerate([(x+h, y) for h in [-1, 1]] + [(x, y+h) for h in [-1, 1]]):
         # if tile is free
@@ -173,9 +166,4 @@ def state_to_features(self, game_state: dict):
         if arena[i,j] == -1:
             features[num] = 1
 
-    #Feature for current tile (4) (Also more important for later tasks, in coin task always 1)
-    features[4] = 1
-
-    output = tuple(features)
-    #self.logger.debug(f'Features Calculated: {output}')
-    return output
+    return tuple(features)
