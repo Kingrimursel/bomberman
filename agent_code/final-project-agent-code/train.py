@@ -142,7 +142,7 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     if (old_features[4]==0 and self_action =='BOMB'):
         events.append(SUICIDE_BOMB)
 
-    if ((old_features[0]==3 or old_features[1]==3 or old_features[2]==3 or old_features[3]==3) and self_action =='BOMB' and old_bomb_map[old_x,old_y]==5 and (old_features[5]==1 or old_features[5]==2)):
+    if ((old_features[0]==3 or old_features[1]==3 or old_features[2]==3 or old_features[3]==3) and self_action =='BOMB' and old_bomb_map[old_x,old_y]==5 and old_features[5]==1):
         events.append(BETTER_BOMB_POSSIBLE)
     if ((old_features[0]!=3 and old_features[1]!=3 and old_features[2]!=3 and old_features[3]!=3) and (old_features[4]==2 or old_features[4]==3) and self_action!='BOMB'):
         events.append(BOMB_CHANCE_MISSED)
@@ -179,9 +179,9 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     if (e.BOMB_EXPLODED in events): #If bomb exploded, rewards for the state where bomb was placed
         drop_state_features = self.features[0]
         self.logger.info(f"Features for drop state: {self.features[0]}")
-        self.model[drop_state_features][5] = self.model[drop_state_features][5] + alpha*(reward_from_events(self, [ev for ev in events if (ev==e.CRATE_DESTROYED or ev==e.KILLED_OPPONENT  or ev==e.COIN_FOUND)])+gamma*(np.max(self.model[self.features[1]]))-self.model[drop_state_features][5]) #Only rewarding destruction, not the fact that a bomb exploded
+        self.model[drop_state_features][5] = self.model[drop_state_features][5] + alpha*(reward_from_events(self, [ev for ev in events if (ev==e.CRATE_DESTROYED or ev==e.OPPONENT_ELIMINATED  or ev==e.COIN_FOUND)])+gamma*(np.max(self.model[self.features[1]]))-self.model[drop_state_features][5]) #Only rewarding destruction, not the fact that a bomb exploded
 
-    self.model[old_features][ACTION[self_action]] = self.model[old_features][ACTION[self_action]] + alpha*(reward_from_events(self, [ev for ev in events if (ev!=e.CRATE_DESTROYED and ev!=e.COIN_FOUND and ev!= e.KILLED_OPPONENT) ])+gamma*(np.max(self.model[state_to_features(self, new_game_state)]))-self.model[old_features][ACTION[self_action]]) #Q-Learning
+    self.model[old_features][ACTION[self_action]] = self.model[old_features][ACTION[self_action]] + alpha*(reward_from_events(self, [ev for ev in events if (ev!=e.CRATE_DESTROYED and ev!=e.COIN_FOUND and ev!= e.OPPONENT_ELIMINATED) ])+gamma*(np.max(self.model[state_to_features(self, new_game_state)]))-self.model[old_features][ACTION[self_action]]) #Q-Learning
     #SARSA:
     #self.model[state_to_features(self, old_game_state)][ACTION[self_action]] = self.model[state_to_features(self, old_game_state)][ACTION[self_action]] + alpha*(reward_from_events(self, events)+gamma*(self.model[state_to_features(self, new_game_state)][ACTION[self_action]])-self.model[state_to_features(self, old_game_state)][ACTION[self_action]]) #SARSA
 
@@ -228,9 +228,9 @@ def end_of_round(self, last_game_state: dict, last_action: str, events: List[str
     if (e.BOMB_EXPLODED in events and e.KILLED_SELF not in events):
         drop_state_features = self.features[0]
         self.logger.info(f"Features for drop state: {self.features[0]}")
-        self.model[drop_state_features][5] = self.model[drop_state_features][5] + alpha*(reward_from_events(self, [ev for ev in events if (ev==e.CRATE_DESTROYED or ev==e.KILLED_OPPONENT  or ev==e.COIN_FOUND)])+gamma*(np.max(self.model[self.features[1]]))-self.model[drop_state_features][5]) #Only rewarding destruction, not the fact that a bomb exploded
+        self.model[drop_state_features][5] = self.model[drop_state_features][5] + alpha*(reward_from_events(self, [ev for ev in events if (ev==e.CRATE_DESTROYED or ev==e.OPPONENT_ELIMINATED  or ev==e.COIN_FOUND)])+gamma*(np.max(self.model[self.features[1]]))-self.model[drop_state_features][5]) #Only rewarding destruction, not the fact that a bomb exploded
     #Q-Learning
-    self.model[old_features][ACTION[last_action]] = self.model[old_features][ACTION[last_action]] + alpha*(reward_from_events(self, [ev for ev in events if (ev!=e.CRATE_DESTROYED and ev!= e.KILLED_OPPONENT and ev!=e.COIN_FOUND) ]))#Only this part because new state does not exist.  #Q-Learning
+    self.model[old_features][ACTION[last_action]] = self.model[old_features][ACTION[last_action]] + alpha*(reward_from_events(self, [ev for ev in events if (ev!=e.CRATE_DESTROYED and ev!= e.OPPONENT_ELIMINATED and ev!=e.COIN_FOUND) ]))#Only this part because new state does not exist.  #Q-Learning
     #SARSA:
     #self.model[state_to_features(self, old_game_state)][ACTION[self_action]] = self.model[state_to_features(self, old_game_state)][ACTION[self_action]] + alpha*(reward_from_events(self, events)+gamma*(self.model[state_to_features(self, new_game_state)][ACTION[self_action]])-self.model[state_to_features(self, old_game_state)][ACTION[self_action]]) #SARSA
 
@@ -249,7 +249,7 @@ def reward_from_events(self, events: List[str]) -> int:
         e.INVALID_ACTION:-5,
         e.KILLED_SELF:-5,
         e.CRATE_DESTROYED: 1,
-        e.KILLED_OPPONENT: 5,
+        e.OPPONENT_ELIMINATED: 5,
         e.COIN_FOUND: 1,
         CORRECT_WAIT:1,
         WRONG_WAIT:-1,

@@ -115,13 +115,13 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
 
 
     #Only penalize if other move would really be bad and good chance not taken
-    if (old_features[0]==3 and self_action!='LEFT' and not (old_features[5]==2 and old_features[4]==2)):
+    if (old_features[0]==3 and self_action!='LEFT' ):# and not (old_features[5]==2 and old_features[4]==2)):
         events.append(WRONG_DIRECTION)
-    if (old_features[1]==3 and self_action!='RIGHT' and not (old_features[5]==2 and old_features[4]==2)):
+    if (old_features[1]==3 and self_action!='RIGHT' ):#and not (old_features[5]==2 and old_features[4]==2)):
         events.append(WRONG_DIRECTION)
-    if (old_features[2]==3 and self_action!='UP' and not (old_features[5]==2 and old_features[4]==2)):
+    if (old_features[2]==3 and self_action!='UP' ):#and not (old_features[5]==2 and old_features[4]==2)):
         events.append(WRONG_DIRECTION)
-    if (old_features[3]==3 and self_action!='DOWN' and not (old_features[5]==2 and old_features[4]==2)):
+    if (old_features[3]==3 and self_action!='DOWN' ):#and not (old_features[5]==2 and old_features[4]==2)):
         events.append(WRONG_DIRECTION)
     if old_features[0]==1 and self_action =='LEFT':
         events.append(SUICIDE_MOVE)
@@ -142,14 +142,14 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     if (old_features[4]==0 and self_action =='BOMB'):
         events.append(SUICIDE_BOMB)
 
-    if ((old_features[0]==3 or old_features[1]==3 or old_features[2]==3 or old_features[3]==3) and self_action =='BOMB' and old_bomb_map[old_x,old_y]==5 and old_features[5]==1):
+    if ((old_features[0]==3 or old_features[1]==3 or old_features[2]==3 or old_features[3]==3) and self_action =='BOMB' and old_bomb_map[old_x,old_y]==5 and (old_features[5]==1 or old_features[5]==2)):
         events.append(BETTER_BOMB_POSSIBLE)
     if ((old_features[0]!=3 and old_features[1]!=3 and old_features[2]!=3 and old_features[3]!=3) and (old_features[4]==2 or old_features[4]==3) and self_action!='BOMB'):
         events.append(BOMB_CHANCE_MISSED)
 
 
 
-    if (old_features[4]==4 and self_action =='WAIT'):
+    if (old_features[4]==4 and self_action =='WAIT' and (old_features[0]!=1 or old_features[1]!=1 or old_features[2]!=1 or old_features[3]!=1)):
         events.append(STUPID_WAIT)
 
 
@@ -181,7 +181,7 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
         self.logger.info(f"Features for drop state: {self.features[0]}")
         self.model[drop_state_features][5] = self.model[drop_state_features][5] + alpha*(reward_from_events(self, [ev for ev in events if (ev==e.CRATE_DESTROYED or ev==e.KILLED_OPPONENT  or ev==e.COIN_FOUND)])+gamma*(np.max(self.model[self.features[1]]))-self.model[drop_state_features][5]) #Only rewarding destruction, not the fact that a bomb exploded
 
-    self.model[old_features][ACTION[self_action]] = self.model[old_features][ACTION[self_action]] + alpha*(reward_from_events(self, [ev for ev in events if (ev!=e.CRATE_DESTROYED and ev!=e.COIN_FOUND and ev!= e.OPPONENT_ELIMINATED) ])+gamma*(np.max(self.model[state_to_features(self, new_game_state)]))-self.model[old_features][ACTION[self_action]]) #Q-Learning
+    self.model[old_features][ACTION[self_action]] = self.model[old_features][ACTION[self_action]] + alpha*(reward_from_events(self, [ev for ev in events if (ev!=e.CRATE_DESTROYED and ev!=e.COIN_FOUND  and ev!=e.KILLED_OPPONENT) ])+gamma*(np.max(self.model[state_to_features(self, new_game_state)]))-self.model[old_features][ACTION[self_action]]) #Q-Learning
     #SARSA:
     #self.model[state_to_features(self, old_game_state)][ACTION[self_action]] = self.model[state_to_features(self, old_game_state)][ACTION[self_action]] + alpha*(reward_from_events(self, events)+gamma*(self.model[state_to_features(self, new_game_state)][ACTION[self_action]])-self.model[state_to_features(self, old_game_state)][ACTION[self_action]]) #SARSA
 
@@ -230,7 +230,7 @@ def end_of_round(self, last_game_state: dict, last_action: str, events: List[str
         self.logger.info(f"Features for drop state: {self.features[0]}")
         self.model[drop_state_features][5] = self.model[drop_state_features][5] + alpha*(reward_from_events(self, [ev for ev in events if (ev==e.CRATE_DESTROYED or ev==e.KILLED_OPPONENT  or ev==e.COIN_FOUND)])+gamma*(np.max(self.model[self.features[1]]))-self.model[drop_state_features][5]) #Only rewarding destruction, not the fact that a bomb exploded
     #Q-Learning
-    self.model[old_features][ACTION[last_action]] = self.model[old_features][ACTION[last_action]] + alpha*(reward_from_events(self, [ev for ev in events if (ev!=e.CRATE_DESTROYED and ev!= e.OPPONENT_ELIMINATED and ev!=e.COIN_FOUND) ]))#Only this part because new state does not exist.  #Q-Learning
+    self.model[old_features][ACTION[last_action]] = self.model[old_features][ACTION[last_action]] + alpha*(reward_from_events(self, [ev for ev in events if (ev!=e.CRATE_DESTROYED and ev!=e.KILLED_OPPONENT and ev!=e.COIN_FOUND) ]))#Only this part because new state does not exist.  #Q-Learning
     #SARSA:
     #self.model[state_to_features(self, old_game_state)][ACTION[self_action]] = self.model[state_to_features(self, old_game_state)][ACTION[self_action]] + alpha*(reward_from_events(self, events)+gamma*(self.model[state_to_features(self, new_game_state)][ACTION[self_action]])-self.model[state_to_features(self, old_game_state)][ACTION[self_action]]) #SARSA
 

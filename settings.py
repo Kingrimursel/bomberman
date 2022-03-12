@@ -20,6 +20,10 @@ SCENARIOS = {
     "empty": {
         "CRATE_DENSITY": 0,
         "COIN_COUNT": 0
+    },
+    "some-crates": {
+        "CRATE_DENSITY": .4,
+        "COIN_COUNT": 0
     }
     # Feel free to add more game modes and properties
     # game is created in environment.py -> BombeRLeWorld -> build_arena()
