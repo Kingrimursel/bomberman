@@ -210,18 +210,22 @@ def state_to_features(self, game_state: dict) -> np.array:
     free_tiles = [(x, y) for x in cols for y in rows if (arena[x, y] == 0)]
     for (xb, yb) in bomb_xys:
         free_tiles.remove((xb,yb))
+    others_free_tiles = free_tiles.copy()
+    if (x,y) in others_free_tiles: others_free_tiles.remove((x,y))
+    others_free_space = free_space.copy()
+    others_free_space[x,y]=False
     others_coord = []
     others_closest_to_safe =[]
     for no,so,bo,(xo,yo) in others:
-        #free_space[xo,yo]=False
-        #if((xo,yo) in free_tiles): free_tiles.remove((xo,yo)) #If bomb dropped, then the point is not in list anymore
+        free_space[xo,yo]=False
+        if((xo,yo) in free_tiles): free_tiles.remove((xo,yo)) #If bomb dropped, then the point is not in list anymore
         others_coord.append((xo,yo))
         if bomb_map[xo,yo]<5: #Calculate for every opponent the way out of a bomb radius if they are in
             _, others_closest, _ = look_for_targets(free_space, (xo, yo), [(x,y) for (x,y) in np.array(np.where(bomb_map+explosion_map==5)).T if free_space[x,y]], self.logger, dir=True) #distance to closest safe tile
             others_closest_to_safe.append(others_closest)
 
 
-    #All the three are needed for the phase dependent decision
+    #All four are needed for the phase dependent decision
     if(len(coins)>0):
         distance_nextcoin, closest_to_coin, coin_reachable = look_for_targets(free_space, (x, y), coins, self.logger, dir=True) #distance to closest coin
     else: coin_reachable = False #If no coin visible, set also to not reachable
@@ -235,16 +239,10 @@ def state_to_features(self, game_state: dict) -> np.array:
     #Phase Feature (5) (Needed for other features, because of that determined first)
     if(len(coins)>0 and coin_reachable==True and (len(crates)==0 or distance_nextcoin<distance_nextcrate+5)): #Only change to collect mode if coin is in a reasonable region
         features[5]=0
-    elif(len(coins)>0 or len(crates)>0):
+    elif(len(coins)>0 and len(crates)>0):
         features[5]=1
     else:
         features[5]=2
-
-
-
-
-
-
 
     #Possible destruction for bomb placed at current tile
     possible_destruction = destruction(arena, others_coord,x, y)
@@ -257,7 +255,21 @@ def state_to_features(self, game_state: dict) -> np.array:
     possible_bomb = potential_bomb(arena, x, y)
     #All tiles with potential danger, if bomb was dropped
     danger_tiles = possible_bomb + [(i,j) for (i,j) in free_tiles if (bomb_map+explosion_map)[i,j]<5] #All tiles affected by any other explosion in move after potential bomb drop
+    others_danger_tiles = possible_bomb + [(i,j) for (i,j) in others_free_tiles if (bomb_map+explosion_map)[i,j]<5]
     potential_escape = [(i,j) for (i,j) in free_tiles if (i,j) not in danger_tiles] #All tiles, that would still be safe when bomb is dropped
+    others_potential_escape = [(i,j) for (i,j) in others_free_tiles if (i,j) not in others_danger_tiles]
+
+    #TODO: Implement feature that encourages bomb drop when opponent is trapped
+    for (xo,yo) in others_coord:
+        not_trapped = True
+        if bomb_map[xo,yo]==5: #Calculate for every opponent if they are trapped by a potential bomb
+            not_trapped = look_for_targets(others_free_space, (xo, yo), others_potential_escape, self.logger, dir=True)[2]
+            if not not_trapped:
+                self.logger.info(f"Is trapped")
+                break
+
+
+
     #Neighbor tile features (0-3)
     #This is in order (Left, Right, Above, Below)
     for num, (i,j) in enumerate([(x + h, y) for h in [-1, 1]] + [(x, y + h) for h in [-1, 1]]):
@@ -284,7 +296,7 @@ def state_to_features(self, game_state: dict) -> np.array:
                 #if current tile has lower destruction potential
                 if((i,j)==max_destruction_tile and highest_destruction>possible_destruction):
                     features[num]=3
-                #no escape from current tile possible if bomb dropped and neighbor tile has second highest desctruction potential
+                #no escape from current tile possible if bomb dropped and neighbor tile has (second) highest destruction potential
                 elif(not look_for_targets(free_space, (x, y), potential_escape , self.logger, dir=True)[2] and (i,j)==max_destruction_tile):
                     features[num]=3
             #If no destruction possible, mark way to next crate with 3.
@@ -299,9 +311,8 @@ def state_to_features(self, game_state: dict) -> np.array:
                     features[num]=3
             if((i,j) in others_closest_to_safe and look_for_targets(free_space, (i, j), [(x,y) for (x,y) in np.array(np.where(bomb_map+explosion_map==5)).T if free_space[x,y]], self.logger, dir=True)[0]<=(bomb_map[i,j])): #If tile is on way to safe for opponent, but going there is no safe death ,set tile 3. (It is without the +1 at the and here, because that is the tile to go to, so when going there, the bomb timer counts one down, and then escape must still be possible)
                 features[num]=3
-            if((x,y) in others_closest_to_safe and (bomb_map[x,y]==5 or distance_nextsafe<(bomb_map[x,y]+1))):
+            if(not not_trapped or (x,y) in others_closest_to_safe) and (bomb_map[x,y]==5 or distance_nextsafe<(bomb_map[x,y]+1)):
                 features[num]=1
-
 
         #General for every game phase:
         if(len(others)==0 and len(crates)==0 and len(coins)==0): #Force to wait when everyone is dead and nothing to collect
@@ -315,16 +326,17 @@ def state_to_features(self, game_state: dict) -> np.array:
 
     #Feature for current tile (4) (in coin task always 1)
     #wait does not lead to sure death and (can not place bomb or moving leads to sure death or bomb placement on current tile would be safe death(No escape tile reachable))
-    if(bomb_map[x,y]>0 and (not b or features[0]==features[1]==features[2]==features[3]==1)or not look_for_targets(free_space, (x, y), potential_escape , self.logger, dir=True)[2]):
+    if(bomb_map[x,y]>0 and (not b or not look_for_targets(free_space, (x, y), potential_escape , self.logger, dir=True)[2])): #Removed: or features[0]==features[1]==features[2]==features[3]==1) TODO: is this smart?
         features[4]=0
-    #not (directly) trapped and the possible destruction is (0-2)/(3-5)/(>6)
-    elif((features[0]!=1 or features[1]!=1 or features[2]!= 1 or features[3]!=1) and (possible_destruction == 0)):
+    #not trapped and the possible destruction is (0)/(3-5)/(>6)
+    elif(look_for_targets(free_space, (x, y), potential_escape , self.logger, dir=True)[2] and (possible_destruction == 0)):
         features[4]=1
-    elif((features[0]!=1 or features[1]!=1 or features[2]!= 1 or features[3]!=1) and (1 <= possible_destruction < 5)):
+    elif(look_for_targets(free_space, (x, y), potential_escape , self.logger, dir=True)[2] and (1 <= possible_destruction < 5)):
         features[4]=2
-    elif((features[0]!=1 or features[1]!=1 or features[2]!= 1 or features[3]!=1) and (5 <= possible_destruction)):
+    elif(look_for_targets(free_space, (x, y), potential_escape , self.logger, dir=True)[2] and (5 <= possible_destruction)):
         features[4]=3
-    if(bomb_map[x,y]==0 or (x,y) in bomb_xys or look_for_targets(free_space, (x, y), [(x,y) for (x,y) in np.array(np.where(bomb_map+explosion_map==5)).T if free_space[x,y]], self.logger, dir=True)[0]>=(bomb_map[x,y]+1)): #Bomb is placed on current tile, or wait is safe death
+    #Bomb is placed on current tile, or wait is safe death
+    if(bomb_map[x,y]==0 or (x,y) in bomb_xys or look_for_targets(free_space, (x, y), [(x,y) for (x,y) in np.array(np.where(bomb_map+explosion_map==5)).T if free_space[x,y]], self.logger, dir=True)[0]>=(bomb_map[x,y]+1)):
         features[4]=4
     if(features[5]==0 and len(coins)>0 and len(crates)>0 and distance_nextcoin<distance_nextcrate): #Only stop dropping bombs, when coin is close
         features[4]=1

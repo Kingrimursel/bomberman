@@ -99,7 +99,7 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     # Own events to hand out rewards
 
 
-    if (old_features[0]==old_features[1]==old_features[2]==old_features[3]==1 and self_action=='WAIT'):
+    if (old_features[0]==old_features[1]==old_features[2]==old_features[3]==1 and old_features[4]==0 and self_action=='WAIT'):
         events.append(CORRECT_WAIT)
     if ((old_features[0]==0 or old_features[0]==3 or old_features[1]==0 or old_features[1]==3 or old_features[2]==0 or old_features[2]==3 or old_features[3]==0 or old_features[3]==3) and self_action=='WAIT'):
         events.append(WRONG_WAIT)
