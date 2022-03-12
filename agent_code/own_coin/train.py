@@ -13,13 +13,17 @@ Transition = namedtuple('Transition',
                         ('state', 'action', 'next_state', 'reward'))
 ACTIONS             = ['UP', 'RIGHT', 'DOWN', 'LEFT', 'WAIT', 'BOMB']
 ACTIONS_TO_INDEX    = {'UP': 0, 'RIGHT': 1, 'DOWN': 2,'LEFT': 3 , 'WAIT': 4, 'BOMB': 5}
-
+ACTION_SYMMETRY     = {
+    'HORIZONTAL': {0:2, 1:1, 2:0, 3:3, 4:4, 5:5},
+    'VERTICAL': {0:0, 1:3, 2:2, 3:1, 4:4, 5:5},
+    'POINT': {0:2, 1:3, 2:0, 3:1, 4:4, 5:5}
+}
 
 # Hyperparameters
 TRANSITION_HISTORY_SIZE  = 3
 ALPHA                    = .4
-GAMMA                    = .4
-EPSILON                  = .2
+GAMMA                    = .2
+EPSILON                  = .4
 RECORD_ENEMY_TRANSITIONS = 1.0
 
 # Events
@@ -41,9 +45,54 @@ def setup_training(self):
     self.transitions = deque(maxlen=TRANSITION_HISTORY_SIZE)
 
 
+def get_equivalent_features(feature: tuple):
+    """
+    Using symmetries of the playground to get equivalent feature of the passed feature.
+
+    :param feature: A tuple of the indices in feature space/self.model except the last axis
+        which indicates the action to take in this state. Remember that the feature indeices are
+        build up like this: (left, right, above, below, game mode).
+    :return: Three equivalent features in the follwoing order:
+        (horizontal reflection, vertical reflectino, point reflection)
+    """
+    f_left    = feature[0]
+    f_right   = feature[1]
+    f_below   = feature[2]
+    f_above   = feature[3]
+    f_current = feature[4]
+    f_phase   = feature[5]
+
+    # horizontal reflection
+    feature_h = tuple([f_left, f_right, f_above, f_below, f_current, f_phase])
+    # vertiacl reflection
+    feature_v = tuple([f_right, f_left, f_below, f_above, f_current, f_phase])
+    # point reflection
+    feature_p = tuple([f_right, f_left, f_above, f_below, f_current, f_phase])
+
+    return [feature, feature_h, feature_v, feature_p]
+
+
+def get_equivalent_actions(action: int):
+    """
+    Using symmetries of the playground to get equivalent feature of the passed feature.
+
+    :param action: The index of the last axis in feature space/self.model.
+    :return: Three equivalent features in the follwoing order:
+        (horizontal reflection, vertical reflectino, point reflection)
+    """
+    # horizontal reflection
+    action_h  = ACTION_SYMMETRY['HORIZONTAL'][action]
+    # vertiacl reflection
+    action_v  = ACTION_SYMMETRY['VERTICAL'][action]
+    # point reflection
+    action_p  = ACTION_SYMMETRY['POINT'][action]
+
+    return np.array([action, action_h, action_v, action_p])
+
+
 def update_Q(self, nstep=True, SARSA=False, Qlearning=False):
     """
-    Performs update on Q depending on which method was chosen. By default N-step SARSA Learning is chosen.
+    Performs update on Q depending on which method was chosen. By default N-step Q-learning is chosen.
 
     :param self: This object is passed to all callbacks.
     :param nstep/SARSA/Qlearning: Boolean which indicates which update method should be chosen.
@@ -61,40 +110,44 @@ def update_Q(self, nstep=True, SARSA=False, Qlearning=False):
         transition_n = self.transitions.pop()
         self.transitions.append(transition_n)
 
-        feature_0 = state_to_features(self, transition_0[0])
-        feature_n = state_to_features(self, transition_n[0])
-        action_0  = ACTIONS_TO_INDEX[transition_0[1]]
-        action_n  = ACTIONS_TO_INDEX[transition_n[1]]
-
-        self.logger.debug(f'before: {self.model[feature_0][action_0]}')
+        feature_0 = get_equivalent_features(state_to_features(self, transition_0[0]))
+        action_0  = get_equivalent_actions(ACTIONS_TO_INDEX[transition_0[1]])
+        feature_n = get_equivalent_features(state_to_features(self, transition_n[0]))
+        action_n  = get_equivalent_actions(ACTIONS_TO_INDEX[transition_n[1]])
 
         prev_rewards = np.array([r for (_, _, _, r) in self.transitions])
         gamma_pow    = np.power(np.ones(n) * self.gamma, np.arange(n))
 
-        self.model[feature_0][action_0] = self.model[feature_0][action_0] + self.alpha * np.sum(gamma_pow*prev_rewards + self.gamma**n * np.max(self.model[feature_n]) - self.model[feature_0][action_0])
-
-        self.logger.debug(f'after: {self.model[feature_0][action_0]}')
+        for i in range(4):
+            self.model[feature_0[i]][action_0[i]] = self.model[feature_0[i]][action_0[i]] + self.alpha * np.sum(gamma_pow*prev_rewards + self.gamma**n * np.max(self.model[feature_n[i]]) - self.model[feature_0[i]][action_0[i]])
 
     elif SARSA:
         transition  = self.transitions.popleft()
 
-        old_feature = state_to_features(self, transition[0])
-        new_feature = state_to_features(self, transition[2])
-        action      = ACTIONS_TO_INDEX[transition[1]]
-        rewards     = transition[3]
-
-        if new_feature is None or old_feature is None:
+        if transition[0] is None or transition[2] is None:
             return
 
-        self.model[old_feature][action] = self.model[old_feature][action] + self.alpha*(rewards + self.gamma*(self.model[new_feature][action]) - self.model[old_feature][action])
+        old_feature = get_equivalent_features(state_to_features(self, transition[0]))
+        new_feature = get_equivalent_features(state_to_features(self, transition[2]))
+        action      = get_equivalent_actions(ACTIONS_TO_INDEX[transition[1]])
+        rewards     = transition[3]
+
+        for i in range(4):
+            self.model[old_feature[i]][action[i]] = self.model[old_feature[i]][action[i]] + self.alpha*(rewards + self.gamma*(self.model[new_feature[i]][action[i]]) - self.model[old_feature[i]][action[i]])
 
     elif Qlearning:
         transition = self.transitions.popleft()
-        feature    = state_to_features(self, transition[0])
-        action     = ACTIONS_TO_INDEX[transition[1]]
+        feature    = get_equivalent_features(state_to_features(self, transition[0]))
+        action     = get_equivalent_actions(ACTIONS_TO_INDEX[transition[1]])
         rewards    = transition[3]
 
-        self.model[feature][action] = self.model[feature][action] + self.alpha*(rewards + self.gamma*np.max(self.model[feature]) - self.model[feature][action])
+        self.logger.debug(f'feature: {feature}')
+        self.logger.debug(f'transition: {state_to_features(self, transition[0])}')
+        self.logger.debug(f'action: {action}')
+        self.logger.debug(f'transition action: {ACTIONS_TO_INDEX[transition[1]]}')
+
+        for i in range(4):
+            self.model[feature[i]][action[i]] = self.model[feature[i]][action[i]] + self.alpha*(rewards + self.gamma*np.max(self.model[feature[i]]) - self.model[feature[i]][action[i]])
 
 
 def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_state: dict, events: List[str]):
