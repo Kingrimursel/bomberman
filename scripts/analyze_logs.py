@@ -1,5 +1,7 @@
 #!/bin/python3
 
+import os
+
 import argparse
 import pickle
 
@@ -15,14 +17,16 @@ def main():
     # Adding optional argument
     parser.add_argument("-a", "--agent", help = "agent name")
     parser.add_argument("-c", "--clear", help = "clear old data")
+    parser.add_argument("-d", "--directory", help = "subdirectory to save images in")
      
     # Read arguments from command line
     args = parser.parse_args()
 
     agent_name = args.agent
     clear      = args.clear
+    subdir  = args.directory
 
-    base_dir = Path("../agent_code/{}".format(agent_name))
+    base_dir = Path(f"../agent_code/{agent_name}")
 
 
     if not agent_name:
@@ -34,7 +38,12 @@ def main():
 
 
     # create analysis directory
-    Path("../agent_code/{}/logs/analysis".format(agent_name)).mkdir(exist_ok=True)    
+    if subdir:
+        analysis_directory = Path(os.path.join(base_dir, "logs/analysis", subdir))
+    else:
+        analysis_directory = Path(os.path.join(base_dir, "logs/analysis"))
+    
+    analysis_directory.mkdir(exist_ok=True, parents=True)
 
 
     round_counter = 0
@@ -42,8 +51,8 @@ def main():
 
     datetime = None
 
-    history_path = Path("../agent_code/{}/logs/analysis/history.npy".format(agent_name))
-    placement_path = Path("../agent_code/{}/logs/analysis/placement.npy".format(agent_name))
+    history_path = Path(os.path.join(analysis_directory, "history.npy"))
+    placement_path = Path(os.path.join(analysis_directory, "placement.npy"))
 
     if not history_path.is_file() or clear == "true":
         with open(history_path, "wb") as file:
@@ -96,8 +105,10 @@ def main():
                     game_counter += 1
 
             agents_placement = None
-            if " ".join(message[:2]) == "Agents placement:":
-                agents_placement = int(message[-1])
+            agents_score     = None
+            if " ".join(message[:2]) == "Agents placement/score:":
+                agents_placement = int(message[-1].split(",")[0])
+                agents_score = int(message[-1].split(",")[1])
 
             if message[0] == "Awarded":
                 reward = message[1]
@@ -113,7 +124,7 @@ def main():
             last_round_counter = round_counter
 
             if agents_placement:
-                placement[datetime].append(agents_placement)
+                placement[datetime].append((agents_placement, agents_score))
 
 
     with open(history_path, 'wb') as file:

@@ -120,10 +120,19 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
         #self.model[state_to_features(self, old_game_state)][action[self_action]] = self.model[state_to_features(self, old_game_state)][action[self_action]] + self.alpha*(reward_from_events(self, events)+self.gamma*(self.model[state_to_features(self, new_game_state)][action[self_action]])-self.model[state_to_features(self, old_game_state)][action[self_action]]) #SARSA
 
 
+        # update score
+        ##################
+        for (n, s, b, xy) in new_game_state['others']:
+            self.score[n] = s
+        ##################
+
 
     # We want to test in training mode aswell because we have access to the events in this case.
     # But the model should not be updated in then
+
+    #####################
     if config.TRULY_TRAIN:
+    #####################
         with open("my-saved-model.pt", "wb") as file:
             pickle.dump(self.model, file)
         # state_to_features is defined in callbacks.py
@@ -153,14 +162,25 @@ def end_of_round(self, last_game_state: dict, last_action: str, events: List[str
     if len(score_others)>0 and score_own>max(score_others):
         events.append(VICTORY)
 
+    #################
+    # keep track of score
+    for (n, s, b, xy) in last_game_state['others']:
+        self.score[n] = s
+
+    scores = np.array(list(self.score.values()))
+
     # log agents placement at end of the game
-    agent_placement = len(score_others) - np.searchsorted(np.sort(score_others), score_own) + 1
-    self.logger.debug(f'Agents placement: {agent_placement}')
+    agent_placement = len(scores) - np.searchsorted(np.sort(scores), score_own) + 1
+    self.logger.debug(f'Agents placement/score: {agent_placement},{score_own}')
+    ##################
 
 
     # We want to test in training mode aswell because we have access to the events in this case.
     # But the model should not be updated in then
+
+    ######################
     if config.TRULY_TRAIN:
+    ######################
         # Store updated model
         with open("my-saved-model.pt", "wb") as file:
             pickle.dump(self.model, file)

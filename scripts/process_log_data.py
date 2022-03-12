@@ -24,12 +24,14 @@ def main():
     # Adding optional argument
     parser.add_argument("-a", "--agent", help = "agent name")
     parser.add_argument("-c", "--clear", help = "clear old data")
+    parser.add_argument("-d", "--directory", help = "subdirectory to save images in")
  
     # Read arguments from command line
     args = parser.parse_args()
 
     agent_name = args.agent
     clear      = args.clear
+    subdir     = args.directory
 
     base_dir = Path("../agent_code/{}".format(agent_name))
 
@@ -40,8 +42,14 @@ def main():
         print("AGENT DOES NOT EXIST")
         return
 
-   
-    img_path = Path(os.path.join(base_dir, "logs/analysis/imgs"))
+  
+    if subdir:
+        analysis_directory = Path(os.path.join(base_dir, "logs/analysis", subdir))
+    else:
+        analysis_directory = Path(os.path.join(base_dir, "logs/analysis"))
+
+
+    img_path = Path(os.path.join(analysis_directory, "imgs"))
     img_path.mkdir(parents=True, exist_ok=True)    
 
     # clear data
@@ -49,11 +57,12 @@ def main():
         shutil.rmtree(os.path.abspath(img_path))
         #shutil.move(os.path.abspath(img_path), os.path.abspath(os.path.join(base_dir, "logs/analysis/imgs_old")))
 
+
     img_path.mkdir(parents=True, exist_ok=True)    
 
 
-    history_path = os.path.join(base_dir, "logs/analysis/history.npy")
-    placement_path = os.path.join(base_dir, "logs/analysis/placement.npy")
+    history_path = os.path.join(analysis_directory, "history.npy")
+    placement_path = os.path.join(analysis_directory, "placement.npy")
 
 
     # open files in read mode
@@ -91,8 +100,8 @@ def main():
         lifetime_history[game_counter] =  round_counter
 
 
-    if "KILLED_SELF" in action_history:
-        del action_history["KILLED_SELF"]
+    # if "KILLED_SELF" in action_history:
+    #     del action_history["KILLED_SELF"]
     if "GOT_KILLED" in action_history:
         del action_history["GOT_KILLED"]
     if "BOMB_EXPLODED" in action_history:
@@ -100,9 +109,6 @@ def main():
 
     actions = action_history.keys()
     action_values = np.asmatrix(list(action_history.values()))
-
-    # TODO: add wievielter platz agent geworden ist
-    # TODO: add analysis of one single game
 
     ### PIECHARTS
 
@@ -144,9 +150,18 @@ def main():
         ax[i//4, i%4].step(np.arange(len(values)), values, color=c)
         ax[i//4, i%4].title.set_text(action)
 
+        fig2, ax2 = plt.subplots    (figsize=(19, 9))
+        fig2.suptitle(f"Action distribution: {action} of {agent_name} over all gamines")
+        ax2.fill_between(np.arange(len(values)), values, step="pre", alpha=0.4, color=c)
+        ax2.step(np.arange(len(values)), values, color=c)
+        ax2.title.set_text(action)
+        fig2.savefig(os.path.join(img_path, f'action_{action}.png'))
+        plt.close(fig2)
+
+
     fig.supxlabel('#game')
     fig.supylabel('#actions')
-    plt.savefig(os.path.join(img_path, "distribution-all-actions.png"))
+    fig.savefig(os.path.join(img_path, "action-distribution-overview.png"))
 
 
     ### LIFETIME PLOT
@@ -168,9 +183,12 @@ def main():
 
     ## Finale Placement Plot
     placement_list = []
+    score_list     = []
 
     for datetime in placement:
-        placement_list.extend(placement[datetime])
+        placement_list.extend(np.array(placement[datetime])[:, 0])
+        score_list.extend(np.array(placement[datetime])[:, 1])
+
 
     fig = plt.figure(figsize=(19, 9))
 
@@ -183,6 +201,19 @@ def main():
     plt.title("Agent {}: Final Placement".format(agent_name))
 
     plt.savefig(os.path.join(img_path, "final_placement.png"))
+
+
+    fig = plt.figure(figsize=(19, 9))
+
+    plt.fill_between(np.arange(len(score_list)), score_list, step="pre", alpha=0.4, color="navy")
+    plt.step(np.arange(len(score_list)), score_list, c="navy")
+
+    plt.xlabel("#game")
+    plt.ylabel("final score")
+
+    plt.title("Agent {}: Final Score".format(agent_name))
+
+    plt.savefig(os.path.join(img_path, "final_score.png"))
 
     # plt.show()
 

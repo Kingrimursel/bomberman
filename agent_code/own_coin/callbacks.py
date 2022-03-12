@@ -33,9 +33,13 @@ def setup(self):
         with open("my-saved-model.pt", "rb") as file:
             self.model = pickle.load(file)
 
+    ##########################
     self.alpha = config.ALPHA
     self.gamma = config.GAMMA
     self.random_prob = config.RANDOM_PROB
+
+    self.score = {}
+    ###########################
 
 
 def act(self, game_state: dict) -> str:
@@ -53,7 +57,9 @@ def act(self, game_state: dict) -> str:
     #     random_prob = np.exp(-0.01*game_state['round'])
     # else:
 
+    #####################################
     if self.train and random.random() < self.random_prob:
+    #####################################
         self.logger.debug("Choosing action purely at random.")
         # 80% walk in any direction. wait 20%. Bomb 0%
         return np.random.choice(ACTIONS, p=[.25, .25, .25, .25, .0, .0])

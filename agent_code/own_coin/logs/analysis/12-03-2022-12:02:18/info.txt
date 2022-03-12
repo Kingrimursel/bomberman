@@ -1,0 +1,12 @@
+lower_random_prob_after=1
+lower_random_prob_to=0.1
+starting_random_prob=0.2
+step_number_alpha=1
+step_number_gamma=1
+num_of_training_sessions=1
+num_of_test_sessions=1
+mean_placements=[[3.75]]
+alpha_opt=1.0
+gamma_opt=1.0
+i_opt=1
+j_opt=1
