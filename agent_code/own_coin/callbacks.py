@@ -8,7 +8,7 @@ import numpy as np
 ACTIONS = ['UP', 'RIGHT', 'DOWN', 'LEFT', 'WAIT', 'BOMB']
 
 # Constants
-NAME = "my-saved-model"
+NAME = "test_updates"
 
 def setup(self):
     """
@@ -51,13 +51,9 @@ def act(self, game_state: dict):
 
     features = state_to_features(self, game_state) #get features from game_state
 
-    self.logger.info(f"FEATURE CALCULATED")
-    self.logger.info(f"Features: {features}")
-
-    return ACTIONS[np.argmax(self.model[features])] #Gives action with maximal reward for given state
+    return ACTIONS[np.argmax(self.model[features][:-1])] #Gives action with maximal reward for given state
 
 
-# The following two functions are defined in here so they can also be used in the train.py.
 def look_for_targets(free_space, start, targets, logger=None, dir=False):
     """
     Find distance to the closest target (target can be specified in use (coin/opponent/crate...))
@@ -153,7 +149,7 @@ def state_to_features(self, game_state: dict):
 
     # NEIGHBOT TILE FEATURE (0-3):
     _, closest_to_coin = look_for_targets(free_space, (x, y), coins, self.logger, dir=True)
-    # This is in order (Left, Right, Above, Below)
+    # This is in order (left, right, below, above)
     for num, (i,j) in enumerate([(x+h, y) for h in [-1, 1]] + [(x, y+h) for h in [-1, 1]]):
         # if tile is free
         if arena[i,j] == 0:
