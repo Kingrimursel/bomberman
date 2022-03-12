@@ -41,32 +41,60 @@ def setup_training(self):
     self.transitions = deque(maxlen=TRANSITION_HISTORY_SIZE)
 
 
-def update_Q(feature: tuple, action: int, rewards: float, nstep=True, Qlearning=False, SARSA=False):
+def update_Q(self, nstep=True, SARSA=False, Qlearning=False):
+    """
+    Performs update on Q depending on which method was chosen. By default N-step SARSA Learning is chosen.
 
+    :param self: This object is passed to all callbacks.
+    :param nstep/SARSA/Qlearning: Boolean which indicates which update method should be chosen.
+    """
     if np.sum([nstep, Qlearning, SARSA]) != 1:
         raise TypeError(f"Choose only and at least one learning method. {np.sum([nstep, Qlearning, SARSA])} were given.")
 
     if nstep:
-        n = TRANSITION_HISTORY_SIZE
+        transition_0 = self.transitions.popleft()
+        n            = len(self.transitions)
 
-        transition = self.transitions.popleft()
-        feature    = state_to_features(transition[0])
-        action     = ACTIONS_TO_INDEX[transition[1]]
+        if transition_0[0]['step']<TRANSITION_HISTORY_SIZE or n<1:
+            return
 
-        transitions  = np.array([np.array([state_to_features(s), state_to_features(s_prime), r]) for (s, _, s_prime, r) in self.transitions)
-        old_features = transitions[:, 0]
-        new_features = transitions[:, 2]
-        prev_rewards = transitions[:, 3]
+        transition_n = self.transitions.pop()
+        self.transitions.append(transition_n)
 
-        gamma_pow = np.power(np.ones(n)*self.gamme, np.arange(n))
+        feature_0 = state_to_features(self, transition_0[0])
+        feature_n = state_to_features(self, transition_n[0])
+        action_0  = ACTIONS_TO_INDEX[transition_0[1]]
+        action_n  = ACTIONS_TO_INDEX[transition_n[1]]
 
-        self.model[feature][action] = self.model[feature][action] + self.alpha * np.sum(gamma_pow*prev_rewards + self.gamma**n * self.model[feature][action] - self.model[feature][action])
+        self.logger.debug(f'before: {self.model[feature_0][action_0]}')
+
+        prev_rewards = np.array([r for (_, _, _, r) in self.transitions])
+        gamma_pow    = np.power(np.ones(n) * self.gamma, np.arange(n))
+
+        self.model[feature_0][action_0] = self.model[feature_0][action_0] + self.alpha * np.sum(gamma_pow*prev_rewards + self.gamma**n * np.max(self.model[feature_n]) - self.model[feature_0][action_0])
+
+        self.logger.debug(f'after: {self.model[feature_0][action_0]}')
 
     elif SARSA:
-        self.model[feature][action] = self.model[feature][action] + self.alpha*(rewards + self.gamma*(self.model[feature][action]) - self.model[feature][action])
+        transition  = self.transitions.popleft()
 
-    else:
-        self.model[feature][action] = self.model[feature][action] + self.alpha*(rewards + self.gamma*(np.max(self.model[feature])) - self.model[feature][action])
+        old_feature = state_to_features(self, transition[0])
+        new_feature = state_to_features(self, transition[2])
+        action      = ACTIONS_TO_INDEX[transition[1]]
+        rewards     = transition[3]
+
+        if new_feature is None or old_feature is None:
+            return
+
+        self.model[old_feature][action] = self.model[old_feature][action] + self.alpha*(rewards + self.gamma*(self.model[new_feature][action]) - self.model[old_feature][action])
+
+    elif Qlearning:
+        transition = self.transitions.popleft()
+        feature    = state_to_features(self, transition[0])
+        action     = ACTIONS_TO_INDEX[transition[1]]
+        rewards    = transition[3]
+
+        self.model[feature][action] = self.model[feature][action] + self.alpha*(rewards + self.gamma*np.max(self.model[feature]) - self.model[feature][action])
 
 
 def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_state: dict, events: List[str]):
@@ -89,6 +117,7 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     _, _, _,(old_x, old_y) = old_game_state['self']
     old_coins      = old_game_state['coins']
     old_free_space = old_arena == 0
+    step           = old_game_state['step']
 
     # Define new game state properties.
     new_arena      = new_game_state['field']
@@ -111,7 +140,7 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     self.transitions.append(Transition(old_game_state, self_action, new_game_state, rewards))
 
     # Update Q matrix.
-    update_Q(feature, action, rewards, nstep=True)
+    update_Q(self, nstep=True, SARSA=False, Qlearning=False)
 
     with open(self.code_name + ".pt", "wb") as file:
         pickle.dump(self.model, file)
@@ -132,11 +161,9 @@ def end_of_round(self, last_game_state: dict, last_action: str, events: List[str
     # Add last transition.
     self.transitions.append(Transition(last_game_state, last_action, None, reward_from_events(self, events)))
 
-    #TODO: Where should the reward for a victory be put into?
-    score_others = [s for (n, s, b, xy) in last_game_state['others']]
-    score_own    = last_game_state['self'][1]
-    if len(score_others) > 0 and score_own > max(score_others):
-        events.append(VICTORY)
+    # Make last updates on Q.
+    while len(self.transitions)>1:
+        update_Q(self, nstep=True, SARSA=False, Qlearning=False)
 
     # Store updated model
     with open(self.code_name + ".pt", "wb") as file:
@@ -153,12 +180,10 @@ def reward_from_events(self, events: List[str]):
     #TODO: Create good rewards/penalties with good values. Avoid repeating moves somehow.
     game_rewards = {
         e.COIN_COLLECTED: 1,
-        e.INVALID_ACTION:-100,
-        e.WAITED:-100,
-        #e.KILLED_SELF:-500,
-        #e.BOMB_DROPPED:-500,
-        APPROACH_COIN:1,
-        AWAY_FROM_COIN:-2,
+        e.INVALID_ACTION: -100,
+        e.WAITED: -100,
+        APPROACH_COIN: 1,
+        AWAY_FROM_COIN: -2,
         }
 
     reward_sum = 0
