@@ -43,7 +43,7 @@ def main():
         return
 
   
-    if subdir:
+    if subdir and subdir != "None":
         analysis_directory = Path(os.path.join(base_dir, "logs/analysis", subdir))
     else:
         analysis_directory = Path(os.path.join(base_dir, "logs/analysis"))
