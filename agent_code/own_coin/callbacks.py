@@ -14,6 +14,13 @@ from agent_code.own_coin import config
 
 ACTIONS = ['UP', 'RIGHT', 'DOWN', 'LEFT', 'WAIT', 'BOMB']
 
+class color:
+    RED='\033[0;31m'
+    GREEN='\033[0;32m'
+    BLUE='\033[0;34m'
+    PURPLE='\033[0;35m'
+    NC='\033[0m'
+
 
 def setup(self):
     """
@@ -37,6 +44,10 @@ def setup(self):
         self.logger.info("Loading model from saved state.")
         with open("my-saved-model.pt", "rb") as file:
             self.model = pickle.load(file)
+
+    print(f"TRULY_TRAIN={color.RED}{config.TRULY_TRAIN}{color.NC}")
+    print(f"DETERMINISTIC={color.RED}{config.DETERMINISTIC}{color.NC}")
+    print(f"RANDOM_PROB={color.RED}{config.RANDOM_PROB}{color.NC}")
 
     ##########################
 

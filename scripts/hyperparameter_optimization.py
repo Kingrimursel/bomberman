@@ -48,8 +48,6 @@ step_size_gamma = 1/step_number_gamma
 mean_placements = np.empty((step_number_alpha, step_number_gamma))
 mean_scores     = np.empty((step_number_alpha, step_number_gamma))
 
-# TODO: implement deterministic training
-# TODO: dann exploration afterwards. Also counter anpassen!
 # TODO: alternating optimization. Maybe listen for key to stop loop?
 
 def main():

@@ -110,8 +110,9 @@ def main():
     os.chdir("scripts")
 
 
-    # sicherheitshalber: set deterministic to false
+    # sicherheitshalber, falls loop empty war:
     update_var("DETERMINISTIC", False, agent_name)
+    update_var("RANDOM_PROB", lower_random_prob_to, agent_name)
 
 
     if process_logs:
