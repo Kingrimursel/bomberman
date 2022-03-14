@@ -30,9 +30,12 @@ lower_random_prob_after = 1  # 10
 # lower random probability to...
 lower_random_prob_to    = 0.1
 # the random probability we are starting the training with
-starting_random_prob     = 0.2
+starting_random_prob    = 0.2
 
-num_of_training_sessions = 1  # 50
+# train deterministically for ... rounds
+deterministic_for = 1
+
+num_of_training_sessions = 3  # 50
 
 
 
@@ -81,6 +84,7 @@ def main():
     os.chdir("..")   
     
     update_var("RANDOM_PROB", starting_random_prob, agent_name)
+    update_var("DETERMINISTIC", True, agent_name)
 
     clear_data(history_path, placement_path)
 
@@ -88,16 +92,27 @@ def main():
     for session_nr in range(num_of_training_sessions):
         print(f"{color.PURPLE}training Nr. {session_nr + 1} of {num_of_training_sessions}:{color.NC}")
 
+        # make training not deterministic
+        if session_nr == deterministic_for:
+            update_var("DETERMINISTIC", False, agent_name)
+
         # lower random prob (exploration phase is over)
-        if session_nr == lower_random_prob_after:
+        if session_nr == deterministic_for + lower_random_prob_after:
             update_var("RANDOM_PROB", lower_random_prob_to, agent_name)
 
         subprocess.run([training_command], shell=True)
 
-
         # analyze the logs
         os.chdir("scripts")
         subprocess.run([f"./analyze_logs.py -a {agent_name} -d {subdir}"], shell=True)
+        os.chdir("..")
+
+    os.chdir("scripts")
+
+
+    # sicherheitshalber: set deterministic to false
+    update_var("DETERMINISTIC", False, agent_name)
+
 
     if process_logs:
         subprocess.run([f"./process_log_data.py -a {agent_name} -d {subdir}"], shell=True)

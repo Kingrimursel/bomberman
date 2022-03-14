@@ -6,6 +6,7 @@
 # - implement new logging
 # - übernehmen: truly_training
 # - übernehmen: keeping track of other scores
+# - übernehmen: deterministic next step
 # - best way: check changelog in github
 
 import os
@@ -47,9 +48,9 @@ step_size_gamma = 1/step_number_gamma
 mean_placements = np.empty((step_number_alpha, step_number_gamma))
 mean_scores     = np.empty((step_number_alpha, step_number_gamma))
 
-# TODO: Elias soll nochmal eine gute training-Strategie nennen
+# TODO: implement deterministic training
+# TODO: dann exploration afterwards. Also counter anpassen!
 # TODO: alternating optimization. Maybe listen for key to stop loop?
-# TODO: not only count the final position, but also the number of coins. Irgendwie vermischen, vielleicht gibt ein Sieg x coins oder so.
 
 def main():
     # Initialize parser

@@ -1,5 +1,7 @@
-from collections import namedtuple, deque
+import sys
+import os
 
+from collections import namedtuple, deque
 
 import numpy as np
 import random
@@ -8,7 +10,10 @@ from typing import List
 import events as e
 from .callbacks import state_to_features, look_for_targets
 
-from . import config
+sys.path.append(os.path.abspath(".."))
+
+from agent_code.own_coin import config
+
 
 Transition = namedtuple('Transition',
                         ('state', 'action', 'next_state', 'reward'))
@@ -113,18 +118,22 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
         #     self.model[state_to_features(self, old_states[0])][actions[0]] = self.model[state_to_features(self, old_states[0])][actions[0]] + self.alpha*(np.sum(self.gamma_exp*prev_rewards +(self.gamma**TRANSITION_HISTORY_SIZE)*np.max(self.model[state_to_features(self, new_game_state)]))-self.model[state_to_features(self, old_states[0])][actions[0]])
         #     self.logger.info(f"Model updated")
 
-        #Update Q-function(model) here
-        #Q-Learning:
-        self.model[state_to_features(self, old_game_state)][action[self_action]] = self.model[state_to_features(self, old_game_state)][action[self_action]] + self.alpha*(reward_from_events(self, events)+self.gamma*(np.max(self.model[state_to_features(self, new_game_state)]))-self.model[state_to_features(self, old_game_state)][action[self_action]]) #Q-Learning
-        #SARSA:
-        #self.model[state_to_features(self, old_game_state)][action[self_action]] = self.model[state_to_features(self, old_game_state)][action[self_action]] + self.alpha*(reward_from_events(self, events)+self.gamma*(self.model[state_to_features(self, new_game_state)][action[self_action]])-self.model[state_to_features(self, old_game_state)][action[self_action]]) #SARSA
-
-
         # update score
         ##################
         for (n, s, b, xy) in new_game_state['others']:
             self.score[n] = s
         ##################
+
+        #################################################
+        # Q-Learning:
+        if config.DETERMINISTIC and not self_action:  # this case somehow happens. Why? Also for non-deterministic?
+            return
+        #################################################
+
+        self.model[state_to_features(self, old_game_state)][action[self_action]] = self.model[state_to_features(self, old_game_state)][action[self_action]] + self.alpha*(reward_from_events(self, events)+self.gamma*(np.max(self.model[state_to_features(self, new_game_state)]))-self.model[state_to_features(self, old_game_state)][action[self_action]]) #Q-Learning
+        #SARSA:
+        #self.model[state_to_features(self, old_game_state)][action[self_action]] = self.model[state_to_features(self, old_game_state)][action[self_action]] + self.alpha*(reward_from_events(self, events)+self.gamma*(self.model[state_to_features(self, new_game_state)][action[self_action]])-self.model[state_to_features(self, old_game_state)][action[self_action]]) #SARSA
+
 
 
     # We want to test in training mode aswell because we have access to the events in this case.
