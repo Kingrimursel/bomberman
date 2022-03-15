@@ -26,16 +26,16 @@ class color:
 model_name = "my-saved-model.pt"
 
 # lower random probability after ... training sessions (exploration phase)
-lower_epsilon_after = 5  # 10
+lower_epsilon_after = 2  # 10
 # lower random probability to...
 lower_epsilon_to    = 0.1
 # the random probability we are starting the training with
-starting_epsilon    = 0.2
+starting_epsilon    = 0.5
 
 # train deterministically for ... rounds
-deterministic_for = 5
+deterministic_for = 0
 
-num_of_training_sessions = 20  # 50
+num_of_training_sessions = 10  # 50
 
 
 
@@ -61,7 +61,7 @@ def main():
         print("PLEASE PROVIDE AN AGENT NAME")
         return
 
-    training_command = f"python3 main.py play --my-agent {agent_name} --train 1 --no-gui --scenario coin-heaven"
+    training_command = f"python main.py play --agents {agent_name} --train 1 --no-gui --scenario coin-heaven"
 
 
     base_dir = Path(f"../agent_code/{agent_name}")
@@ -106,9 +106,9 @@ def main():
         # analyze the logs
         os.chdir("scripts")
         if clear and counter == 1:
-            subprocess.run([f"./analyze_logs.py -a {agent_name} -d {subdir} -c"], shell=True)
+            subprocess.run([f"python analyze_logs.py -a {agent_name} -d {subdir} -c"], shell=True)
         else:
-            subprocess.run([f"./analyze_logs.py -a {agent_name} -d {subdir}"], shell=True)
+            subprocess.run([f"python analyze_logs.py -a {agent_name} -d {subdir}"], shell=True)
 
         os.chdir("..")
         counter += 1
@@ -121,7 +121,7 @@ def main():
     os.chdir("scripts")
 
     if process_logs:
-        subprocess.run([f"./process_log_data.py -a {agent_name} -d {subdir}"], shell=True)
+        subprocess.run([f"python process_log_data.py -a {agent_name} -d {subdir}"], shell=True)
 
 
 

@@ -105,9 +105,9 @@ def main():
 
             # actually training
             if counter == 1:
-                subprocess.run([f"./train.py -a {agent_name} -d {subdir} -dp -c"], shell=True)
+                subprocess.run([f"python train.py -a {agent_name} -d {subdir} -dp -c"], shell=True)
             else:
-                subprocess.run([f"./train.py -a {agent_name} -d {subdir} -dp"], shell=True)
+                subprocess.run([f"python train.py -a {agent_name} -d {subdir} -dp"], shell=True)
 
 
             # since we are now testing, not training
@@ -122,7 +122,7 @@ def main():
                 subprocess.run([test_command], shell=True)
                 os.chdir("scripts")
                 # evaluate logs
-                subprocess.run([f"./analyze_logs.py -a {agent_name} -d {subdir}"], shell=True)
+                subprocess.run([f"python analyze_logs.py -a {agent_name} -d {subdir}"], shell=True)
 
 
             placements, scores = calculate_ratings(placement_path)

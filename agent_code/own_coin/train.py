@@ -204,7 +204,7 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
 
     if config.TRULY_TRAIN:
         # Update Q matrix.
-        update_Q(self, nstep=True, SARSA=False, Qlearning=False)
+        update_Q(self, nstep=False, SARSA=False, Qlearning=True)
 
         with open(self.code_name + ".pt", "wb") as file:
             pickle.dump(self.model, file)
@@ -229,6 +229,7 @@ def end_of_round(self, last_game_state: dict, last_action: str, events: List[str
     scores = np.array(list(self.score.values()))
 
     # log agents placement at end of the game
+    score_own = last_game_state['self'][1]
     agent_placement = len(scores) - np.searchsorted(np.sort(scores), score_own) + 1
     self.logger.debug(f'Agents placement/score: {agent_placement},{score_own}')
 
@@ -238,7 +239,7 @@ def end_of_round(self, last_game_state: dict, last_action: str, events: List[str
     if config.TRULY_TRAIN:
         # Make last updates on Q.
         while len(self.transitions)>1:
-            update_Q(self, nstep=True, SARSA=False, Qlearning=False)
+            update_Q(self, nstep=False, SARSA=False, Qlearning=True)
 
         # Store updated model
         with open(self.code_name + ".pt", "wb") as file:
