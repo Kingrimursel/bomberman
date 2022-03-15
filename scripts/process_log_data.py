@@ -75,6 +75,8 @@ def main():
     action_history   = {}
     lifetime_history = {}
 
+    print(f"{color.PURPLE}Plots werden erstellt...{color.NC}")
+
 
     num_of_games = 10*len(history.keys())
     current_game_counter = 0
@@ -130,6 +132,7 @@ def main():
 
         
         plt.savefig(os.path.join(img_path, "pycharts-all-actions_{}.png".format(file_num)))
+        plt.close(fig)
 
 
     ### ACTION TIMELINE PLOTS
@@ -150,7 +153,7 @@ def main():
         ax[i//4, i%4].step(np.arange(len(values)), values, color=c)
         ax[i//4, i%4].title.set_text(action)
 
-        fig2, ax2 = plt.subplots    (figsize=(19, 9))
+        fig2, ax2 = plt.subplots(figsize=(19, 9))
         fig2.suptitle(f"Action distribution: {action} of {agent_name} over all gamines")
         ax2.fill_between(np.arange(len(values)), values, step="pre", alpha=0.4, color=c)
         ax2.step(np.arange(len(values)), values, color=c)

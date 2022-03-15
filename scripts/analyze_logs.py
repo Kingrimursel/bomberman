@@ -16,7 +16,7 @@ def main():
     
     # Adding optional argument
     parser.add_argument("-a", "--agent", help = "agent name")
-    parser.add_argument("-c", "--clear", help = "clear old data")
+    parser.add_argument("-c", "--clear", help = "clear old data", action="store_true")
     parser.add_argument("-d", "--directory", help = "subdirectory to save images in")
      
     # Read arguments from command line
@@ -54,11 +54,11 @@ def main():
     history_path = Path(os.path.join(analysis_directory, "history.npy"))
     placement_path = Path(os.path.join(analysis_directory, "placement.npy"))
 
-    if not history_path.is_file() or clear == "true":
+    if not history_path.is_file() or clear:
         with open(history_path, "wb") as file:
             pickle.dump({}, file)
 
-    if not placement_path.is_file() or clear == "true":
+    if not placement_path.is_file() or clear:
         with open(placement_path, "wb") as file:
             pickle.dump({}, file)
 
@@ -132,6 +132,7 @@ def main():
 
     with open(placement_path, 'wb') as file:
         pickle.dump(placement, file)
+
 
 if __name__ == "__main__":
     main()

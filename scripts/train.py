@@ -23,19 +23,19 @@ class color:
     NC='\033[0m'
 
 
-model_name       = "my-saved-model.pt"
+model_name = "my-saved-model.pt"
 
 # lower random probability after ... training sessions (exploration phase)
-lower_random_prob_after = 1  # 10
+lower_random_prob_after = 5  # 10
 # lower random probability to...
 lower_random_prob_to    = 0.1
 # the random probability we are starting the training with
 starting_random_prob    = 0.2
 
 # train deterministically for ... rounds
-deterministic_for = 1
+deterministic_for = 5
 
-num_of_training_sessions = 3  # 50
+num_of_training_sessions = 20  # 50
 
 
 
@@ -82,13 +82,14 @@ def main():
 
 
     os.chdir("..")   
-    
+   
     update_var("RANDOM_PROB", starting_random_prob, agent_name)
     update_var("DETERMINISTIC", True, agent_name)
 
     clear_data(history_path, placement_path)
 
     # do the training sessions
+    counter = 1
     for session_nr in range(num_of_training_sessions):
         print(f"{color.PURPLE}training Nr. {session_nr + 1} of {num_of_training_sessions}:{color.NC}")
 
@@ -104,16 +105,20 @@ def main():
 
         # analyze the logs
         os.chdir("scripts")
-        subprocess.run([f"./analyze_logs.py -a {agent_name} -d {subdir}"], shell=True)
-        os.chdir("..")
+        if clear and counter == 1:
+            subprocess.run([f"./analyze_logs.py -a {agent_name} -d {subdir} -c"], shell=True)
+        else:
+            subprocess.run([f"./analyze_logs.py -a {agent_name} -d {subdir}"], shell=True)
 
-    os.chdir("scripts")
+        os.chdir("..")
+        counter += 1
 
 
     # sicherheitshalber, falls loop empty war:
     update_var("DETERMINISTIC", False, agent_name)
     update_var("RANDOM_PROB", lower_random_prob_to, agent_name)
 
+    os.chdir("scripts")
 
     if process_logs:
         subprocess.run([f"./process_log_data.py -a {agent_name} -d {subdir}"], shell=True)
@@ -131,7 +136,6 @@ def update_var(name, value, agent_name):
     configpath = Path(f"agent_code/{agent_name}/config.py")
 
     with open(configpath, "r") as file:
-        #print(file.readlines())
         for line in file:
             els = line.split(" ")
             thisname = els[0]

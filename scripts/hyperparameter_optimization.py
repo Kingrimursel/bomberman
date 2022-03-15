@@ -49,6 +49,7 @@ mean_placements = np.empty((step_number_alpha, step_number_gamma))
 mean_scores     = np.empty((step_number_alpha, step_number_gamma))
 
 # TODO: alternating optimization. Maybe listen for key to stop loop?
+# TODO: clera .npy files at the beginning
 
 def main():
     # Initialize parser
@@ -103,7 +104,10 @@ def main():
             print(f"{color.RED}ITERATION {counter} OF {step_number_alpha*step_number_gamma} {color.NC}")
 
             # actually training
-            subprocess.run([f"./train.py -a {agent_name} -d {subdir} -dp"], shell=True)
+            if counter == 1:
+                subprocess.run([f"./train.py -a {agent_name} -d {subdir} -dp -c"], shell=True)
+            else:
+                subprocess.run([f"./train.py -a {agent_name} -d {subdir} -dp"], shell=True)
 
 
             # since we are now testing, not training
