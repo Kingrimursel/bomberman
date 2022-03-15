@@ -1,0 +1,20 @@
+IDEE:
+	- do PCA to extract usefull features
+	- do pre-extraction first though, because the vanilla information in a game state is too uninformative
+	- Dann machen wir training batch q function regression (Seite 4)
+	- In Q-Function Regression: ein Batch entsprich einem Spiel. Am Ende des Spiels wird dann immer geupdated. Initialisiere at random
+
+
+FRAGEN DAZU:
+	- was ist denn das Y hier? Das kennen wir doch gar nicht, wie sind nicht supervised?
+	- wenn ich das hintereinander auf Zehnerbatches anwende, dann kann sich das X(.) ja ändern, wenn sich die scatter matrix ändert. Ist das denn erlaubt?
+	- ich glaube nicht? Weil wie berechnet man dann die test features? Also müssen wir wirklich alles sammeln. Aber wie? Dann kann er sich ja zwischendurch gar nicht ändern?
+
+
+VORGEHEN:
+	- einer implementiert die Basisstruktur für das regression model
+	- einer extrahiert erstmal Basisfeatures. Lieber zu viel als zu wenig, wir können es uns jetzt ja leisten. Aber schon etwas informativer als ohne preprocessing
+	- aber nicht zu viel Arbeit, weil wir sonst ja keine PCA mehr brauchen... schön viel übrig lasse (wo ist Bombe, wo sind user, wer hat wie viele coins...)
+	- wir könnten auch einer am feature preprocessing, einer an training und einer an der eigentlichen PCA arbeiten
+	- wenn das mit der PCA nicht klappt, können wir auch ganz von Hand Features craften und darauf dann regression anwenden...
+	- die reward Ausgabe können wir ja vielleicht sogar mindestens teilweise übernehmen?

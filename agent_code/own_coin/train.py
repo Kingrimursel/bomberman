@@ -1,3 +1,5 @@
+import sys
+import os
 import numpy as np
 import random
 import pickle
@@ -8,7 +10,11 @@ from collections import namedtuple, deque
 import events as e
 from .callbacks import state_to_features, look_for_targets
 
-# Additional structures
+sys.path.append(os.path.abspath(".."))
+
+from agent_code.own_coin import config
+
+# Additiona Structures
 Transition = namedtuple('Transition',
                         ('state', 'action', 'next_state', 'reward'))
 ACTIONS             = ['UP', 'RIGHT', 'DOWN', 'LEFT', 'WAIT', 'BOMB']
@@ -21,9 +27,6 @@ ACTION_SYMMETRY     = {
 
 # Hyperparameters
 TRANSITION_HISTORY_SIZE  = 3
-ALPHA                    = .4
-GAMMA                    = .2
-EPSILON                  = .4
 RECORD_ENEMY_TRANSITIONS = 1.0
 
 # Events
@@ -38,9 +41,9 @@ def setup_training(self):
 
     :param self: This object is passed to all callbacks and you can set arbitrary values.
     """
-    self.alpha   = ALPHA
-    self.gamma   = GAMMA
-    self.epsilon = EPSILON
+    self.alpha   = config.ALPHA
+    self.gamma   = config.GAMMA
+    self.epsilon = config.EPSILON
 
     self.transitions = deque(maxlen=TRANSITION_HISTORY_SIZE)
 
@@ -184,6 +187,13 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     if len(new_coins)>0 and look_for_targets(old_free_space, (old_x, old_y), old_coins, dir=True)[1] != (new_x, new_y):
         events.append(AWAY_FROM_COIN)
 
+    # update score
+    for (n, s, b, xy) in new_game_state['others']:
+        self.score[n] = s
+
+    if config.DETERMINISTIC and not self_action:
+        self_action = 'WAIT'
+
     # Determine rewards and feature indices.
     feature = state_to_features(self, old_game_state)
     action  = ACTIONS_TO_INDEX[self_action]
@@ -192,11 +202,12 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     # Add current transition.
     self.transitions.append(Transition(old_game_state, self_action, new_game_state, rewards))
 
-    # Update Q matrix.
-    update_Q(self, nstep=True, SARSA=False, Qlearning=False)
+    if config.TRULY_TRAIN:
+        # Update Q matrix.
+        update_Q(self, nstep=True, SARSA=False, Qlearning=False)
 
-    with open(self.code_name + ".pt", "wb") as file:
-        pickle.dump(self.model, file)
+        with open(self.code_name + ".pt", "wb") as file:
+            pickle.dump(self.model, file)
 
 
 def end_of_round(self, last_game_state: dict, last_action: str, events: List[str]):
@@ -211,16 +222,27 @@ def end_of_round(self, last_game_state: dict, last_action: str, events: List[str
     """
     self.logger.debug(f'Encountered event(s) {", ".join(map(repr, events))} in final step')
 
+    # keep track of score
+    for (n, s, b, xy) in last_game_state['others']:
+        self.score[n] = s
+
+    scores = np.array(list(self.score.values()))
+
+    # log agents placement at end of the game
+    agent_placement = len(scores) - np.searchsorted(np.sort(scores), score_own) + 1
+    self.logger.debug(f'Agents placement/score: {agent_placement},{score_own}')
+
     # Add last transition.
     self.transitions.append(Transition(last_game_state, last_action, None, reward_from_events(self, events)))
 
-    # Make last updates on Q.
-    while len(self.transitions)>1:
-        update_Q(self, nstep=True, SARSA=False, Qlearning=False)
+    if config.TRULY_TRAIN:
+        # Make last updates on Q.
+        while len(self.transitions)>1:
+            update_Q(self, nstep=True, SARSA=False, Qlearning=False)
 
-    # Store updated model
-    with open(self.code_name + ".pt", "wb") as file:
-        pickle.dump(self.model, file)
+        # Store updated model
+        with open(self.code_name + ".pt", "wb") as file:
+            pickle.dump(self.model, file)
 
 
 def reward_from_events(self, events: List[str]):
