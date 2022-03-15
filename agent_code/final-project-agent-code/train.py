@@ -115,13 +115,13 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
 
 
     #Only penalize if other move would really be bad and good chance not taken
-    if (old_features[0]==3 and self_action!='LEFT' ):
+    if (old_features[0]==3 and self_action!='LEFT' and not (old_features[5]==2 and old_features[4]==2)):
         events.append(WRONG_DIRECTION)
-    if (old_features[1]==3 and self_action!='RIGHT'):
+    if (old_features[1]==3 and self_action!='RIGHT' and not (old_features[5]==2 and old_features[4]==2)):
         events.append(WRONG_DIRECTION)
-    if (old_features[2]==3 and self_action!='UP' ):
+    if (old_features[2]==3 and self_action!='UP' and not (old_features[5]==2 and old_features[4]==2)):
         events.append(WRONG_DIRECTION)
-    if (old_features[3]==3 and self_action!='DOWN' ):
+    if (old_features[3]==3 and self_action!='DOWN' and not (old_features[5]==2 and old_features[4]==2)):
         events.append(WRONG_DIRECTION)
     if old_features[0]==1 and self_action =='LEFT':
         events.append(SUICIDE_MOVE)
@@ -137,7 +137,7 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
         events.append(UNNECCESSARY_BOMB)
     if (old_features[4]==2 and self_action =='BOMB' ):
         events.append(GOOD_BOMB)
-    if (old_features[4]==3 and self_action =='BOMB' ):
+    if (old_features[4]==3 and self_action =='BOMB'):
         events.append(BEST_BOMB)
     if (old_features[4]==0 and self_action =='BOMB'):
         events.append(SUICIDE_BOMB)
@@ -151,8 +151,6 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
 
     if (old_features[4]==4 and self_action =='WAIT'):
         events.append(STUPID_WAIT)
-
-    #BOMB DROP was 4 moves before explosion, reward that if survived
 
 
     #N-Step Q Learning:
@@ -220,11 +218,7 @@ def end_of_round(self, last_game_state: dict, last_action: str, events: List[str
     alpha=0.1
     gamma=0.8
 
-    #VICTORY REWARD #FIXME: Where should this be used? And: Does not work this way, dead opponents are not in 'others' anymore
-    score_others = [s for (n, s, b, xy) in last_game_state['others']]
-    score_own = last_game_state['self'][1]
-    if len(score_others)>0 and score_own>max(score_others):
-        events.append(VICTORY)
+
 
     old_features = self.features[-1]
 

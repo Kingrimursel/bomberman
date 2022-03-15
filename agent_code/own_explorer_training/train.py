@@ -209,13 +209,8 @@ def end_of_round(self, last_game_state: dict, last_action: str, events: List[str
 
     :param self: The same object that is passed to all of your callbacks.
     """
-
-    self.logger.info(f"Action: {last_action}")
-
     self.logger.debug(f'Encountered event(s) {", ".join(map(repr, events))} in final step')
     #self.transitions.append(Transition(last_game_state, last_action, None, reward_from_events(self, events)))
-
-
 
     alpha=0.1
     gamma=0.8
