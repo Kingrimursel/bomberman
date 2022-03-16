@@ -28,7 +28,7 @@ def setup(self):
         weights = np.random.rand(len(ACTIONS))
         self.model = np.ones((4,4,4,4,5,3,6))*[.25, .25, .25, .25, .0, .0] #Initial guess
 
-    else: #if model saved, no matter if in train mode or not, load current model #TODO: Why is this not done in the given code? In training mode a random model is picked always
+    else: #if model saved, no matter if in train mode or not, load current model 
         self.logger.info("Loading model from saved state.")
         with open("my-saved-model.pt", "rb") as file:
             self.model = pickle.load(file)
@@ -259,13 +259,12 @@ def state_to_features(self, game_state: dict) -> np.array:
     potential_escape = [(i,j) for (i,j) in free_tiles if (i,j) not in danger_tiles] #All tiles, that would still be safe when bomb is dropped
     others_potential_escape = [(i,j) for (i,j) in others_free_tiles if (i,j) not in others_danger_tiles]
 
-    #TODO: Implement feature that encourages bomb drop when opponent is trapped
+    #Boolean for feature adaption that leads to encouraging bomb drop when opponent is trapped
     for (xo,yo) in others_coord:
         not_trapped = True
         if bomb_map[xo,yo]==5: #Calculate for every opponent if they are trapped by a potential bomb
             not_trapped = look_for_targets(others_free_space, (xo, yo), others_potential_escape, self.logger, dir=True)[2]
             if not not_trapped:
-                self.logger.info(f"Is trapped")
                 break
 
 
@@ -326,7 +325,7 @@ def state_to_features(self, game_state: dict) -> np.array:
 
     #Feature for current tile (4) (in coin task always 1)
     #wait does not lead to sure death and (can not place bomb or moving leads to sure death or bomb placement on current tile would be safe death(No escape tile reachable))
-    if(bomb_map[x,y]>0 and (not b or not look_for_targets(free_space, (x, y), potential_escape , self.logger, dir=True)[2])): #Removed: or features[0]==features[1]==features[2]==features[3]==1) TODO: is this smart?
+    if(bomb_map[x,y]>0 and (not b or not look_for_targets(free_space, (x, y), potential_escape , self.logger, dir=True)[2])):
         features[4]=0
     #not trapped and the possible destruction is (0)/(3-5)/(>6)
     elif(look_for_targets(free_space, (x, y), potential_escape , self.logger, dir=True)[2] and (possible_destruction == 0)):
@@ -344,5 +343,4 @@ def state_to_features(self, game_state: dict) -> np.array:
 
 
     output = tuple(features)
-    #self.logger.debug(f'Features Calculated: {output}')
     return output

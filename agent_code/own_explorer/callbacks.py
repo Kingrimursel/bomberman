@@ -28,7 +28,7 @@ def setup(self):
         weights = np.random.rand(len(ACTIONS))
         self.model = np.ones((4,4,4,4,5,3,6))*[.25, .25, .25, .25, .0, .0] #Initial guess
 
-    else: #if model saved, no matter if in train mode or not, load current model #TODO: Why is this not done in the given code? In training mode a random model is picked always
+    else: #if model saved, no matter if in train mode or not, load current model 
         self.logger.info("Loading model from saved state.")
         with open("my-saved-model.pt", "rb") as file:
             self.model = pickle.load(file)
@@ -224,35 +224,30 @@ def state_to_features(self, game_state: dict) -> np.array:
 
     #Phase Feature (5) (Needed for other features, because of that determined first)
     #Determine total number of found coins
-    total_agents = 3 #TODO: Define depending on game mode, later always 3=opponent number)
-    totalscore=0
     others_coord = []
     for no,so,bo,(xo,yo) in others:
         others_coord.append((xo,yo))
-        totalscore+=so
-    totalcoins=totalscore-((total_agents-len(others))*5)
     if(len(coins)>0 and coin_reachable==True and (len(crates)==0 or distance_nextcoin<distance_nextcrate+5)): #Only change to collect mode if coin is in a reasonable region
         features[5]=0
-    elif(totalcoins<9):
+    elif(len(coins)>0 and len(crates)>0):
         features[5]=1
     else:
         features[5]=2
 
-
-
-
-
-
+    #Possible destruction for bomb placed at current tile
     possible_destruction = destruction(arena, others,x, y)
-
-
+    #Highest destruction for neighbor tiles
     highest_destruction = max([destruction(arena, others, i,j) for (i,j) in [(x + h, y) for h in [-1, 1]] + [(x, y + h) for h in [-1, 1]]]) #Highest destruction for all 4 neighbor tiles
-
+    #All the neighbor tiles that lead to that highest value of destruction
     max_destruction_tiles = ([(x + h, y) for h in [-1, 1] if destruction(arena,others, x+h, y)==highest_destruction] + [(x, y + h) for h in [-1, 1] if destruction(arena,others, x, y+h)==highest_destruction]) #Pick Neighbor Tiles with highest destruction
-    max_destruction_tile = max_destruction_tiles[0]
+    max_destruction_tile = max_destruction_tiles[0] #Just pick the first one of them
+    #All tiles affected by a potential bomb drop at current tile
     possible_bomb = potential_bomb(arena, x, y)
+    #All tiles with potential danger (existing bomb and added bomb), if bomb was dropped
     danger_tiles = possible_bomb + [(i,j) for (i,j) in free_tiles if (bomb_map+explosion_map)[i,j]!=5] #All tiles affected by any explosion
     potential_escape = [(i,j) for (i,j) in free_tiles if (i,j) not in danger_tiles] #All tiles, that would still be safe when bomb is dropped
+
+
     #Neighbor tile features (0-3)
     #This is in order (Left, Right, Above, Below)
     for num, (i,j) in enumerate([(x + h, y) for h in [-1, 1]] + [(x, y + h) for h in [-1, 1]]):
@@ -288,6 +283,10 @@ def state_to_features(self, game_state: dict) -> np.array:
         #The following case will not occur in this section (only with opponents, later tasks)
         elif(features[5]==2):
             features[num]=1
+
+        #General for every game phase:
+        if(len(others)==0 and len(crates)==0 and len(coins)==0): #Force to wait when everyone is dead and nothing to collect
+            features[num]=1
         # if tile is Wall, crate, bomb, or death (bomb will explode or explosion lasts for next step or no escape from tile possible) stronger than everything else, so calculated last
         if ((i,j) in others_coord or arena[i,j] == -1 or arena[i,j] == 1 or (i,j) in bomb_xys or bomb_map[i,j]==0 or explosion_map[i,j]==1 or look_for_targets(free_space, (i, j), [(x,y) for (x,y) in np.array(np.where(bomb_map+explosion_map==5)).T if free_space[x,y]], self.logger, dir=True)[0]>=(bomb_map[i,j]+1) or not look_for_targets(free_space, (i, j), [(x,y) for (x,y) in np.array(np.where(bomb_map+explosion_map==5)).T if free_space[x,y]], self.logger, dir=True)[2]):
             features[num]=1
@@ -314,5 +313,4 @@ def state_to_features(self, game_state: dict) -> np.array:
 
 
     output = tuple(features)
-    #self.logger.debug(f'Features Calculated: {output}')
     return output
