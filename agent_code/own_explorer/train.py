@@ -35,7 +35,6 @@ TRANSITION_HISTORY_SIZE = 5  # keep only ... last transitions
 
 
 # Events
-VICTORY = "VICTORY"
 REPEATED_MOVE = "REPEATED_MOVE"
 DESTRUCTED_CRATE ="DESTRUCTED_CRATE"
 CORRECT_WAIT = "CORRECT_WAIT"
@@ -380,4 +379,4 @@ def reward_from_events(self, events: List[str]) -> int:
         if event in game_rewards:
             reward_sum += game_rewards[event]
     self.logger.info(f"Awarded {int(reward_sum*4)} for events {', '.join(events)}")
-    return int(reward_sum*4)
+    return int(reward_sum*4) #The statistic functions can only work with integer rewards
