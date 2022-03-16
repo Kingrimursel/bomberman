@@ -26,16 +26,16 @@ class color:
 model_name = "my-saved-model.pt"
 
 # lower random probability after ... training sessions (exploration phase)
-lower_epsilon_after = 2  # 10
+lower_epsilon_after = 30  # 10
 # lower random probability to...
-lower_epsilon_to    = 0.1
+lower_epsilon_to    = 0.0
 # the random probability we are starting the training with
-starting_epsilon    = 0.5
+starting_epsilon    = 0.05
 
 # train deterministically for ... rounds
-deterministic_for = 0
+deterministic_for = 10
 
-num_of_training_sessions = 10  # 50
+num_of_training_sessions = 70  # 50
 
 
 
@@ -61,7 +61,7 @@ def main():
         print("PLEASE PROVIDE AN AGENT NAME")
         return
 
-    training_command = f"python main.py play --agents {agent_name} --train 1 --no-gui --scenario coin-heaven"
+    training_command = f"python main.py play --agents {agent_name} --train 1 --no-gui"
 
 
     base_dir = Path(f"../agent_code/{agent_name}")

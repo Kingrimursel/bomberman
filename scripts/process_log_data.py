@@ -20,12 +20,12 @@ class color:
 def main():
     # Initialize parser
     parser = argparse.ArgumentParser()
-     
+
     # Adding optional argument
     parser.add_argument("-a", "--agent", help = "agent name")
     parser.add_argument("-c", "--clear", help = "clear old data")
     parser.add_argument("-d", "--directory", help = "subdirectory to save images in")
- 
+
     # Read arguments from command line
     args = parser.parse_args()
 
@@ -42,7 +42,7 @@ def main():
         print("AGENT DOES NOT EXIST")
         return
 
-  
+
     if subdir and subdir != "None":
         analysis_directory = Path(os.path.join(base_dir, "logs/analysis", subdir))
     else:
@@ -50,7 +50,7 @@ def main():
 
 
     img_path = Path(os.path.join(analysis_directory, "imgs"))
-    img_path.mkdir(parents=True, exist_ok=True)    
+    img_path.mkdir(parents=True, exist_ok=True)
 
     # clear data
     if clear == "true":
@@ -58,7 +58,7 @@ def main():
         #shutil.move(os.path.abspath(img_path), os.path.abspath(os.path.join(base_dir, "logs/analysis/imgs_old")))
 
 
-    img_path.mkdir(parents=True, exist_ok=True)    
+    img_path.mkdir(parents=True, exist_ok=True)
 
 
     history_path = os.path.join(analysis_directory, "history.npy")
@@ -127,10 +127,10 @@ def main():
             wedges, texts, autotexts = ax[grid_num//5, grid_num%5].pie(values, labels=None, autopct='', shadow=False, startangle=90)
 
             ax[grid_num//5, grid_num%5].title.set_text("Game {}".format(i + 1))
-        
+
         ax[0, 4].legend(wedges, actions, title="Actions", loc="upper right", bbox_to_anchor=(2.8, 1.7))
 
-        
+
         plt.savefig(os.path.join(img_path, "pycharts-all-actions_{}.png".format(file_num)))
         plt.close(fig)
 
@@ -154,7 +154,7 @@ def main():
         ax[i//4, i%4].title.set_text(action)
 
         fig2, ax2 = plt.subplots(figsize=(19, 9))
-        fig2.suptitle(f"Action distribution: {action} of {agent_name} over all gamines")
+        fig2.suptitle(f"Action distribution: {action} of {agent_name} over all games")
         ax2.fill_between(np.arange(len(values)), values, step="pre", alpha=0.4, color=c)
         ax2.step(np.arange(len(values)), values, color=c)
         ax2.title.set_text(action)

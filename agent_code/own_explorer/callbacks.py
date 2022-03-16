@@ -9,7 +9,7 @@ import numpy as np
 
 sys.path.append(os.path.abspath(".."))
 
-from agent_code.own_coin import config
+from agent_code.own_explorer import config
 
 
 ACTIONS = ['UP', 'RIGHT', 'DOWN', 'LEFT', 'WAIT', 'BOMB']
@@ -76,15 +76,17 @@ def act(self, game_state: dict) -> str:
     :param game_state: The dictionary that describes everything on the board.
     :return: The action to take as a string.
     """
+    features = state_to_features(self, game_state) #get features from game_state
+    self.features.append(features)
 
+    self.logger.info(f"Features: {features}")
     if config.DETERMINISTIC:
         return deterministic_action(self, game_state)
 
 
-    features = state_to_features(self, game_state) #get features from game_state
-    self.features.append(features)
 
-    if self.train and random.random() < random_prob:
+
+    if self.train and random.random() < self.epsilon:
         self.logger.debug("Choosing action purely at random.")
         return np.random.choice(ACTIONS, p=[.2, .2, .2, .2, .0, .2])
 
@@ -251,7 +253,7 @@ def state_to_features(self, game_state: dict) -> np.array:
         others_coord.append((xo,yo))
     if(len(coins)>0 and coin_reachable==True and (len(crates)==0 or distance_nextcoin<distance_nextcrate+5)): #Only change to collect mode if coin is in a reasonable region
         features[5] = 0
-    elif(len(coins)>0 and len(crates)>0):
+    elif(len(coins)>0 or len(crates)>0):
         features[5] = 1
     else:
         features[5] = 2

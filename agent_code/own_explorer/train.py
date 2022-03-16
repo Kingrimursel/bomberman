@@ -16,7 +16,7 @@ from agent_code.own_explorer import config
 
 
 Transition = namedtuple('Transition',
-                        ('state', 'action', 'next_state', 'reward'))
+                        ('state', 'action', 'next_state', 'events'))
 
 
 #Additional Structures
@@ -169,7 +169,7 @@ def update_Q(self, nstep=False, SARSA=False, Qlearning=True, bomb_exploded=False
             transition = self.transitions[0]
             feature    = get_equivalent_features(self.features[0])
             action     = get_equivalent_actions(ACTIONS_TO_INDEX[transition[1]])
-            rewards    = [ev for ev in transition[3] if (ev==e.CRATE_DESTROYED or ev==e.KILLED_OPPONENT  or ev==e.COIN_FOUND)]
+            rewards    = reward_from_events(self, [ev for ev in transition[3] if (ev==e.CRATE_DESTROYED or ev==e.KILLED_OPPONENT  or ev==e.COIN_FOUND)])
 
 
             self.logger.debug(f'Equivalent features for bomb drop state: {feature}')
@@ -177,7 +177,7 @@ def update_Q(self, nstep=False, SARSA=False, Qlearning=True, bomb_exploded=False
             self.logger.debug(f'action: {action}')
             self.logger.debug(f'transition action: {ACTIONS_TO_INDEX[transition[1]]}')
 
-            for i in np.unique(feature, return_index=True)[1]):
+            for i in np.unique(feature, return_index=True)[1]:
                 self.model[feature[i]][action[i]] = self.model[feature[i]][action[i]] + self.alpha*(rewards + self.gamma*np.max(self.model[feature[i]]) - self.model[feature[i]][action[i]])
 
             return
@@ -186,14 +186,14 @@ def update_Q(self, nstep=False, SARSA=False, Qlearning=True, bomb_exploded=False
         transition = self.transitions[-1]
         feature    = get_equivalent_features(self.features[-1])
         action     = get_equivalent_actions(ACTIONS_TO_INDEX[transition[1]])
-        rewards    = [ev for ev in transition[3] if (ev!=e.CRATE_DESTROYED and ev!=e.COIN_FOUND and ev!= e.KILLED_OPPONENT)]
+        rewards    = reward_from_events(self, [ev for ev in transition[3] if (ev!=e.CRATE_DESTROYED and ev!=e.COIN_FOUND and ev!= e.KILLED_OPPONENT)])
 
         self.logger.debug(f'Equivalent features: {feature}')
         self.logger.debug(f'Feature: {self.features[-1]}')
         self.logger.debug(f'action: {action}')
         self.logger.debug(f'transition action: {ACTIONS_TO_INDEX[transition[1]]}')
 
-        for i in np.unique(feature, return_index=True)[1]):
+        for i in np.unique(feature, return_index=True)[1]:
             self.model[feature[i]][action[i]] = self.model[feature[i]][action[i]] + self.alpha*(rewards + self.gamma*np.max(self.model[feature[i]]) - self.model[feature[i]][action[i]])
 
 
@@ -283,7 +283,7 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
         self.score[n] = s
 
 
-    self.transitions.append(Transition(old_game_state, self_action, new_game_state, reward_from_events(self, events)))
+    self.transitions.append(Transition(old_game_state, self_action, new_game_state, events))
 
     #Update Q-function
     if config.TRULY_TRAIN:
@@ -328,7 +328,7 @@ def end_of_round(self, last_game_state: dict, last_action: str, events: List[str
     self.logger.debug(f'Agents placement/score: {agent_placement},{score_own}')
 
     # Add last transition.
-    self.transitions.append(Transition(last_game_state, last_action, None, reward_from_events(self, events)))
+    self.transitions.append(Transition(last_game_state, last_action, None, events))
 
 
 
@@ -379,5 +379,5 @@ def reward_from_events(self, events: List[str]) -> int:
     for event in events:
         if event in game_rewards:
             reward_sum += game_rewards[event]
-    self.logger.info(f"Awarded {reward_sum} for events {', '.join(events)}")
-    return reward_sum
+    self.logger.info(f"Awarded {int(reward_sum*4)} for events {', '.join(events)}")
+    return int(reward_sum*4)
