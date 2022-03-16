@@ -85,7 +85,7 @@ def act(self, game_state: dict):
 
     features = state_to_features(self, game_state) #get features from game_state
 
-    return ACTIONS[np.argmax(self.model[features][:-1])] #Gives action with maximal reward for given state
+    return ACTIONS[np.argmax(self.model[features][:-1])] #Gives action with maximal reward for given state, never returns 'BOMB'
 
 
 def look_for_targets(free_space, start, targets, logger=None, dir=False):
