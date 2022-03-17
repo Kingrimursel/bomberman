@@ -12,7 +12,7 @@ from .callbacks import state_to_features, look_for_targets, destruction, potenti
 
 sys.path.append(os.path.abspath(".."))
 
-from agent_code.own_explorer import config
+from agent_code.own_KGB import config
 
 
 Transition = namedtuple('Transition',
@@ -61,139 +61,8 @@ def setup_training(self):
 
     :param self: This object is passed to all callbacks and you can set arbitrary values.
     """
-    self.alpha   = config.ALPHA
-    self.gamma   = config.GAMMA
-    self.epsilon = config.EPSILON
 
     self.transitions = deque(maxlen=TRANSITION_HISTORY_SIZE)
-
-def get_equivalent_features(feature: tuple):
-    """
-    Using symmetries of the playground to get equivalent feature of the passed feature.
-
-    :param feature: A tuple of the indices in feature space/self.model except the last axis
-        which indicates the action to take in this state. Remember that the feature indeices are
-        build up like this: (left, right, above, below, current, game mode).
-    :return: Three equivalent features in the follwoing order:
-        (horizontal reflection, vertical reflectino, point reflection)
-    """
-    f_left    = feature[0]
-    f_right   = feature[1]
-    f_above   = feature[2]
-    f_below   = feature[3]
-    f_current = feature[4]
-    f_phase   = feature[5]
-
-    # horizontal reflection
-    feature_h = tuple([f_left, f_right, f_below, f_above, f_current, f_phase])
-    # vertiacl reflection
-    feature_v = tuple([f_right, f_left, f_above, f_below, f_current, f_phase])
-    #Rotation by pi/2
-    feature_r1 = tuple([f_below, f_above, f_left, f_right, f_current, f_phase])
-    # point reflecion/ rotation by pi
-    feature_r2 = tuple([f_right, f_left, f_below, f_above, f_current, f_phase])
-    #Rotation by 3pi/2
-    feature_r3 = tuple([f_above, f_below, f_right, f_left, f_current, f_phase])
-
-    return [feature, feature_h, feature_v, feature_r1, feature_r2, feature_r3] #TODO: Only use equivalent features if they are not the same later
-
-def get_equivalent_actions(action: int):
-    """
-    Using symmetries of the playground to get equivalent feature of the passed feature.
-
-    :param action: The index of the last axis in feature space/self.model.
-    :return: Five actions for equivalent features in the following order:
-        (horizontal reflection, vertical reflection, rotation by pi/2, point reflection, rotation by 3pi/2)
-    """
-    # horizontal reflection
-    action_h  = ACTION_SYMMETRY['HORIZONTAL'][action]
-    # vertiacl reflection
-    action_v  = ACTION_SYMMETRY['VERTICAL'][action]
-    #Pi/2 Rotation
-    action_r1  = ACTION_SYMMETRY['ROTATION1'][action]
-    # point reflection and Pi rotation
-    action_r2  = ACTION_SYMMETRY['POINT'][action]
-    #3Pi/2 Rotation
-    action_r3  = ACTION_SYMMETRY['ROTATION3'][action]
-
-    return [action, action_h, action_v, action_r1, action_r2 ,action_r3]
-
-def update_Q(self, nstep=False, SARSA=False, Qlearning=True, bomb_exploded=False):
-    """
-    Performs update on Q depending on which method was chosen. By default normal Q-learning is chosen.
-
-    :param self: This object is passed to all callbacks.
-    :param nstep/SARSA/Qlearning: Boolean which indicates which update method should be chosen.
-    :param bomb_exploded: Boolean which indicates if a bomb exploded, to update the move where bomb was dropped
-    """
-    if np.sum([nstep, Qlearning, SARSA]) != 1:
-        raise TypeError(f"Choose only and at least one learning method. {np.sum([nstep, Qlearning, SARSA])} were given.")
-    #TODO: Adapt n-step and SARSA to new symmetries
-    if nstep:
-        transition_0 = self.transitions[0]
-        n            = len(self.transitions)
-
-        if transition_0[0]['step']<TRANSITION_HISTORY_SIZE or n<1:
-            return
-
-        transition_n = self.transitions[-1]
-        self.transitions.append(transition_n)
-
-        feature_0 = get_equivalent_features(state_to_features(self, transition_0[0]))
-        action_0  = get_equivalent_actions(ACTIONS_TO_INDEX[transition_0[1]])
-        feature_n = get_equivalent_features(state_to_features(self, transition_n[0]))
-        action_n  = get_equivalent_actions(ACTIONS_TO_INDEX[transition_n[1]])
-
-        prev_rewards = np.array([r for (_, _, _, r) in self.transitions])
-        gamma_pow    = np.power(np.ones(n) * self.gamma, np.arange(n))
-
-        for i in range(4):
-            self.model[feature_0[i]][action_0[i]] = self.model[feature_0[i]][action_0[i]] + self.alpha * np.sum(gamma_pow*prev_rewards + self.gamma**n * np.max(self.model[feature_n[i]]) - self.model[feature_0[i]][action_0[i]])
-
-    elif SARSA:
-        transition  = self.transitions[-1]
-
-        old_feature = get_equivalent_features(state_to_features(self, transition[0]))
-        new_feature = get_equivalent_features(state_to_features(self, transition[2]))
-        action      = get_equivalent_actions(ACTIONS_TO_INDEX[transition[1]])
-        rewards     = transition[3]
-
-        for i in range(4):
-            self.model[old_feature[i]][action[i]] = self.model[old_feature[i]][action[i]] + self.alpha*(rewards + self.gamma*(self.model[new_feature[i]][action[i]]) - self.model[old_feature[i]][action[i]])
-
-    elif Qlearning:
-        if bomb_exploded: #If a bomb exploded, use this funtion to reward the bomb drop move
-            transition = self.transitions[0]
-            feature    = get_equivalent_features(self.features[0])
-            action     = get_equivalent_actions(ACTIONS_TO_INDEX[transition[1]])
-            rewards    = reward_from_events(self, [ev for ev in transition[3] if (ev==e.CRATE_DESTROYED or ev==e.KILLED_OPPONENT  or ev==e.COIN_FOUND)])
-
-
-            self.logger.debug(f'Equivalent features for bomb drop state: {feature}')
-            self.logger.debug(f'Features for bomb drop state: {self.features[0]}')
-            self.logger.debug(f'action: {action}')
-            self.logger.debug(f'transition action: {ACTIONS_TO_INDEX[transition[1]]}')
-
-            for i in np.unique(feature, return_index=True)[1]:
-                self.model[feature[i]][action[i]] = self.model[feature[i]][action[i]] + self.alpha*(rewards + self.gamma*np.max(self.model[feature[i]]) - self.model[feature[i]][action[i]])
-
-            return
-
-
-        transition = self.transitions[-1]
-        feature    = get_equivalent_features(self.features[-1])
-        action     = get_equivalent_actions(ACTIONS_TO_INDEX[transition[1]])
-        rewards    = reward_from_events(self, [ev for ev in transition[3] if (ev!=e.CRATE_DESTROYED and ev!=e.COIN_FOUND and ev!= e.KILLED_OPPONENT)])
-
-        self.logger.debug(f'Equivalent features: {feature}')
-        self.logger.debug(f'Feature: {self.features[-1]}')
-        self.logger.debug(f'action: {action}')
-        self.logger.debug(f'transition action: {ACTIONS_TO_INDEX[transition[1]]}')
-
-        for i in np.unique(feature, return_index=True)[1]:
-            self.model[feature[i]][action[i]] = self.model[feature[i]][action[i]] + self.alpha*(rewards + self.gamma*np.max(self.model[feature[i]]) - self.model[feature[i]][action[i]])
-
-
 
 
 def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_state: dict, events: List[str]):
@@ -285,14 +154,22 @@ def game_events_occurred(self, old_game_state: dict, self_action: str, new_game_
     self.transitions.append(Transition(old_game_state, self_action, new_game_state, events))
 
     #Update Q-function
+
+    alpha = self.alpha
+    gamma = self.gamma
+
     if config.TRULY_TRAIN:
         if (e.BOMB_EXPLODED in events): #If bomb exploded, rewards for the state where bomb was placed
-            update_Q(self, bomb_exploded =True)
+            drop_state_features = self.features[0]
+            self.logger.info(f"Features for drop state: {self.features[0]}")
+            self.model[drop_state_features][5] = self.model[drop_state_features][5] + alpha*(reward_from_events(self, [ev for ev in events if (ev==e.CRATE_DESTROYED or ev==e.KILLED_OPPONENT  or ev==e.COIN_FOUND)])+gamma*(np.max(self.model[self.features[1]]))-self.model[drop_state_features][5]) #Only rewarding destruction, not the fact that a bomb exploded
 
-        update_Q(self)
+        self.model[old_features][ACTION[self_action]] = self.model[old_features][ACTION[self_action]] + alpha*(reward_from_events(self, [ev for ev in events if (ev!=e.CRATE_DESTROYED and ev!=e.COIN_FOUND  and ev!=e.KILLED_OPPONENT) ])+gamma*(np.max(self.model[state_to_features(self, new_game_state)]))-self.model[old_features][ACTION[self_action]]) #Q-Learning
 
         with open("my-saved-model.pt", "wb") as file:
             pickle.dump(self.model, file)
+    # state_to_features is defined in callbacks.py
+    self.transitions.append(Transition(old_game_state, self_action, new_game_state, reward_from_events(self, events)))
 
 
 
@@ -310,10 +187,13 @@ def end_of_round(self, last_game_state: dict, last_action: str, events: List[str
 
     :param self: The same object that is passed to all of your callbacks.
     """
-
+    if(last_action==None): #Must do this for training with rule_based_agent here, because wait is sometimes returned as None, which crashes the training
+        last_action= 'WAIT'
+        events.remove(e.INVALID_ACTION)
 
     self.logger.debug(f'Encountered event(s) {", ".join(map(repr, events))} in final step')
     self.logger.info(f"Action: {last_action}")
+
     # keep track of score
     for (n, s, b, xy) in last_game_state['others']:
         self.score[n] = s
@@ -325,17 +205,20 @@ def end_of_round(self, last_game_state: dict, last_action: str, events: List[str
     agent_placement = len(scores) - np.searchsorted(np.sort(scores), score_own) + 1
     self.logger.debug(f'Agents placement/score: {agent_placement},{score_own}')
 
-    # Add last transition.
-    self.transitions.append(Transition(last_game_state, last_action, None, events))
 
+    old_features = self.features[-1]
+    alpha = self.alpha
+    gamma = self.gamma
 
 
     if config.TRULY_TRAIN:
-        #Update Q-function
         if (e.BOMB_EXPLODED in events and e.KILLED_SELF not in events):
-            update_Q(self, bomb_exploded =True)
+            drop_state_features = self.features[0]
+            self.logger.info(f"Features for drop state: {self.features[0]}")
+            self.model[drop_state_features][5] = self.model[drop_state_features][5] + alpha*(reward_from_events(self, [ev for ev in events if (ev==e.CRATE_DESTROYED or ev==e.KILLED_OPPONENT  or ev==e.COIN_FOUND)])+gamma*(np.max(self.model[self.features[1]]))-self.model[drop_state_features][5]) #Only rewarding destruction, not the fact that a bomb exploded
+        #Q-Learning
+        self.model[old_features][ACTION[last_action]] = self.model[old_features][ACTION[last_action]] + alpha*(reward_from_events(self, [ev for ev in events if (ev!=e.CRATE_DESTROYED and ev!=e.KILLED_OPPONENT and ev!=e.COIN_FOUND) ]))#Only this part because new state does not exist.  #Q-Learning
 
-        update_Q(self)
         # Store updated model
         with open("my-saved-model.pt", "wb") as file:
             pickle.dump(self.model, file)
@@ -377,5 +260,5 @@ def reward_from_events(self, events: List[str]) -> int:
     for event in events:
         if event in game_rewards:
             reward_sum += game_rewards[event]
-    self.logger.info(f"Awarded {int(reward_sum*4)} for events {', '.join(events)}")
-    return int(reward_sum*4) #The statistic functions can only work with integer rewards
+    self.logger.info(f"Awarded {reward_sum} for events {', '.join(events)}")
+    return reward_sum

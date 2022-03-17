@@ -112,27 +112,27 @@ def main():
     actions = action_history.keys()
     action_values = np.asmatrix(list(action_history.values()))
 
-    ### PIECHARTS
-
-    num_of_files = int(np.ceil(num_of_games/20))
-
-    for file_num in range(num_of_files):
-
-        fig, ax = plt.subplots(4, 5, figsize=(19, 9), subplot_kw=dict(aspect="equal"))
-        fig.suptitle("Action intensity of {} games - {}".format(agent_name, file_num))
-
-        for grid_num, i in enumerate(range(20*file_num, min(20*(file_num + 1), num_of_games))):
-
-            values = np.squeeze(np.array(action_values[:, i]))
-            wedges, texts, autotexts = ax[grid_num//5, grid_num%5].pie(values, labels=None, autopct='', shadow=False, startangle=90)
-
-            ax[grid_num//5, grid_num%5].title.set_text("Game {}".format(i + 1))
-
-        ax[0, 4].legend(wedges, actions, title="Actions", loc="upper right", bbox_to_anchor=(2.8, 1.7))
-
-
-        plt.savefig(os.path.join(img_path, "pycharts-all-actions_{}.png".format(file_num)))
-        plt.close(fig)
+    # ### PIECHARTS
+    #
+    # num_of_files = int(np.ceil(num_of_games/20))
+    #
+    # for file_num in range(num_of_files):
+    #
+    #     fig, ax = plt.subplots(4, 5, figsize=(19, 9), subplot_kw=dict(aspect="equal"))
+    #     fig.suptitle("Action intensity of {} games - {}".format(agent_name, file_num))
+    #
+    #     for grid_num, i in enumerate(range(20*file_num, min(20*(file_num + 1), num_of_games))):
+    #
+    #         values = np.squeeze(np.array(action_values[:, i]))
+    #         wedges, texts, autotexts = ax[grid_num//5, grid_num%5].pie(values, labels=None, autopct='', shadow=False, startangle=90)
+    #
+    #         ax[grid_num//5, grid_num%5].title.set_text("Game {}".format(i + 1))
+    #
+    #     ax[0, 4].legend(wedges, actions, title="Actions", loc="upper right", bbox_to_anchor=(2.8, 1.7))
+    #
+    #
+    #     plt.savefig(os.path.join(img_path, "pycharts-all-actions_{}.png".format(file_num)))
+    #     plt.close(fig)
 
 
     ### ACTION TIMELINE PLOTS

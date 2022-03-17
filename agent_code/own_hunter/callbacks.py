@@ -9,7 +9,7 @@ import numpy as np
 
 sys.path.append(os.path.abspath(".."))
 
-from agent_code.own_explorer import config
+from agent_code.own_hunter import config
 
 
 ACTIONS = ['UP', 'RIGHT', 'DOWN', 'LEFT', 'WAIT', 'BOMB']

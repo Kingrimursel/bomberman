@@ -13,12 +13,12 @@ import numpy as np
 def main():
     # Initialize parser
     parser = argparse.ArgumentParser()
-    
+
     # Adding optional argument
     parser.add_argument("-a", "--agent", help = "agent name")
     parser.add_argument("-c", "--clear", help = "clear old data", action="store_true")
     parser.add_argument("-d", "--directory", help = "subdirectory to save images in")
-     
+
     # Read arguments from command line
     args = parser.parse_args()
 
@@ -42,7 +42,7 @@ def main():
         analysis_directory = Path(os.path.join(base_dir, "logs/analysis", subdir))
     else:
         analysis_directory = Path(os.path.join(base_dir, "logs/analysis"))
-    
+
     analysis_directory.mkdir(exist_ok=True, parents=True)
 
 
@@ -95,7 +95,7 @@ def main():
 
             message = line_elements[4:]
             # remove \n
-            message[-1] = message[-1][:-1] 
+            message[-1] = message[-1][:-1]
 
 
             # update game counter
@@ -119,7 +119,7 @@ def main():
                     event = event.replace(",", "")
                     events[i] = event
 
-                history[datetime].append((int(game_counter), int(round_counter), events, int(reward)))
+                history[datetime].append((int(game_counter), int(round_counter), events, float(reward)))
 
             last_round_counter = round_counter
 
