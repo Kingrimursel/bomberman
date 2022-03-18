@@ -26,17 +26,16 @@ class color:
 model_name = "my-saved-model.pt"
 
 # lower random probability after ... training sessions (exploration phase)
-lower_epsilon_after = 0  # 10
+lower_epsilon_after = 1  # 10
 # lower random probability to...
-lower_epsilon_to    = 0.0
+lower_epsilon_to    = 0.1
 # the random probability we are starting the training with
-starting_epsilon    = 0.0
+starting_epsilon    = 0.01
 
 # train deterministically for ... rounds
 deterministic_for = 0
 
-num_of_training_sessions = 5  # 50
-
+num_of_training_sessions = 1  # 50
 
 
 def main():
@@ -61,7 +60,7 @@ def main():
         print("PLEASE PROVIDE AN AGENT NAME")
         return
 
-    training_command = f"python main.py play --agents {agent_name} rule_based_agent rule_based_agent rule_based_agent --train 1 --no-gui"
+    training_command = f"python3 main.py play --agents {agent_name} rule_based_agent rule_based_agent rule_based_agent --train 1 --no-gui"
 
 
     base_dir = Path(f"../agent_code/{agent_name}")
@@ -77,7 +76,7 @@ def main():
 
 
     # move old model
-    if clear:
+    if clear and os.path.exists(os.path.join(base_dir, model_name)):
         os.rename(os.path.join(base_dir, model_name), os.path.join(base_dir, model_name + "_old"))
 
 
@@ -106,9 +105,9 @@ def main():
         # analyze the logs
         os.chdir("scripts")
         if clear and counter == 1:
-            subprocess.run([f"python analyze_logs.py -a {agent_name} -d {subdir} -c"], shell=True)
+            subprocess.run([f"python3 analyze_logs.py -a {agent_name} -d {subdir} -c"], shell=True)
         else:
-            subprocess.run([f"python analyze_logs.py -a {agent_name} -d {subdir}"], shell=True)
+            subprocess.run([f"python3 analyze_logs.py -a {agent_name} -d {subdir}"], shell=True)
 
         os.chdir("..")
         counter += 1
@@ -121,7 +120,7 @@ def main():
     os.chdir("scripts")
 
     if process_logs:
-        subprocess.run([f"python process_log_data.py -a {agent_name} -d {subdir}"], shell=True)
+        subprocess.run([f"python3 process_log_data.py -a {agent_name} -d {subdir}"], shell=True)
 
 
 

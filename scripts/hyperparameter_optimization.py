@@ -38,18 +38,30 @@ class color:
 agent_name       = "own_coin"
 model_name       = "my-saved-model.pt"
 
-num_of_test_sessions     = 1  # 10
+num_of_test_sessions = 1  # 10
 
 step_number_alpha = 2  # 20
 step_number_gamma = 2
-step_size_alpha = 1/step_number_alpha
-step_size_gamma = 1/step_number_gamma
+
+lower_bound_alpha = 0.25  # lower bound excluded
+upper_bound_alpha = 0.75 # upper bound included
+
+lower_bound_gamma = 0.5  # lower bound excluded
+upper_bound_gamma = 1  # upper bound included
+
+step_size_alpha = (upper_bound_alpha - lower_bound_alpha)/step_number_alpha
+step_size_gamma = (upper_bound_gamma - lower_bound_gamma)/step_number_gamma
+
 
 mean_placements = np.empty((step_number_alpha, step_number_gamma))
 mean_scores     = np.empty((step_number_alpha, step_number_gamma))
 
-# TODO: alternating optimization. Maybe listen for key to stop loop?
-# TODO: clera .npy files at the beginning
+
+# TODO: add to Auswertung: the way we are currently doing hyperparemeteroptimization by recursively narrowing
+# the inspected values for gamma and alpha could lead to us missing a global optimum. But we are very likely
+# still performing well enough, since we think that the perfornamce landscace (see figure ??) varies smoothly enough
+# in alpha and gamma and our grid was sufficiently close-meshed.
+
 
 def main():
     # Initialize parser
@@ -67,7 +79,7 @@ def main():
         return
 
 
-    test_command     = f"python3 main.py play --my-agent {agent_name} --train 1 --no-gui --scenario coin-heaven"
+    test_command = f"python3 main.py play --my-agent {agent_name} --train 1 --no-gui --scenario coin-heaven"
 
 
     dt = datetime.now().strftime("%d-%m-%Y-%H:%M:%S")
@@ -82,7 +94,12 @@ def main():
 
     ## loop over all combinations of alpha and gamma values. i = alpha, j = gamma
     counter = 1
+    limit_exceeded = False
     for i in range(1, step_number_alpha + 1):
+
+        if limit_exceeded:
+            break
+
         for j in range(1, step_number_gamma + 1):
 
             subdir = f"{dt}/i={i},j={j}"
@@ -94,8 +111,14 @@ def main():
 
             ## training
             # set starting val for random prob
-            alpha = i*step_size_alpha
-            gamma = j*step_size_gamma
+            alpha = i*step_size_alpha + lower_bound_alpha
+            gamma = j*step_size_gamma + lower_bound_gamma
+
+            if alpha > upper_bound_alpha or gamma > upper_bound_gamma:
+                limit_exceeded = True
+
+            if limit_exceeded:
+                break
 
             update_var("ALPHA", alpha, config_path)
             update_var("GAMMA", gamma, config_path)
@@ -105,9 +128,9 @@ def main():
 
             # actually training
             if counter == 1:
-                subprocess.run([f"python train.py -a {agent_name} -d {subdir} -dp -c"], shell=True)
+                subprocess.run([f"python3 train.py -a {agent_name} -d {subdir} -dp -c"], shell=True)
             else:
-                subprocess.run([f"python train.py -a {agent_name} -d {subdir} -dp"], shell=True)
+                subprocess.run([f"python3 train.py -a {agent_name} -d {subdir} -dp"], shell=True)
 
 
             # since we are now testing, not training
@@ -122,7 +145,7 @@ def main():
                 subprocess.run([test_command], shell=True)
                 os.chdir("scripts")
                 # evaluate logs
-                subprocess.run([f"python analyze_logs.py -a {agent_name} -d {subdir}"], shell=True)
+                subprocess.run([f"python3 analyze_logs.py -a {agent_name} -d {subdir}"], shell=True)
 
 
             placements, scores = calculate_ratings(placement_path)
@@ -154,8 +177,8 @@ def main():
 
     i_opt, j_opt = find_optimal_settings(mean_placements, mean_scores)
 
-    alpha_opt = (i_opt + 1)*step_size_alpha
-    gamma_opt = (j_opt + 1)*step_size_gamma
+    alpha_opt = (i_opt + 1)*step_size_alpha + lower_bound_alpha
+    gamma_opt = (j_opt + 1)*step_size_gamma + lower_bound_gamma
 
     print(f"{color.GREEN}OPTIMIZATION FINISHED. Optimal parameters: i={i_opt+1}, alpha={alpha_opt}, j={j_opt+1}, gamma={gamma_opt}{color.NC}")
 
@@ -185,6 +208,10 @@ def main():
             step_number_alpha={step_number_alpha}\n\
             step_number_gamma={step_number_gamma}\n\
             num_of_test_sessions={num_of_test_sessions}\n\
+            lower_bound_alpha={lower_bound_alpha}\n\
+            upper_bound_alpha={upper_bound_alpha}\n\
+            lower_bound_gamma={lower_bound_gamma}\n\
+            upper_bound_gamma={upper_bound_gamma}\n\
             mean_placements={mean_placements}\n\
             alpha_opt={alpha_opt}\n\
             gamma_opt={gamma_opt}\n\
