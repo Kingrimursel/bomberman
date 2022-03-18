@@ -1,0 +1,11 @@
+TODO: HIER ÜBERALL SO GEILE VERWEISE EINFÜGEN, SO PROFESSIONELL MIT e.g. [5].\newline
+
+Reinforcement learning is a branch of machine learning which is used to learn models that can interact with, and change the environment. A Reinforcement Learning model is active, it observes its environment, makes predictions about its future state and takes corresponding actions to adapt to those predictions. At any time, which is practically quantized, the model is in a certain state. After one time quantum elapsed, the model can take a new state. The central goal of such a model trained using Reinforcement Learning is to maximize its so called "value function" or "Q function", which measures the amount of success a model will have when doing a state transformation.\newline\newline
+
+TODO: WENN WIR PLATZ FÜLLEN MÜSSEN: HIER EIN BISSCHEN THEORIE MACHEN, Z.B. BELLMANN EQUATION USW.
+
+In our application we will use Reinforcement Learning to train two agents to play the game Bomberman (1983). To do so we implemented two different models; the first one uses a simple Q-Table with handcrafted features, the second one a Regresson Forest, also with handcrafted features.\newline
+
+Our approach was to not directly tackle the problem of winning the game against arbitrary opponents, but rather tackled the task stept by step. Our agents went through three phases; in the first phase it focused on collecting coins on a crate- and opponent-free map. In the second phase it then had to use bombs to uncover coins from crates. Once an agent mastered this task it advanced into the third phase, in which he had to play against and kill opponents.\newline
+
+In Section \ref{setup} we will first give a detailed overview over the models we used, the features we designed and the rewards we shaped. In the following sections \ref{training} and \ref{testing} we will then go on to talk about our different training and testing strategies and approaches. Here we will set a focus on the way we conducted performance analysis by generating detailed statistics in the different phases our models went through. We will also touch the important topic of hyper parameter optimization.

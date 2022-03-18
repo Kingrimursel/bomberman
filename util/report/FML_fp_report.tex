@@ -1,0 +1,89 @@
+\documentclass[11pt,twocolumn,twoside]{article} %210 mm × 297 mm
+
+\usepackage[utf8]{inputenc}
+%\usepackage[ngerman]{babel}
+\usepackage[a4paper,left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{color}
+\usepackage{float}
+\usepackage{pdfpages}
+\usepackage{siunitx}
+\usepackage{gensymb}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\captionsetup[figure]{font=footnotesize,labelfont=footnotesize}
+
+% Costumize Page Style
+\fancyhead{}
+\fancyhead[L]{FML - Final Report}
+\fancyhead[R]{Elias Rieger, Etienne Stock, Philipp Nazari}
+%\fancyfoot{}
+%\fancyfoot[LE,RO]{\thepage}
+%\fancyfoot[LO,CE]{Chapter \thechapter}
+%\fancyfoot[CO,RE]{Author Name}
+%\renewcommand{\footrulewidth}{0.4pt}
+
+\usepackage{biblatex}
+\addbibresource{chapters/references.bib}
+
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abstract 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\twocolumn[
+\centering
+\vspace{1.5cm}
+{\Huge\bf Final Report - Using Reinforcement Learning To Play Bomberman} \\
+\vspace{0.5cm}
+{\Large Elias Rieger (sv235) \\
+	elias.rieger@stud.uni-heidleberg.de\\
+	\vspace{0.1cm}
+	Etienne Stock (uc235)\\
+	etienne.stock@stud.uni-heidelberg.de \\
+	\vspace{0.1cm}
+	Philipp Nazari (iy232)\\
+	philipp.nazari@stud.uni-heidelberg.de
+}\\
+\vspace{0.2cm}
+{\large \today} \\
+\vspace{2cm}
+\input{chapters/abstract}
+\vspace{1.5cm}
+]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Contents 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}\label{introduction}
+\input{chapters/introduction}
+
+\section{Model Setup}\label{setup}
+\input{chapters/setup}
+
+\section{Training}\label{training}
+\input{chapters/training}
+
+\section{Testing}\label{testing}
+\input{chapters/testing}
+
+\section{Conclusion}\label{conclusion}
+\input{chapters/conclusion}
+
+\printbibliography
+
+\end{document}

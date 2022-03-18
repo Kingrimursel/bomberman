@@ -1,0 +1,20 @@
+Trainingsmethoden beschreiben. Also erst deterministisch, dann exploration phase und dann normale exploitation.
+
+We tried Q-learning, n-step-Q-learning and SARSA learning It went...
+
+We used the model trained for the old task and trained it also for the new task...
+
+\subsection{Statistics and Analysis}
+Für die bedachte und nachhaltige Entwicklung unserer Agenten hat es sich als äußerst wichtig herausgestellt, das Training in den unterschiedlichen Stadien mit Statistik zu analysieren. Die visuelle Darstellung ermöglicht eine vereinfachte Analyse und zielgerichtete Behebung von Fehlern.
+
+Um die notwendige Statistik zu generieren, auf die wir in den nächsten Absätzen noch genauer eingehen werden, haben wir uns dazu entschieden wichtige Spielinformationen wie beispielsweise den score am Ende eines Spiels oder die am Ende einer Runde ausgeführten events zu loggen, und die log-files dann mit einem script (zunächst mit Hilfe von Bash, dann von Python) zu analysieren und die wichtigen Informationen zu extrahieren. Am Ende einer Trainingssession werden dann die entsprechenden Grafiken erstellt. Dabei handelt es sich unter anderem um eine Reihe von PyCharts, die für jedes Spiel die action-distribution darstellen und so einen schnellen Überblick über die relativen action-Häufigkeiten ermöglichen (figure ???). So lässt sich beispielsweise beobachten, dass die relative Anzahl der illegal moves mit fortschreitendem training abnimmt (figure ???)
+
+Da jedoch nicht nur die relative Häufigkeit von bestimmten Aktionen interessant sein kann, sondern auch das Verhalten der absoluten Häufigkeiten im Verlauf mehrerer Spiele, werden auch hier entsprechende Grafiken erstellt. In Figure ??? wird eine Übersicht dieser Grafiken gezeigt.
+
+Um den Erfolg unseres Agenten zu tracken werden außerdem Grafiken erstellt, die Platzierung und finalen score zeigen.
+
+
+Dies vorgestellten Statistiken verwenden wir dann auch, um Hyperparameter optimization zu betreiben. Wir optimieren die ... alpha sowie die ... gamma. Für unterschiedliche Konstellationen werden wir Platzierung und finalen score nach einer trainingsperiode und dann einer testperiode untersuchen, um die optimalen Parameter zu finden.
+
+
+\subsection{Symmetries}\label{symmetries}

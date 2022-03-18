@@ -1,0 +1,9 @@
+\subsection{Statistics and Analysis}
+
+\subsection{Hyperparameter Optimization}
+Durch Berücksichtigung der vierzähligen Rotationssymmetrie (as explaned in Section \ref{symmetries}) können wir die Q-Table mit vierfacher Geschwindigkeit updaten. Dies ermöglich ein vierfach schnelleres Training, sodass wir uns dafür entschieden haben mit brute force alle möglichen Kombinationen von gamma und alpha durchzuprobieren, wobei gamma und alpha auf einem grid auf dem Intervall [0, 1] liegen dessen spacing wir vorher festlegen.
+
+Wir trainieren nun für jede der berücksichtigten hyperparemeter-Konstellationen ein Modell und testen dieses danach über eine feste anzahl von Spielen. Dann berechnen wir die durchschnittliche Positionierung des Agenten während der tests und wählen jene Hyperparameter, die die durchschnittliche Positionierund minimieren. Im Falle einer Ambiguität wählen wir die Konstellation, die den durchschnittlichen score maximiert.
+
+Hier gibt es theoretisch noch Verbesserungsbedarf. Anstatt den durchschnittlichen score nur im Falle eines Unentschiedens nach mittlerer Positionierung zu berücksichtigen, könnte man eine gewisse range an durchschnittlichen Positionierungen definieren, die dann auf den durchschnittlichen score untersucht werden. Denn eine sehr wenig schlechtere durchschnittliche Positionierung kann durchaus Zufall sein, obwohl der er erreichte score überdurchschnittlich groß ist. Aus Zeitgründen haben wir uns diesem Problem zunächst nicht gewidmet, da es andere dringendere Probleme gab.
+
