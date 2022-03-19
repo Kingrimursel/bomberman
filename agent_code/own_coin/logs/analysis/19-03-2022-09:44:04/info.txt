@@ -5,11 +5,13 @@
             upper_bound_alpha=0.75
             lower_bound_gamma=0.5
             upper_bound_gamma=1
-            mean_placements=[[4.  4. ]
- [4.  3.7]]
+            mean_placements=[[3.2 4. ]
+ [2.4 4. ]]
+            mean_score=[[10.8  4. ]
+ [12.4  2.8]]
             alpha_opt=0.75
-            gamma_opt=1.0
+            gamma_opt=0.75
             i_opt=2
-            j_opt=2
+            j_opt=1
 
             To create the image output: cd into scripts/ and run -/process_log_data.py -a [agent_name] -d [datetime/i=i,j=j]

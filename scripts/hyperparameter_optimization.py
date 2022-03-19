@@ -35,7 +35,6 @@ class color:
     NC='\033[0m'
 
 
-agent_name       = "own_coin"
 model_name       = "my-saved-model.pt"
 
 num_of_test_sessions = 1  # 10
@@ -56,11 +55,6 @@ step_size_gamma = (upper_bound_gamma - lower_bound_gamma)/step_number_gamma
 mean_placements = np.empty((step_number_alpha, step_number_gamma))
 mean_scores     = np.empty((step_number_alpha, step_number_gamma))
 
-
-# TODO: add to Auswertung: the way we are currently doing hyperparemeteroptimization by recursively narrowing
-# the inspected values for gamma and alpha could lead to us missing a global optimum. But we are very likely
-# still performing well enough, since we think that the perfornamce landscace (see figure ??) varies smoothly enough
-# in alpha and gamma and our grid was sufficiently close-meshed.
 
 
 def main():
@@ -162,8 +156,8 @@ def main():
 
 
     ## plot the winrate surface
-    x = np.linspace(0, 1, step_number_alpha)
-    y = np.linspace(0, 1, step_number_gamma)
+    x = np.linspace(lower_bound_alpha + step_size_alpha, upper_bound_alpha, step_number_alpha)
+    y = np.linspace(lower_bound_gamma + step_size_gamma, upper_bound_gamma, step_number_gamma)
 
     X, Y = np.meshgrid(x, y)
 
@@ -174,6 +168,7 @@ def main():
     ax.set_xlabel(r'$\alpha$')
     ax.set_ylabel(r'$\gamma$')
     ax.set_zlabel(r'average placement')
+
 
     i_opt, j_opt = find_optimal_settings(mean_placements, mean_scores)
 
@@ -199,7 +194,7 @@ def main():
     with open(os.path.join(analysis_directory.parents[0], "optimization_landscape.fig.pickle"), 'wb') as file:
         pickle.dump(fig, file)
 
-    # figx = pickle.load(open('optimization_landscape_own_coin.fig.pickle', 'rb'))
+    # figx = pickle.load(open('optimization_landscape.fig.pickle', 'rb'))
     # plt.show()
 
     with open(os.path.join(analysis_directory.parents[0], "info.txt"), 'w') as file:
@@ -213,6 +208,7 @@ def main():
             lower_bound_gamma={lower_bound_gamma}\n\
             upper_bound_gamma={upper_bound_gamma}\n\
             mean_placements={mean_placements}\n\
+            mean_score={mean_scores}\n\
             alpha_opt={alpha_opt}\n\
             gamma_opt={gamma_opt}\n\
             i_opt={i_opt+1}\n\
