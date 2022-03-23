@@ -188,14 +188,15 @@ def reward_from_events(self, events: List[str]) -> int:
     return reward_sum
 
 
-def potential_coin(self, old_game_state: dict, target: tuple, new_game_state:dict) -> float:
+def potential_coin(self, old_game_state: dict, target: tuple, new_game_state: dict) -> float:
     """
-    Approximate a potetnial for coin collecting.
+    Approximate a potential for coin collecting.
 
     :param self: Self objetct of Class Agend.
     :param old_game_state: The state that was passed to the last call of `act`.
     :param target: Tuple of coordinates of the target.
     :param new_game_state: The state after old game state.
+    :return: Difference in potential between both states.
     """
     old_position = np.array(old_game_state['self'][3])
     new_position = np.array(new_game_state['self'][3])
