@@ -25,7 +25,7 @@ PARAMETER_FOR_GBR = {
     'warm_start': True,
     'n_estimators': 10,
     'learning_rate': 0.6,
-    'max_depth': 30,
+    'max_depth': 20,
 }
 
 def setup(self):
