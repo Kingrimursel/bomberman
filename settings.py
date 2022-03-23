@@ -13,8 +13,8 @@ SCENARIOS = {
     },
     # This is the tournament game mode
     "classic": {
-        "CRATE_DENSITY": 0.75,
-        "COIN_COUNT": 9
+        "CRATE_DENSITY": 0.25,
+        "COIN_COUNT": 0
     },
     #Self created for training the hunter:
     "empty": {
@@ -67,5 +67,5 @@ INPUT_MAP = {
 # Logging levels
 LOG_GAME = logging.INFO
 LOG_AGENT_WRAPPER = logging.INFO
-LOG_AGENT_CODE = logging.DEBUG
+LOG_AGENT_CODE = logging.INFO#logging.DEBUG
 LOG_MAX_FILE_SIZE = 100 * 1024 * 1024  # 100 MB
