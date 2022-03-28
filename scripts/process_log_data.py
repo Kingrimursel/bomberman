@@ -134,6 +134,12 @@ def main():
     #     plt.savefig(os.path.join(img_path, "pycharts-all-actions_{}.png".format(file_num)))
     #     plt.close(fig)
 
+    with open(os.path.join(analysis_directory, f"data/piechart_actions.npy"), "wb") as file:
+        np.save(file, list(actions))
+
+    with open(os.path.join(analysis_directory, f"data/piechart_action_values.npy"), "wb") as file:
+        np.save(file, action_values)
+
 
     ### ACTION TIMELINE PLOTS
 
@@ -152,6 +158,9 @@ def main():
         ax[i//4, i%4].fill_between(np.arange(len(values)), values, step="pre", alpha=0.4, color=c)
         ax[i//4, i%4].step(np.arange(len(values)), values, color=c)
         ax[i//4, i%4].title.set_text(action)
+
+        with open(os.path.join(analysis_directory, f"data/action_{action}.npy"), "wb") as file:
+            np.save(file, values)
 
         fig2, ax2 = plt.subplots(figsize=(19, 9))
         fig2.suptitle(f"Action distribution: {action} of {agent_name} over all games")
@@ -181,6 +190,9 @@ def main():
 
     plt.title("Agent {}: Lifetime".format(agent_name))
 
+    with open(os.path.join(analysis_directory, f"data/lifetime.npy"), "wb") as file:
+        np.save(file, lifetimes)
+
     plt.savefig(os.path.join(img_path, "lifetime.png"))
 
 
@@ -202,6 +214,9 @@ def main():
     plt.ylabel("final placement")
 
     plt.title("Agent {}: Final Placement".format(agent_name))
+
+    with open(os.path.join(analysis_directory, f"data/placement.npy"), "wb") as file:
+        np.save(file, placement_list)
 
     plt.savefig(os.path.join(img_path, "final_placement.png"))
 
