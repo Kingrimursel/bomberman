@@ -13,20 +13,42 @@ SCENARIOS = {
     },
     # This is the tournament game mode
     "classic": {
-        "CRATE_DENSITY": 0.25,
-        "COIN_COUNT": 0
+        "CRATE_DENSITY": 0.75,
+        "COIN_COUNT": 9
     },
-    #Self created for training the hunter:
-    "empty": {
-        "CRATE_DENSITY": 0,
-        "COIN_COUNT": 0
+    # Trainings strategies
+    "low-density": {
+        'CRATE_DENSITY': 0.25,
+        'COIN_COUNT': 0,
     },
-    "some-crates": {
-        "CRATE_DENSITY": .4,
-        "COIN_COUNT": 0
+    "medium-density": {
+        'CRATE_DENSITY': 0.5,
+        'COIN_COUNT': 0,
+    },
+    "high-density": {
+        'CRATE_DENSITY': 0.75,
+        'COIN_COUNT': 0,
+    },
+    "high-coin": {
+        'CRATE_DENSITY': 0,
+        'COIN_COUNT': 50,
+    },
+    "high-coin-low-density": {
+        'CRATE_DENSITY': 0.25,
+        'COIN_COUNT': 50,
+    },
+    "medium-coin-medium-density": {
+        'CRATE_DENSITY': 0.5,
+        'COIN_COUNT': 25,
+    },
+    "high-coin-high-density": {
+        'CRATE_DENSITY': 0.75,
+        'COIN_COUNT': 50,
+    },
+    "no-coin-no-density": {
+        'CRATE_DENSITY': .0,
+        'COIN_COUNT': 0,
     }
-    # Feel free to add more game modes and properties
-    # game is created in environment.py -> BombeRLeWorld -> build_arena()
 }
 MAX_AGENTS = 4
 
@@ -67,5 +89,5 @@ INPUT_MAP = {
 # Logging levels
 LOG_GAME = logging.INFO
 LOG_AGENT_WRAPPER = logging.INFO
-LOG_AGENT_CODE = logging.INFO#logging.DEBUG
+LOG_AGENT_CODE = logging.INFO
 LOG_MAX_FILE_SIZE = 100 * 1024 * 1024  # 100 MB
