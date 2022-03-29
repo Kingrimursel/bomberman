@@ -15,7 +15,7 @@ from agent_code.own_KGB import config
 ACTIONS = ['UP', 'RIGHT', 'DOWN', 'LEFT', 'WAIT', 'BOMB']
 
 # Constants
-NAME = "my-saved-model"
+NAME = "well-trained"
 
 class color:
     RED='\033[0;31m'
