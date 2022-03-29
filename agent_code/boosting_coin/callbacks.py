@@ -6,7 +6,8 @@ import numpy as np
 from random import shuffle
 from collections import namedtuple, deque
 from sklearn.ensemble import GradientBoostingRegressor
-from .callbacks_rule_based import act as act_determinstic
+
+from agent_code.rule_based_agent import act as act_determinstic
 
 # Additional structures
 ACTIONS = np.array(['UP', 'RIGHT', 'DOWN', 'LEFT', 'WAIT'])

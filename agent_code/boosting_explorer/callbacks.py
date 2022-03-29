@@ -7,9 +7,6 @@ from random import shuffle
 from collections import namedtuple, deque
 from sklearn.ensemble import GradientBoostingRegressor
 
-from .callbacks_own_explorer import setup as setup_own_explorer
-from .callbacks_own_explorer import act as act_own_explorer
-
 from agent_code.rule_based_agent import callbacks as rule_based
 
 # Additional structures
