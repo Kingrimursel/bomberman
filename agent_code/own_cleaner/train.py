@@ -12,7 +12,7 @@ from .callbacks import state_to_features, look_for_targets, destruction, potenti
 
 sys.path.append(os.path.abspath(".."))
 
-from agent_code.own_KGB import config
+from agent_code.own_cleaner import config
 
 
 Transition = namedtuple('Transition',

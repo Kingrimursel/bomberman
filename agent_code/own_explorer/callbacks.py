@@ -318,7 +318,7 @@ def state_to_features(self, game_state: dict) -> np.array:
 
 
 
-    #Feature for current tile (4) 
+    #Feature for current tile (4)
     #wait does not lead to sure death and (can not place bomb or moving leads to sure death or bomb placement on current tile would be safe death(No escape tile reachable))
     if(bomb_map[x,y] > 0 and (not b or features[0] == features[1] == features[2] == features[3] == 1) or not look_for_targets(free_space, (x, y), potential_escape , self.logger, dir=True)[2]):
         features[4] = 0

@@ -9,13 +9,13 @@ import numpy as np
 
 sys.path.append(os.path.abspath(".."))
 
-from agent_code.own_KGB import config
+from agent_code.own_cleaner import config
 
 
 ACTIONS = ['UP', 'RIGHT', 'DOWN', 'LEFT', 'WAIT', 'BOMB']
 
 # Constants
-NAME = "well-trained"
+NAME = "my-saved-model"
 
 class color:
     RED='\033[0;31m'
@@ -265,9 +265,9 @@ def state_to_features(self, game_state: dict) -> np.array:
         distance_nextopponent, closest_to_opponent, opponent_reachable = look_for_targets(free_space, (x,y), others_coord, self.logger, dir=True)
 
     #Phase Feature (5) (Needed for other features, because of that determined first)
-    if(len(coins) > 0 and coin_reachable == True and (len(crates) == 0 or distance_nextcoin<distance_nextcrate+5)): #Only change to collect mode if coin is in a reasonable region
+    if(len(coins) > 0 and coin_reachable == True and (len(crates) == 0 or distance_nextcoin<distance_nextcrate+8)): #Only change to collect mode if coin is in a reasonable region
         features[5] = 0
-    elif(len(others) == 0):
+    elif(len(coins) > 0 or len(crates)>0):
         features[5] = 1
     else:
         features[5] = 2
@@ -308,7 +308,7 @@ def state_to_features(self, game_state: dict) -> np.array:
         if (bomb_map[i,j] < 5):
             features[num] = 2
         #If agent must leave current tile to survive, mark way to safe with 3
-        if(bomb_map[x,y] < 5 and distance_nextsafe == (bomb_map[x,y]+1) and (i,j) == closest_to_safe):
+        if(bomb_map[x,y] < 5 and (i,j) == closest_to_safe):
             features[num] = 3
 
         if(len(coins) > 0 and features[5] == 0):
