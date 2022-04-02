@@ -1,0 +1,113 @@
+{
+    "by_agent": {
+        "own_coin": {
+            "invalid": 617,
+            "moves": 554,
+            "rounds": 10,
+            "score": 0,
+            "steps": 1171,
+            "time": 0.9269676208496094
+        },
+        "rule_based_agent_0": {
+            "bombs": 234,
+            "coins": 36,
+            "crates": 476,
+            "invalid": 58,
+            "kills": 1,
+            "moves": 2138,
+            "rounds": 10,
+            "score": 41,
+            "steps": 2442,
+            "suicides": 5,
+            "time": 10.066034317016602
+        },
+        "rule_based_agent_1": {
+            "bombs": 243,
+            "coins": 24,
+            "crates": 352,
+            "invalid": 71,
+            "kills": 6,
+            "moves": 2240,
+            "rounds": 10,
+            "score": 54,
+            "steps": 2562,
+            "suicides": 5,
+            "time": 9.870148658752441
+        },
+        "rule_based_agent_2": {
+            "bombs": 205,
+            "coins": 28,
+            "crates": 379,
+            "invalid": 49,
+            "kills": 6,
+            "moves": 2045,
+            "rounds": 10,
+            "score": 58,
+            "steps": 2303,
+            "suicides": 5,
+            "time": 8.633201837539673
+        }
+    },
+    "by_round": {
+        "Round 01 (2022-03-12 09-59-11)": {
+            "coins": 8,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Round 02 (2022-03-12 09-59-15)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 1
+        },
+        "Round 03 (2022-03-12 09-59-19)": {
+            "coins": 8,
+            "kills": 1,
+            "steps": 400,
+            "suicides": 2
+        },
+        "Round 04 (2022-03-12 09-59-23)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 240,
+            "suicides": 2
+        },
+        "Round 05 (2022-03-12 09-59-25)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 347,
+            "suicides": 2
+        },
+        "Round 06 (2022-03-12 09-59-28)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 326,
+            "suicides": 2
+        },
+        "Round 07 (2022-03-12 09-59-32)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 400,
+            "suicides": 0
+        },
+        "Round 08 (2022-03-12 09-59-35)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 298,
+            "suicides": 2
+        },
+        "Round 09 (2022-03-12 09-59-38)": {
+            "coins": 9,
+            "kills": 2,
+            "steps": 314,
+            "suicides": 1
+        },
+        "Round 10 (2022-03-12 09-59-40)": {
+            "coins": 9,
+            "kills": 1,
+            "steps": 381,
+            "suicides": 2
+        }
+    }
+}
