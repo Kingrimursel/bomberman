@@ -331,7 +331,7 @@ def state_to_features(self, game_state: dict) -> np.array:
                 features[num] = 3
 
         #Neighbor features for last phase
-        elif(features[5] == 2):
+        elif(features[5] == 2 and len(others)>0):
             #Set 3 to the tile that is closest to opponent (The used look_for_targets function decides, wether an escape is neccessary(not neccessary == tile is not safe death)
             if(0<i<16 and 0<j<16 and look_for_targets(free_space, (i, j), [(x,y) for (x,y) in np.array(np.where(bomb_map+explosion_map==5)).T if free_space[x,y]], self.logger, dir=True)[0]<=(bomb_map[i,j]+1) and len(others)>0 and (i,j)==closest_to_opponent):
                 if bomb_map[x,y] == 5 or distance_nextsafe != (bomb_map[x,y]+1):

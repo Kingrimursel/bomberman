@@ -15,7 +15,7 @@ from agent_code.own_hunter import config
 ACTIONS = ['UP', 'RIGHT', 'DOWN', 'LEFT', 'WAIT', 'BOMB']
 
 # Constants
-NAME = "well-trained"
+NAME = "my-saved-model"
 
 class color:
     RED='\033[0;31m'
@@ -35,6 +35,7 @@ def setup(self):
 
     if not os.path.isfile(self.code_name + ".pt"): #if no model saved
         self.logger.info("Setting up model from scratch.")
+        print("Setting up model from scratch.")
         self.model = np.ones((4,4,4,4,5,3,6))*[.25, .25, .25, .25, .0, .0] #Initial guess
 
     else: #if model saved, no matter if in train mode or not, load current model #TODO: Why is this not done in the given code? In training mode a random model is picked always
@@ -331,7 +332,7 @@ def state_to_features(self, game_state: dict) -> np.array:
                 features[num] = 3
 
         #Neighbor features for last phase
-        elif(features[5] == 2):
+        elif(features[5] == 2 and len(others)>0):
             #Set 3 to the tile that is closest to opponent (The used look_for_targets function decides, wether an escape is neccessary(not neccessary == tile is not safe death)
             if(0<i<16 and 0<j<16 and look_for_targets(free_space, (i, j), [(x,y) for (x,y) in np.array(np.where(bomb_map+explosion_map==5)).T if free_space[x,y]], self.logger, dir=True)[0]<=(bomb_map[i,j]+1) and len(others)>0 and (i,j)==closest_to_opponent):
                 if bomb_map[x,y] == 5 or distance_nextsafe != (bomb_map[x,y]+1):
