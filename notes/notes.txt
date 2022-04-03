@@ -1,3 +1,0 @@
-man darf nur actions rewarden, von denen der agent auch wissen konnte, deren info also in den features codiert war
-
-strategie zur hyperparameter optimization: alle combis durchgehen, geht da wir auf Grund der Symmetrie schnelles Training ermöglichen können (Faktor 4 in Q-Table updating velocity). Dann schauen wir im training die Durchschnittsposition an, und bei einem tie nehmen wir die config die den score maximiert.

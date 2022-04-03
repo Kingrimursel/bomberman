@@ -1,3 +1,0 @@
-- Wenn ich zu viele negative rewards gebe und zu wenige positive, wird der agent nur hin und her laufen, weil er so wenigstens nicht bestraft wird.
-
-only give awards for events the agent could have known about, i.e. for which the information is encoded in the features.
